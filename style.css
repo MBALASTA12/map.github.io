@@ -1,29 +1,57 @@
+/* Body and html styling */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
 /* General body styling */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: #f0f0f0; /* Light background */
 }
 
-/* Positioning the map to take full screen */
+/* Compact app container */
+#app-container {
+    width: 400px;  /* Adjust width to your preference */
+    height: 600px; /* Adjust height to your preference */
+    background-color: white; /* App background color */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Map container inside the app */
 #map {
-    height: 100%;
-    width: 100%;
+    flex-grow: 1; /* Ensures map takes the remaining space */
+    height: 100%; /* Set height for the map */
+    width: 100%; /* Set width for the map */
 }
 
-/* Absolute positioning for the search bar */
+/* Search container */
 .search-container {
+    padding: 10px;
+    display: flex;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ccc;
     position: absolute;
     top: 10px; /* Set distance from the top */
     left: 50%;
     transform: translateX(-50%); /* Center the search bar horizontally */
     z-index: 1000; /* Ensure the search bar appears above the map */
-    display: flex;
     width: 400px; /* Set a fixed width for the search bar */
 }
 
-/* Styling for the search input */
+/* Input styling */
 input#search-input {
     flex-grow: 1; /* Allow the input to take up remaining space */
     padding: 10px;
@@ -33,7 +61,7 @@ input#search-input {
     width: calc(100% - 70px); /* Adjust width based on button */
 }
 
-/* Styling for the search button */
+/* Button styling */
 button#search-button {
     padding: 10px 15px;
     font-size: 16px;
