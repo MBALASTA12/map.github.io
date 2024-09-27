@@ -25,10 +25,21 @@ map.on('click', function(e) {
 document.getElementById('search-button').addEventListener('click', function() {
     const address = document.getElementById('search-input').value;
 
+    if (!address) {
+        alert('Please enter a location.');
+        return;
+    }
+
     // Use OpenStreetMap Nominatim API to geocode the address
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log(data); // Debugging: Log the response data
             if (data.length > 0) {
                 const bestResult = data[0];
                 const latLng = [bestResult.lat, bestResult.lon];
@@ -42,7 +53,7 @@ document.getElementById('search-button').addEventListener('click', function() {
             }
         })
         .catch(err => {
-            console.error(err);
+            console.error('Fetch error:', err);
             alert('Error occurred while searching. Please try again later.');
         });
 });
