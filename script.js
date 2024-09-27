@@ -18,3 +18,11 @@ function moveMarker(lat, lon) {
 setTimeout(() => {
     moveMarker(6.125, 125.16); // Replace with actual coordinates
 }, 3000);
+
+// Click event to place a marker on the map
+map.on('click', function(e) {
+    const lat = e.latlng.lat;
+    const lon = e.latlng.lng;
+    moveMarker(lat, lon);
+    // You can also implement logic to get the address from the coordinates using OpenStreetMap API
+});
