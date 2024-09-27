@@ -9,45 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
 </head>
 <body>
-    <!-- App container -->
     <div id="app-container">
-        <!-- Search container -->
-        <div class="search-container">
-            <input id="search-input" type="text" placeholder="Search location" />
-            <button id="search-button">Search</button>
-        </div>
-
-        <!-- Pin icon for GPS location -->
-        <div id="gps-icon" class="gps-icon" title="Move to Current Location">
-            📍
-        </div>
-
-        <!-- Map container -->
-        <div id="map" style="height: 600px;"></div> <!-- Set a height for the map -->
-
-        <!-- Card container at the bottom for pickup and delivery details -->
-        <div class="card-container">
-            <div class="card">
-                <h3>Pickup Location</h3>
-                <input id="pickup-location" type="text" placeholder="Enter pickup location" readonly>
+        <div class="card">
+            <div class="card-header" id="card-header">
+                <span>Pickup & Delivery Details</span>
+                <button id="toggle-card">▼</button>
             </div>
-            <div class="card">
-                <h3>Delivery Location</h3>
-                <input id="delivery-location" type="text" placeholder="Enter delivery location" readonly>
+            <div class="card-body" id="card-body">
+                <div class="search-container">
+                    <input id="search-input" type="text" placeholder="Search location" />
+                    <button id="search-button">Search</button>
+                </div>
+                <div id="map" style="height: 300px;"></div> <!-- Map Height -->
+                <div id="fee-container">
+                    <div>Total Fee: <span id="total-fee">0 PHP</span></div>
+                    <button id="next-button" style="display: none;">Next</button>
+                </div>
+                <div id="note-container" style="display: none;">
+                    <textarea id="note-input" placeholder="Additional info (if any)"></textarea>
+                </div>
             </div>
-            <div class="card">
-                <h3>Total Amount</h3>
-                <p id="total-amount">10 PHP for 500 meters</p>
-            </div>
-            <div class="card">
-                <h3>Additional Note</h3>
-                <input id="additional-note" type="text" placeholder="Enter additional note">
-            </div>
-            <button id="complete-button" disabled>Complete</button>
         </div>
     </div>
 
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
     <script src="script.js"></script> <!-- Link to the JS file -->
