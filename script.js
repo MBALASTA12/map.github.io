@@ -1,5 +1,7 @@
 // Initialize the map
-const map = L.map('map').setView([6.12108, 125.15882], 13); // Set initial coordinates and zoom level
+const map = L.map('map', {
+    zoomControl: false // Disable the default zoom controls
+}).setView([6.12108, 125.15882], 13); // Set initial coordinates and zoom level
 
 // Add tile layer to the map (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -70,3 +72,19 @@ function moveMarker(lat, lon) {
     markers.push(marker);
     map.setView([lat, lon], 13);
 }
+
+// Search button event listener
+document.getElementById('search-button').addEventListener('click', async function() {
+    const query = input.value;
+    if (query.length > 2) {
+        const suggestions = await fetchSuggestions(query);
+        if (suggestions.length > 0) {
+            const bestResult = suggestions[0];
+            moveMarker(bestResult.lat, bestResult.lon);
+        } else {
+            alert('No suggestions found.');
+        }
+    } else {
+        alert('Please enter at least 3 characters to search.');
+    }
+});
