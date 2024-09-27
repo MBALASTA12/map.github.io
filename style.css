@@ -105,3 +105,21 @@ button#search-button:hover {
     margin: 5px 0;
 }
 
+/* User location pin styling */
+.locate-button {
+    position: absolute;
+    top: 20px; /* Position it at the top */
+    right: 20px; /* Position it at the right */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 101; /* Ensure it is above the map */
+    font-size: 20px; /* Adjust size as needed */
+    transition: background 0.3s;
+}
+
+.locate-button:hover {
+    background: #f0f0f0; /* Change background on hover */
+}
