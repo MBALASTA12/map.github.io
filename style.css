@@ -30,19 +30,28 @@ body {
     padding: 5px;
 }
 
-/* Search icon styling */
-#search-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
 /* Input styling */
 input#search-input {
     border: none;
     outline: none;
     padding: 5px;
     width: 200px; /* Width of the search input */
+}
+
+/* Search button styling */
+button#search-button {
+    border: none;
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    padding: 6px 10px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-left: 5px; /* Space between input and button */
+}
+
+/* Search button hover effect */
+button#search-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 /* Autocomplete suggestions */
