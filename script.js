@@ -73,18 +73,21 @@ function moveMarker(lat, lon) {
     map.setView([lat, lon], 13);
 }
 
-// Search button event listener
-document.getElementById('search-button').addEventListener('click', async function() {
-    const query = input.value;
-    if (query.length > 2) {
-        const suggestions = await fetchSuggestions(query);
-        if (suggestions.length > 0) {
-            const bestResult = suggestions[0];
-            moveMarker(bestResult.lat, bestResult.lon);
+// Ensure the DOM is fully loaded before attaching event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    // Search button event listener
+    document.getElementById('search-button').addEventListener('click', async function() {
+        const query = input.value;
+        if (query.length > 2) {
+            const suggestions = await fetchSuggestions(query);
+            if (suggestions.length > 0) {
+                const bestResult = suggestions[0];
+                moveMarker(bestResult.lat, bestResult.lon);
+            } else {
+                alert('No suggestions found.');
+            }
         } else {
-            alert('No suggestions found.');
+            alert('Please enter at least 3 characters to search.');
         }
-    } else {
-        alert('Please enter at least 3 characters to search.');
-    }
+    });
 });
