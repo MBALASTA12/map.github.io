@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Map</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
 </head>
 <body>
-    <!-- Search container -->
-    <div class="search-container">
-        <input id="search-input" type="text" placeholder="Search location" />
-        <button id="search-button">Search</button>
+    <!-- App container -->
+    <div id="app-container">
+        <!-- Search container -->
+        <div class="search-container">
+            <input id="search-input" type="text" placeholder="Search location" />
+            <button id="search-button">Search</button>
+        </div>
+
+        <!-- Map container -->
+        <div id="map" style="height: 600px;"></div> <!-- Set a height for the map -->
     </div>
 
-    <!-- Map container -->
-    <div id="map"></div>
-    
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Link to the JS file -->
 </body>
 </html>
