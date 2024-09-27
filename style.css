@@ -1,3 +1,15 @@
+/* Map container styling */
+#map {
+    height: 600px; /* Set a height for the map */
+    position: relative; /* Set the position to relative */
+    z-index: 1; /* Set a lower z-index to push it behind */
+}
+
+/* App container */
+#app-container {
+    position: relative; /* Ensure the app container has relative positioning */
+}
+
 /* Styling for the pin icon */
 .gps-icon {
     position: absolute;
@@ -5,7 +17,7 @@
     right: 20px;
     font-size: 24px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1000; /* Higher z-index to place it on top */
 }
 
 /* Card container at the bottom */
@@ -19,6 +31,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    z-index: 1000; /* Higher z-index to place it on top */
 }
 
 /* Individual card styling */
@@ -29,31 +42,4 @@
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
-
-.card h3 {
-    margin: 0 0 5px;
-    font-size: 16px;
-}
-
-.card input {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#complete-button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: not-allowed;
-    border-radius: 5px;
-}
-
-#complete-button.enabled {
-    cursor: pointer;
-    background-color: #218838;
 }
