@@ -137,5 +137,29 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             alert('Geolocation is not supported by this browser.');
         }
+        // Function to save pickup details and transfer card to the top
+function savePickupDetails() {
+    const address = document.getElementById('pickup-address').textContent;
+    const coordinates = document.getElementById('pickup-coordinates').textContent;
+
+    // Save the details in the saved pickup card
+    document.getElementById('saved-address').textContent = address;
+    document.getElementById('saved-coordinates').textContent = coordinates;
+
+    // Hide the original pickup card
+    document.getElementById('pickup-card').style.display = 'none';
+
+    // Show the saved pickup card at the top
+    const savedPickupCard = document.getElementById('saved-pickup-card');
+    savedPickupCard.style.display = 'block';
+}
+
+// Ensure the DOM is fully loaded before attaching event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    // Other existing event listeners...
+
+    // Save button event listener
+    document.getElementById('save-button').addEventListener('click', function() {
+        savePickupDetails(); // Save the details when the button is clicked
     });
 });
