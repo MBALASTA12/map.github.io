@@ -71,6 +71,31 @@ function moveMarker(lat, lon) {
     const marker = L.marker([lat, lon]).addTo(map);
     markers.push(marker);
     map.setView([lat, lon], 13);
+
+    // Update the pickup card with address and coordinates
+    updatePickupCard(lat, lon);
+}
+
+// Function to update the pickup card with address and coordinates
+function updatePickupCard(lat, lon) {
+    // Fetch address details using reverse geocoding
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+        .then(response => response.json())
+        .then(data => {
+            const address = data.display_name || 'Unknown address';
+            document.getElementById('pickup-address').textContent = `Address: ${address}`;
+            document.getElementById('pickup-coordinates').textContent = `Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+            slideUpPickupCard(); // Slide up the card
+        })
+        .catch(err => {
+            console.error('Fetch error:', err);
+        });
+}
+
+// Function to slide up the pickup card
+function slideUpPickupCard() {
+    const card = document.getElementById('pickup-card');
+    card.classList.add('visible'); // Add visible class to show the card
 }
 
 // Ensure the DOM is fully loaded before attaching event listeners
@@ -89,5 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             alert('Please enter at least 3 characters to search.');
         }
+    });
+
+    // Click event on the map
+    map.on('click', function(e) {
+        const lat = e.latlng.lat;
+        const lon = e.latlng.lng;
+        moveMarker(lat, lon); // Move the marker and update the card
     });
 });
