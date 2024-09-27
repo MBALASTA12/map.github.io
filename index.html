@@ -9,13 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
 </head>
 <body>
-    <!-- Map container -->
-    <div id="map"></div>
+    <!-- App container -->
+    <div id="app-container">
+        <!-- Search container -->
+        <div class="search-container">
+            <input id="search-input" type="text" placeholder="Search location" />
+            <button id="search-button">Search</button>
+        </div>
 
-    <!-- Search container -->
-    <div class="search-container">
-        <input id="search-input" type="text" placeholder="Search location" />
-        <button id="search-button">Search</button> <!-- Search button -->
+        <!-- Map container -->
+        <div id="map" style="height: 600px;"></div> <!-- Set a height for the map -->
+
+        <!-- Pickup Location Card -->
+        <div id="pickup-card" class="pickup-card">
+            <div class="card-content">
+                <h3>Pickup Location</h3>
+                <p id="pickup-address">Address: Not set</p>
+                <p id="pickup-coordinates">Coordinates: Not set</p>
+            </div>
+        </div>
     </div>
 
     <!-- Leaflet JS -->
