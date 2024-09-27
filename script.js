@@ -98,33 +98,6 @@ function slideUpPickupCard() {
     card.classList.add('visible'); // Add visible class to show the card
 }
 
-// Function to save the pickup details
-function savePickupDetails() {
-    const address = document.getElementById('pickup-address').textContent;
-    const coordinates = document.getElementById('pickup-coordinates').textContent;
-
-    // Create a new element for the saved location
-    const savedLocation = document.createElement('div');
-    savedLocation.classList.add('saved-location');
-    savedLocation.innerHTML = `
-        <h3>Saved Location</h3>
-        <p>${address}</p>
-        <p>${coordinates}</p>
-    `;
-
-    // Append it to the top of the page
-    document.getElementById('app-container').prepend(savedLocation);
-
-    // Slide down the search tab and button
-    slideDownSearchElements();
-}
-
-// Function to slide down the search elements
-function slideDownSearchElements() {
-    const searchContainer = document.querySelector('.search-container');
-    searchContainer.style.marginTop = '150px'; // Adjust this value based on your design
-}
-
 // Ensure the DOM is fully loaded before attaching event listeners
 document.addEventListener("DOMContentLoaded", () => {
     // Search button event listener
@@ -164,10 +137,5 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             alert('Geolocation is not supported by this browser.');
         }
-    });
-
-    // Save button event listener
-    document.getElementById('save-button').addEventListener('click', function() {
-        savePickupDetails(); // Save the details when the button is clicked
     });
 });
