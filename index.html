@@ -9,9 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
 </head>
 <body>
-    <input id="search-input" type="text" placeholder="Search location" />
-    <button id="search-button">Search</button>
-    <div id="map" style="height: 80vh;"></div>
+    <!-- Search container -->
+    <div class="search-container">
+        <input id="search-input" type="text" placeholder="Search location" />
+        <button id="search-button">Search</button>
+    </div>
+
+    <!-- Map container -->
+    <div id="map"></div>
     
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
