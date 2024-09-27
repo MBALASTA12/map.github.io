@@ -1,59 +1,69 @@
-body, html {
-    height: 100%;
+/* General body styling */
+body {
     margin: 0;
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-}
-
-#app-container {
-    width: 400px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-}
-
-.card {
+    height: 100vh;
     overflow: hidden;
-    transition: max-height 0.3s ease;
 }
 
-.card-header {
-    background-color: #f9f9f9;
-    padding: 10px;
+/* Map container */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure the map is behind all other elements */
+}
+
+/* Search container */
+.search-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2; /* Ensure the search bar is above the map */
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+}
+
+/* Search icon styling */
+#search-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Input styling */
+input#search-input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: 200px; /* Width of the search input */
+}
+
+/* Autocomplete suggestions */
+.awesomplete > ul {
+    position: absolute;
+    z-index: 3;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.awesomplete > ul > li {
+    padding: 8px 12px;
     cursor: pointer;
 }
 
-.card-body {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.search-container {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-#map {
-    flex-grow: 1;
-    height: 300px; /* Set height for the map */
-    width: 100%; /* Set width for the map */
-}
-
-#fee-container {
-    margin-top: 10px;
-}
-
-#note-input {
-    width: 100%;
-    margin-top: 10px;
+.awesomplete > ul > li:hover {
+    background: #f0f0f0; /* Highlight on hover */
 }
