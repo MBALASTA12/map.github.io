@@ -122,4 +122,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const lon = e.latlng.lng;
         moveMarker(lat, lon); // Move the marker and update the card
     });
+
+    // Locate button event listener
+    document.getElementById('locate-button').addEventListener('click', function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                moveMarker(lat, lon); // Move the marker to the user's location
+            }, error => {
+                console.error('Geolocation error:', error);
+                alert('Unable to retrieve your location. Please enable GPS or location services.');
+            });
+        } else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    });
 });
