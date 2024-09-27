@@ -1,45 +1,59 @@
-/* Map container styling */
-#map {
-    height: 600px; /* Set a height for the map */
-    position: relative; /* Set the position to relative */
-    z-index: 1; /* Set a lower z-index to push it behind */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
 }
 
-/* App container */
 #app-container {
-    position: relative; /* Ensure the app container has relative positioning */
-}
-
-/* Styling for the pin icon */
-.gps-icon {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1000; /* Higher z-index to place it on top */
-}
-
-/* Card container at the bottom */
-.card-container {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    width: 400px;
     background-color: white;
-    padding: 15px;
-    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    z-index: 1000; /* Higher z-index to place it on top */
 }
 
-/* Individual card styling */
 .card {
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.card-header {
     background-color: #f9f9f9;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.card-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#map {
+    flex-grow: 1;
+    height: 300px; /* Set height for the map */
+    width: 100%; /* Set width for the map */
+}
+
+#fee-container {
+    margin-top: 10px;
+}
+
+#note-input {
+    width: 100%;
+    margin-top: 10px;
 }
