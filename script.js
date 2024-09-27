@@ -14,15 +14,35 @@ function moveMarker(lat, lon) {
     map.setView([lat, lon], 13);
 }
 
-// Example: Move marker to new location after 3 seconds
-setTimeout(() => {
-    moveMarker(6.125, 125.16); // Replace with actual coordinates
-}, 3000);
-
 // Click event to place a marker on the map
 map.on('click', function(e) {
     const lat = e.latlng.lat;
     const lon = e.latlng.lng;
     moveMarker(lat, lon);
-    // You can also implement logic to get the address from the coordinates using OpenStreetMap API
+});
+
+// Handle search button click
+document.getElementById('search-button').addEventListener('click', function() {
+    const address = document.getElementById('search-input').value;
+
+    // Use OpenStreetMap Nominatim API to geocode the address
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                const bestResult = data[0];
+                const latLng = [bestResult.lat, bestResult.lon];
+
+                // Move marker to the searched location
+                moveMarker(bestResult.lat, bestResult.lon);
+                // Optionally, you can open a popup with the address
+                marker.bindPopup(bestResult.display_name).openPopup();
+            } else {
+                alert('Location not found. Please try another search.');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Error occurred while searching. Please try again later.');
+        });
 });
