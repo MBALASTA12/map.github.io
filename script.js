@@ -21,9 +21,33 @@ map.on('click', function(e) {
     moveMarker(lat, lon);
 });
 
+// Initialize Awesomplete for search input
+const input = document.getElementById('search-input');
+const awesomplete = new Awesomplete(input, {
+    autoFirst: true,
+});
+
+// Function to fetch location suggestions
+async function fetchSuggestions(query) {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
+    const data = await response.json();
+    return data.map(item => item.display_name);
+}
+
+// Handle input event for autocomplete
+input.addEventListener('input', async function() {
+    const query = this.value;
+    if (query.length > 2) {
+        const suggestions = await fetchSuggestions(query);
+        awesomplete.list = suggestions;
+    } else {
+        awesomplete.list = [];
+    }
+});
+
 // Handle search button click
 document.getElementById('search-button').addEventListener('click', function() {
-    const address = document.getElementById('search-input').value;
+    const address = input.value;
 
     if (!address) {
         alert('Please enter a location.');
@@ -39,14 +63,9 @@ document.getElementById('search-button').addEventListener('click', function() {
             return response.json();
         })
         .then(data => {
-            console.log(data); // Debugging: Log the response data
             if (data.length > 0) {
                 const bestResult = data[0];
-                const latLng = [bestResult.lat, bestResult.lon];
-
-                // Move marker to the searched location
                 moveMarker(bestResult.lat, bestResult.lon);
-                // Optionally, you can open a popup with the address
                 marker.bindPopup(bestResult.display_name).openPopup();
             } else {
                 alert('Location not found. Please try another search.');

@@ -6,36 +6,15 @@
     <title>Delivery Map</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-        /* Style for the search bar container */
-        #search-container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        #search-input {
-            width: 200px;
-            padding: 5px;
-        }
-        #search-button {
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Awesomeplete/11.2.0/awesomplete.css" />
 </head>
 <body>
-    <div id="map" style="height: 100vh;"></div>
-    <div id="search-container">
-        <input type="text" id="search-input" placeholder="Search location...">
-        <button id="search-button">Search</button>
-    </div>
+    <input id="search-input" type="text" placeholder="Search location" />
+    <button id="search-button">Search</button>
+    <div id="map" style="height: 80vh;"></div>
+    
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Awesomeplete/11.2.0/awesomplete.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
