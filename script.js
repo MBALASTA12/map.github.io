@@ -27,25 +27,29 @@ const awesomplete = new Awesomplete(input, {
     autoFirst: true,
 });
 
-// Function to fetch location suggestions
+// Function to fetch location suggestions from OpenStreetMap
 async function fetchSuggestions(query) {
-    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`);
     const data = await response.json();
-    return data.map(item => item.display_name);
+    return data.map(item => ({
+        label: item.display_name,
+        lat: item.lat,
+        lon: item.lon
+    }));
 }
 
-// Handle input event for autocomplete
+// Handle input event for autocomplete suggestions
 input.addEventListener('input', async function() {
     const query = this.value;
     if (query.length > 2) {
         const suggestions = await fetchSuggestions(query);
-        awesomplete.list = suggestions;
+        awesomplete.list = suggestions.map(s => s.label);
     } else {
         awesomplete.list = [];
     }
 });
 
-// Handle search button click
+// Handle the search button click
 document.getElementById('search-button').addEventListener('click', function() {
     const address = input.value;
 
@@ -54,7 +58,7 @@ document.getElementById('search-button').addEventListener('click', function() {
         return;
     }
 
-    // Use OpenStreetMap Nominatim API to geocode the address
+    // Fetch the first result for the typed address and move the marker there
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
         .then(response => {
             if (!response.ok) {
