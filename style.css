@@ -124,3 +124,30 @@ button#search-button:hover {
     background: #f0f0f0; /* Change background on hover */
 }
 
+/* Styles for the saved pickup card */
+.saved-pickup-card {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #e3f2fd; /* Light blue background */
+    border: 1px solid #2196F3; /* Blue border */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Ensure it's above the map */
+}
+
+/* Adjust the pickup card style to align */
+.pickup-card {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
