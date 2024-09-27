@@ -1,11 +1,12 @@
-// script.js
+// Initialize the map inside the compact app container
 const map = L.map('map').setView([6.12108, 125.15882], 13); // Set initial coordinates and zoom level
 
+// Add tile layer to the map (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
 }).addTo(map);
 
-// Add a marker to the map
+// Add a marker for testing purposes
 const marker = L.marker([6.12108, 125.15882]).addTo(map);
 
 // Function to move the marker to a new location
