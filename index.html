@@ -3,23 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delivery Map</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Map with Search Bar</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
+    <style>
+        /* Body and html styling */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Fullscreen map container */
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Search container absolute positioning */
+        .search-container {
+            position: absolute;
+            top: 20px; /* You can adjust this value */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            width: 400px;
+        }
+
+        /* Input styling */
+        input#search-input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+        }
+
+        /* Button styling */
+        button#search-button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
 </head>
 <body>
-    <!-- Search container -->
+    <!-- Search bar container -->
     <div class="search-container">
-        <input id="search-input" type="text" placeholder="Search location" />
+        <input id="search-input" type="text" placeholder="Search location">
         <button id="search-button">Search</button>
     </div>
 
     <!-- Map container -->
     <div id="map"></div>
-    
+
+    <!-- Leaflet and Map script -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([6.1164, 125.1716], 13);
+
+        // Add tile layer to the map (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Add a marker for testing purposes
+        L.marker([6.1164, 125.1716]).addTo(map)
+            .bindPopup('Your Location').openPopup();
+    </script>
 </body>
 </html>
