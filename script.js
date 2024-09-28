@@ -140,8 +140,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Add a click event listener to the check button
+// Handle Check button functionality
 document.getElementById('check-button').addEventListener('click', function() {
+    const address = document.getElementById('pickup-address').textContent;
+    const coordinates = document.getElementById('pickup-coordinates').textContent;
+
+    if (address.includes('Not set') || coordinates.includes('Not set')) {
+        alert('Please set a location first.');
+        return;
+    }
+
     alert('Pickup location confirmed.');
+    // Additional logic to handle the confirmed pickup location can be added here.
 });
 
