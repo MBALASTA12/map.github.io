@@ -150,18 +150,13 @@ document.getElementById('check-button').addEventListener('click', function() {
         return;
     }
 
-    alert('Pickup location confirmed.');
-
-    // Set the details in the sliding card
-    document.getElementById('confirmed-address').textContent = address;
-    document.getElementById('confirmed-coordinates').textContent = coordinates;
-
-    // Show the sliding card with a sliding effect
+    document.getElementById('confirmed-address').textContent = `Address: ${address}`;
+    document.getElementById('confirmed-coordinates').textContent = `Coordinates: ${coordinates}`;
+    
     const slidingCard = document.getElementById('sliding-card');
-    slidingCard.style.display = 'block'; // Show the card
-    slidingCard.style.top = '-50px'; // Start above the view
-    slidingCard.style.transition = 'top 0.5s ease'; // Smooth transition
-    slidingCard.style.top = '10px'; // Move it down into view
+    slidingCard.style.display = 'block'; // Show the sliding card
+    slidingCard.style.top = '60px'; // Position it below the search container
 });
+
 
 
