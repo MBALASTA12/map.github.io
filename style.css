@@ -28,7 +28,6 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 5px;
-    width: 30%; /* Adjust the width for the container */
     max-width: 400px; /* Set a maximum width */
 }
 
