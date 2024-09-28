@@ -77,33 +77,6 @@ button#search-button {
             background: #f0f0f0; /* Highlight on hover */
         }
 
-/* Sliding card styles */
-.sliding-card {
-    display: block; /* Hidden by default */
-    position: absolute; /* Positioned relative to the nearest positioned ancestor */
-    top: 60px; /* Position directly below the search container */
-    left: 10px; /* Align to the left like the search container */
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    max-width: 400px; /* Set maximum width to match search container */
-    width: calc(100% - 20px); /* Full width minus padding */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 3; /* Above the map and pickup card */
-    transition: all 0.5s ease; /* Smooth transition */
-}
-
-    /* Adjusting font size for sliding card details */
-    .sliding-card h3 {
-        margin: 0 0 10px;
-        font-size: 16px; /* Smaller size for better fit */
-    }
-
-    .sliding-card p {
-        margin: 5px 0;
-        font-size: 14px; /* Smaller font size for details */
-    }
 
 /* Pickup card styling */
 .pickup-card {
