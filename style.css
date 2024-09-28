@@ -129,21 +129,20 @@ button#search-button {
 .sliding-card {
     position: absolute;
     top: -200px; /* Start off the screen */
-    left: 50%;
-    transform: translateX(-50%);
+    left: 10px; /* Align to the left */
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: top 0.5s ease; /* Smooth transition */
-    padding: 15px;
-    width: calc(100% - 30px); /* Adjust width to match the search tab (subtracting padding) */
-    max-width: 600px; /* Set a maximum width if desired */
+    padding: 15px; 
+    width: calc(100% - 20px); /* Adjust width to match the search container's width minus padding */
+    max-width: 400px; /* Set the same maximum width as the search container */
     z-index: 1000; /* Ensure it appears above other elements */
 }
 
 /* Sliding card visible state */
 .sliding-card.visible {
-    top: calc(60px + 15px); /* Position it below the search container, accounting for padding */
+    top: calc(10px + 5px + 15px); /* Position it below the search container accounting for padding */
 }
 
 
