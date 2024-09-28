@@ -29,19 +29,20 @@
 
         <!-- Map container -->
         <div id="map" style="height: 600px;"></div> <!-- Set a height for the map -->
+
         <!-- Pickup Location Card -->
-        <div id="pickup-card" class="pickup-card">
+        <div id="pickup-card" class="card visible"> <!-- Added 'visible' class here -->
             <div class="card-content">
                 <h3>Pickup Location</h3>
                 <p id="pickup-address">Address: Not set</p>
                 <p id="pickup-coordinates">Coordinates: Not set</p>
                 <!-- Check Button -->
-                <button id="check-button">✔️ <!-- Check button -->
+                <button id="check-button">✔️</button> <!-- Fixed the button tag -->
             </div>
         </div>
 
         <!-- Delivery Location Card -->
-        <div id="delivery-card" class="card">
+        <div id="delivery-card" class="card"> <!-- Delivery card is hidden initially -->
             <div class="card-content">
                 <h3>Delivery Location</h3>
                 <p id="delivery-address">Address: Not set</p>
@@ -56,7 +57,6 @@
             📍 <!-- You can use an icon or an image -->
         </button>
     </div>
-
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
