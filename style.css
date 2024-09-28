@@ -20,7 +20,8 @@ body {
 .search-container {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 50%; /* Center align horizontally */
+    transform: translateX(-50%); /* Center the container */
     z-index: 2; /* Ensure the search bar is above the map */
     display: flex;
     align-items: center;
@@ -89,8 +90,6 @@ button#search-button:hover {
     transition: bottom 0.5s; /* Smooth transition for sliding */
     padding: 10px;
     z-index: 100;
-    display: flex;
-    align-items: center;
 }
 
 .pickup-card.visible {
@@ -98,11 +97,6 @@ button#search-button:hover {
 }
 
 /* Card content styling */
-.card-content {
-    display: flex;
-    align-items: center;
-}
-
 .card-content h3 {
     margin: 0 0 10px;
     font-size: 18px;
@@ -113,25 +107,29 @@ button#search-button:hover {
 }
 
 /* Check button styling */
-.check-button {
+#check-button {
+    position: absolute;
+    bottom: 10px; /* Slight margin from the bottom */
+    right: 10px; /* Positioned on the right side */
     background-color: #28a745;
-    border: none;
     color: white;
-    padding: 10px;
-    border-radius: 50%;
-    margin-left: 10px; /* Space between check button and content */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    z-index: 101;
 }
 
-.check-button:hover {
-    background-color: #218838;
+#check-button:hover {
+    background-color: #218838; /* Darker green on hover */
 }
 
 /* User location pin styling */
 .locate-button {
     position: absolute;
     top: 10px; /* Align with search bar */
-    right: 20px; /* Position it at the right */
+    right: 20px;
     background: white;
     border: 1px solid #ccc;
     border-radius: 50%;
