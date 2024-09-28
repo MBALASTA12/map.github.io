@@ -125,25 +125,6 @@ button#search-button {
         background-color: #218838; /* Darker green on hover */
     }
 
-/* Close button styling */
-.close-button {
-    position: absolute;
-    top: 10px; /* Adjust to position at the top */
-    left: 10px; /* Align to the left */
-    background: transparent;
-    border: none;
-    font-size: 20px; /* Size of the 'X' */
-    color: #007bff; /* Color of the 'X' */
-    cursor: pointer;
-    z-index: 4; /* Ensure it is above the sliding card */
-}
-
-/* Change color on hover */
-.close-button:hover {
-    color: #0056b3; /* Darker blue on hover */
-}
-
-
 /* User location pin styling */
 .locate-button {
     position: absolute;
