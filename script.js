@@ -108,6 +108,21 @@ function slideUpPickupCard() {
     }
 }
 
+// Function to move the marker to a new location
+function moveMarker(lat, lon) {
+    // Remove existing markers
+    markers.forEach(marker => map.removeLayer(marker));
+    markers.length = 0; // Clear the markers array
+
+    // Add a new marker
+    const marker = L.marker([lat, lon]).addTo(map);
+    markers.push(marker);
+    map.setView([lat, lon], 13);
+
+    // Update the pickup card with address and coordinates
+    updatePickupCard(lat, lon);
+}
+
 // Function to update the delivery card with address and coordinates
 function updateDeliveryCard(lat, lon) {
     // Fetch address details using reverse geocoding
@@ -124,10 +139,18 @@ function updateDeliveryCard(lat, lon) {
         });
 }
 
+// Click event on the map for setting delivery location
+map.on('click', function (e) {
+    const lat = e.latlng.lat;
+    const lon = e.latlng.lng;
+    moveMarker(lat, lon); // Move the marker and update the pickup card
+    updateDeliveryCard(lat, lon); // Call this to update and slide up the delivery card
+});
+
 // Function to slide up the delivery card
 function slideUpDeliveryCard() {
-    const card = document.getElementById('delivery-card');
-    card.classList.add('visible'); // Add visible class to show the card
+    const deliverycard = document.getElementById('delivery-card');
+    delivery.classList.add('visible'); // Add visible class to show the card
 }
 
 // Search button event listener
