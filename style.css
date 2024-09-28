@@ -49,10 +49,10 @@ button#search-button {
     cursor: pointer;
 }
 
-/* Search button hover effect */
-button#search-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
+    /* Search button hover effect */
+    button#search-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
 
 /* Autocomplete suggestions */
 .awesomplete > ul {
@@ -68,14 +68,14 @@ button#search-button:hover {
     list-style-type: none;
 }
 
-.awesomplete > ul > li {
-    padding: 8px 12px;
-    cursor: pointer;
-}
+    .awesomplete > ul > li {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
 
-.awesomplete > ul > li:hover {
-    background: #f0f0f0; /* Highlight on hover */
-}
+        .awesomplete > ul > li:hover {
+            background: #f0f0f0; /* Highlight on hover */
+        }
 
 /* Sliding card styles */
 .sliding-card {
@@ -94,16 +94,16 @@ button#search-button:hover {
     transition: all 0.5s ease; /* Smooth transition */
 }
 
-/* Adjusting font size for sliding card details */
-.sliding-card h3 {
-    margin: 0 0 10px;
-    font-size: 16px; /* Smaller size for better fit */
-}
+    /* Adjusting font size for sliding card details */
+    .sliding-card h3 {
+        margin: 0 0 10px;
+        font-size: 16px; /* Smaller size for better fit */
+    }
 
-.sliding-card p {
-    margin: 5px 0;
-    font-size: 14px; /* Smaller font size for details */
-}
+    .sliding-card p {
+        margin: 5px 0;
+        font-size: 14px; /* Smaller font size for details */
+    }
 
 /* Pickup card styling */
 .pickup-card {
@@ -119,9 +119,9 @@ button#search-button:hover {
     z-index: 100;
 }
 
-.pickup-card.visible {
-    bottom: 0; /* Slide up to show the card */
-}
+    .pickup-card.visible {
+        bottom: 0; /* Slide up to show the card */
+    }
 
 /* Card content styling */
 .card-content h3 {
@@ -148,9 +148,28 @@ button#search-button:hover {
     z-index: 101;
 }
 
-#check-button:hover {
-    background-color: #218838; /* Darker green on hover */
+    #check-button:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+/* Close button styling */
+.close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px; /* Size of the 'X' */
+    color: #007bff; /* Color of the 'X' */
+    cursor: pointer;
+    z-index: 4; /* Ensure it is above the sliding card */
 }
+
+    /* Change color on hover */
+    .close-button:hover {
+        color: #0056b3; /* Darker blue on hover */
+    }
+
 
 /* User location pin styling */
 .locate-button {
@@ -167,9 +186,9 @@ button#search-button:hover {
     transition: background 0.3s;
 }
 
-.locate-button:hover {
-    background: #f0f0f0; /* Change background on hover */
-}
+    .locate-button:hover {
+        background: #f0f0f0; /* Change background on hover */
+    }
 
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {
