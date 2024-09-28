@@ -202,6 +202,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('close-button').addEventListener('click', function () {
         document.getElementById('sliding-card').style.display = 'none'; // Hide the sliding card
     });
-});
 
 
