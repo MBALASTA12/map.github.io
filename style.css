@@ -107,7 +107,7 @@ button#search-button {
 }
 
 /* delivery card styling */
-.delivery-card {
+.card {
     position: absolute;
     bottom: -200px; /* Start off the screen */
     left: 0;
@@ -120,7 +120,7 @@ button#search-button {
     z-index: 100;
 }
 
-    .delivery-card.visible {
+    .card.visible {
         bottom: 0; /* Slide up to show the card */
     }
 
@@ -261,7 +261,7 @@ button#search-button {
         padding: 10px;
     }
 
-    .delivery-card {
+    .card {
         padding: 10px;
     }
 
