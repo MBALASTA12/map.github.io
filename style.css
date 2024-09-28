@@ -149,7 +149,8 @@ button#search-button:hover {
 @media screen and (max-width: 768px) {
     .search-container {
         top: 20px;
-        width: 90%;
+        width: 80%;
+        max-width: none;
     }
 
     button#search-button {
