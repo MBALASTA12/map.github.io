@@ -20,18 +20,18 @@ body {
 .search-container {
     position: absolute;
     top: 10px;
-    left: 50%; /* Center align horizontally */
-    transform: translateX(-50%);
+    left: 10px; /* Align to the left */
     z-index: 2; /* Ensure the search bar is above the map */
     display: flex;
-    align-items: left;
+    align-items: center; /* Align the items properly inside the container */
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 5px;
-    width: 80%; /* Adjust width for mobile */
-    max-width: 500px; /* Set a maximum width */
+    width: 60%; /* Adjust the width for the container */
+    max-width: 400px; /* Set a maximum width */
 }
+
 
 /* Input styling */
 input#search-input {
