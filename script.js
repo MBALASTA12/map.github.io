@@ -26,7 +26,7 @@ const awesomplete = new Awesomplete(input, {
 });
 
 // Handle input event for autocomplete suggestions
-input.addEventListener('input', async function() {
+input.addEventListener('input', async function () {
     const query = this.value;
     if (query.length > 2) {
         const suggestions = await fetchSuggestions(query);
@@ -37,7 +37,7 @@ input.addEventListener('input', async function() {
 });
 
 // Handle the selection of an autocomplete suggestion
-awesomplete.input.addEventListener("awesomplete-selectcomplete", function(event) {
+awesomplete.input.addEventListener("awesomplete-selectcomplete", function (event) {
     const selected = event.text.value;
 
     // Fetch the first result for the selected address
@@ -101,7 +101,7 @@ function slideUpPickupCard() {
 // Ensure the DOM is fully loaded before attaching event listeners
 document.addEventListener("DOMContentLoaded", () => {
     // Search button event listener
-    document.getElementById('search-button').addEventListener('click', async function() {
+    document.getElementById('search-button').addEventListener('click', async function () {
         const query = input.value;
         if (query.length > 2) {
             const suggestions = await fetchSuggestions(query);
@@ -117,14 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Click event on the map
-    map.on('click', function(e) {
+    map.on('click', function (e) {
         const lat = e.latlng.lat;
         const lon = e.latlng.lng;
         moveMarker(lat, lon); // Move the marker and update the card
     });
 
     // Locate button event listener
-    document.getElementById('locate-button').addEventListener('click', function() {
+    document.getElementById('locate-button').addEventListener('click', function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 const lat = position.coords.latitude;
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Handle Check button functionality
-document.getElementById('check-button').addEventListener('click', function() {
+document.getElementById('check-button').addEventListener('click', function () {
     const address = document.getElementById('pickup-address').textContent;
     const coordinates = document.getElementById('pickup-coordinates').textContent;
 
@@ -152,11 +152,12 @@ document.getElementById('check-button').addEventListener('click', function() {
 
     document.getElementById('confirmed-address').textContent = `Address: ${address}`;
     document.getElementById('confirmed-coordinates').textContent = `Coordinates: ${coordinates}`;
-    
+
     const slidingCard = document.getElementById('sliding-card');
     slidingCard.style.display = 'block'; // Show the sliding card
     slidingCard.style.top = '60px'; // Position it below the search container
 });
 
-
-
+document.getElementById('close-button').addEventListener('click', function () {
+    document.getElementById('sliding-card').style.display = 'none'; // Hides the sliding card
+});
