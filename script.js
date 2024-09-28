@@ -76,6 +76,10 @@ function moveMarker(lat, lon) {
     updatePickupCard(lat, lon);
 }
 
+// Update the pickup card with address and coordinates
+    updateDeliveryCard(lat, lon);
+}
+
 // Function to update the pickup card with address and coordinates
 function updatePickupCard(lat, lon) {
     // Fetch address details using reverse geocoding
@@ -211,17 +215,5 @@ document.getElementById('check-button').addEventListener('click', function () {
     const card = document.getElementById('pickup-card');
     card.classList.remove('visible'); // Hide the pickup card
 
-    // Ensure the delivery button and delivery card are now visible
-    const deliveryCard = document.getElementById('delivery-card');
-    const deliveryButton = document.getElementById('check-delivery-button');
-
-    if (deliveryCard) {
-        deliveryCard.style.display = 'block'; // Show the delivery card
-    }
-
-    if (deliveryButton) {
-        deliveryButton.style.display = 'inline-block'; // Make sure the delivery button is visible
-    }
-});
-
+   
 
