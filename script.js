@@ -98,36 +98,27 @@ function slideUpPickupCard() {
     card.classList.add('visible'); // Add visible class to show the card
 }
 
-// Ensure the DOM is fully loaded before attaching event listeners
-document.addEventListener('DOMContentLoaded', function () {
-
-    // Check for check-delivery-button existence
-    const checkDeliveryButton = document.getElementById('check-delivery-button');
-    if (!checkDeliveryButton) {
-        console.error('Check delivery button not found');
-    } else {
-        checkDeliveryButton.addEventListener('click', function () {
-            const deliveryAddress = document.getElementById('delivery-address').textContent;
-            const deliveryCoordinates = document.getElementById('delivery-coordinates').textContent;
-            const pickupAddress = document.getElementById('pickup-address').textContent;
-            const pickupCoordinates = document.getElementById('pickup-coordinates').textContent;
-
-            if (pickupAddress.includes('Not set') || pickupCoordinates.includes('Not set')) {
-                alert('Please set a pickup location first.');
-                return;
-            }
-
-            if (deliveryAddress.includes('Not set') || deliveryCoordinates.includes('Not set')) {
-                alert('Please set a delivery location first.');
-                return;
-            }
-
-            const detailsUrl = `details.html?pickupAddress=${encodeURIComponent(pickupAddress)}&pickupCoordinates=${encodeURIComponent(pickupCoordinates)}&deliveryAddress=${encodeURIComponent(deliveryAddress)}&deliveryCoordinates=${encodeURIComponent(deliveryCoordinates)}`;
-            
-            window.location.href = detailsUrl; // Navigate to details.html
+// Function to update the delivery card with address and coordinates
+function updateDeliveryCard(lat, lon) {
+    // Fetch address details using reverse geocoding
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+        .then(response => response.json())
+        .then(data => {
+            const address = data.display_name || 'Unknown address';
+            document.getElementById('delivery-address').textContent = `Address: ${address}`;
+            document.getElementById('delivery-coordinates').textContent = `Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+            slideUpPickupCard(); // Slide up the card
+        })
+        .catch(err => {
+            console.error('Fetch error:', err);
         });
-    }
-});
+}
+
+// Function to slide up the delivery card
+function slideUpPickupCard() {
+    const card = document.getElementById('delivery-card');
+    card.classList.add('visible'); // Add visible class to show the card
+}
 
     // Search button event listener
     document.getElementById('search-button').addEventListener('click', async function () {
@@ -167,6 +158,37 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Geolocation is not supported by this browser.');
         }
     });
+
+// Ensure the DOM is fully loaded before attaching event listeners
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Check for check-delivery-button existence
+    const checkDeliveryButton = document.getElementById('check-delivery-button');
+    if (!checkDeliveryButton) {
+        console.error('Check delivery button not found');
+    } else {
+        checkDeliveryButton.addEventListener('click', function () {
+            const deliveryAddress = document.getElementById('delivery-address').textContent;
+            const deliveryCoordinates = document.getElementById('delivery-coordinates').textContent;
+            const pickupAddress = document.getElementById('pickup-address').textContent;
+            const pickupCoordinates = document.getElementById('pickup-coordinates').textContent;
+
+            if (pickupAddress.includes('Not set') || pickupCoordinates.includes('Not set')) {
+                alert('Please set a pickup location first.');
+                return;
+            }
+
+            if (deliveryAddress.includes('Not set') || deliveryCoordinates.includes('Not set')) {
+                alert('Please set a delivery location first.');
+                return;
+            }
+
+            const detailsUrl = `details.html?pickupAddress=${encodeURIComponent(pickupAddress)}&pickupCoordinates=${encodeURIComponent(pickupCoordinates)}&deliveryAddress=${encodeURIComponent(deliveryAddress)}&deliveryCoordinates=${encodeURIComponent(deliveryCoordinates)}`;
+            
+            window.location.href = detailsUrl; // Navigate to details.html
+        });
+    }
+});
 
 // Check button event listener for Pickup
 document.getElementById('check-button').addEventListener('click', function () {
