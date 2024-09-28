@@ -92,10 +92,20 @@ function updatePickupCard(lat, lon) {
         });
 }
 
+let isPickupChecked = false; // Track if the "Check" button has been clicked
+
 // Function to slide up the pickup card
 function slideUpPickupCard() {
-    const card = document.getElementById('pickup-card');
-    card.classList.add('visible'); // Add visible class to show the card
+    if (isPickupChecked) {
+        return; // Stop if the card was already checked
+    }
+
+    const pickupCard = document.getElementById('pickup-card');
+    if (pickupCard) {
+        pickupCard.classList.add('visible'); // Show the pickup card
+    } else {
+        console.error('Pickup card element not found');
+    }
 }
 
 // Function to update the delivery card with address and coordinates
@@ -210,4 +220,6 @@ document.getElementById('check-button').addEventListener('click', function () {
 
     const card = document.getElementById('pickup-card');
     card.classList.remove('visible'); // Hide the pickup card
+
+    isPickupChecked = true; // Set the flag to true after checking the pickup card
 });
