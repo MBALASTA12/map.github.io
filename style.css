@@ -89,6 +89,8 @@ button#search-button:hover {
     transition: bottom 0.5s; /* Smooth transition for sliding */
     padding: 10px;
     z-index: 100;
+    display: flex;
+    align-items: center;
 }
 
 .pickup-card.visible {
@@ -96,6 +98,11 @@ button#search-button:hover {
 }
 
 /* Card content styling */
+.card-content {
+    display: flex;
+    align-items: center;
+}
+
 .card-content h3 {
     margin: 0 0 10px;
     font-size: 18px;
@@ -105,10 +112,25 @@ button#search-button:hover {
     margin: 5px 0;
 }
 
+/* Check button styling */
+.check-button {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px; /* Space between check button and content */
+    cursor: pointer;
+}
+
+.check-button:hover {
+    background-color: #218838;
+}
+
 /* User location pin styling */
 .locate-button {
     position: absolute;
-    top: 20px; /* Position it at the top */
+    top: 10px; /* Align with search bar */
     right: 20px; /* Position it at the right */
     background: white;
     border: 1px solid #ccc;
