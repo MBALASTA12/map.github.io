@@ -119,7 +119,7 @@ button#search-button:hover {
     color: white;
     padding: 10px;
     border-radius: 50%;
-    margin-right: 10px; /* Space between check button and content */
+    margin-left: 10px; /* Space between check button and content */
     cursor: pointer;
 }
 
