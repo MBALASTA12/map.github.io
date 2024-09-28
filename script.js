@@ -76,10 +76,6 @@ function moveMarker(lat, lon) {
     updatePickupCard(lat, lon);
 }
 
-// Update the pickup card with address and coordinates
-    updateDeliveryCard(lat, lon);
-}
-
 // Function to update the pickup card with address and coordinates
 function updatePickupCard(lat, lon) {
     // Fetch address details using reverse geocoding
