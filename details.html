@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Page</title>
+</head>
+<body>
+    <h1>Pickup and Delivery Details</h1>
+    <div id="pickup-details">
+        <h2>Pickup Location</h2>
+        <div id="confirmed-address"></div>
+        <div id="confirmed-coordinates"></div>
+    </div>
+    <div id="delivery-details">
+        <h2>Delivery Location</h2>
+        <div id="delivery-address"></div>
+        <div id="delivery-coordinates"></div>
+    </div>
+
+    <script>
+        // Function to get URL parameters
+        function getUrlParameters() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                pickupAddress: params.get('pickupAddress') || 'Not set',
+                pickupCoordinates: params.get('pickupCoordinates') || 'Not set',
+                deliveryAddress: params.get('deliveryAddress') || 'Not set',
+                deliveryCoordinates: params.get('deliveryCoordinates') || 'Not set'
+            };
+        }
+
+        // Retrieve and display the parameters
+        const { pickupAddress, pickupCoordinates, deliveryAddress, deliveryCoordinates } = getUrlParameters();
+        document.getElementById('confirmed-address').textContent = `Address: ${pickupAddress}`;
+        document.getElementById('confirmed-coordinates').textContent = `Coordinates: ${pickupCoordinates}`;
+        document.getElementById('delivery-address').textContent = `Address: ${deliveryAddress}`;
+        document.getElementById('delivery-coordinates').textContent = `Coordinates: ${deliveryCoordinates}`;
+    </script>
+</body>
+</html>
