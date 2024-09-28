@@ -128,8 +128,8 @@ button#search-button {
 /* Close button styling */
 .close-button {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 10px; /* Adjust to position at the top */
+    left: 10px; /* Align to the left */
     background: transparent;
     border: none;
     font-size: 20px; /* Size of the 'X' */
@@ -138,10 +138,10 @@ button#search-button {
     z-index: 4; /* Ensure it is above the sliding card */
 }
 
-    /* Change color on hover */
-    .close-button:hover {
-        color: #0056b3; /* Darker blue on hover */
-    }
+/* Change color on hover */
+.close-button:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
 
 
 /* User location pin styling */
