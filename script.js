@@ -108,21 +108,6 @@ function slideUpPickupCard() {
     }
 }
 
-// Function to move the marker to a new location
-function moveMarker(lat, lon) {
-    // Remove existing markers
-    markers.forEach(marker => map.removeLayer(marker));
-    markers.length = 0; // Clear the markers array
-
-    // Add a new marker
-    const marker = L.marker([lat, lon]).addTo(map);
-    markers.push(marker);
-    map.setView([lat, lon], 13);
-
-    // Update the pickup card with address and coordinates
-    updatePickupCard(lat, lon);
-}
-
 // Function to update the delivery card with address and coordinates
 function updateDeliveryCard(lat, lon) {
     // Fetch address details using reverse geocoding
@@ -139,6 +124,16 @@ function updateDeliveryCard(lat, lon) {
         });
 }
 
+// Function to slide up the delivery card
+function slideUpDeliveryCard() {
+    const deliveryCard = document.getElementById('delivery-card');
+    if (deliveryCard) {
+        deliveryCard.classList.add('visible'); // Add visible class to show the card
+    } else {
+        console.error('Delivery card element not found');
+    }
+}
+
 // Click event on the map for setting delivery location
 map.on('click', function (e) {
     const lat = e.latlng.lat;
@@ -146,12 +141,6 @@ map.on('click', function (e) {
     moveMarker(lat, lon); // Move the marker and update the pickup card
     updateDeliveryCard(lat, lon); // Call this to update and slide up the delivery card
 });
-
-// Function to slide up the delivery card
-function slideUpDeliveryCard() {
-    const deliverycard = document.getElementById('delivery-card');
-    delivery.classList.add('visible'); // Add visible class to show the card
-}
 
 // Search button event listener
 document.getElementById('search-button').addEventListener('click', async function () {
@@ -167,13 +156,6 @@ document.getElementById('search-button').addEventListener('click', async functio
     } else {
         alert('Please enter at least 3 characters to search.');
     }
-});
-
-// Click event on the map
-map.on('click', function (e) {
-    const lat = e.latlng.lat;
-    const lon = e.latlng.lng;
-    moveMarker(lat, lon); // Move the marker and update the card
 });
 
 // Locate button event listener
@@ -238,11 +220,7 @@ document.getElementById('check-button').addEventListener('click', function () {
     document.getElementById('confirmed-coordinates').textContent = `Coordinates: ${coordinates}`;
 
     const slidingCard = document.getElementById('sliding-card');
-    slidingCard.style.display = 'block'; // Show the sliding card
-    slidingCard.style.top = '60px'; // Position it below the search container
+    slidingCard.style.transform = 'translateY(0)'; // Slide up the confirmed card
 
-    const card = document.getElementById('pickup-card');
-    card.classList.remove('visible'); // Hide the pickup card
-
-    isPickupChecked = true; // Set the flag to true after checking the pickup card
+    isPickupChecked = true; // Mark as checked
 });
