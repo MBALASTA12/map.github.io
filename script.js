@@ -95,22 +95,6 @@ function updatePickupCard(lat, lon) {
 let isPickupChecked = false; // Track if the pickup card is checked
 let isDeliveryChecked = false; // Track if the delivery card is checked
 
-// Function to slide up the pickup card
-function slideUpPickupCard() {
-    const pickupCard = document.getElementById('pickup-card');
-    if (pickupCard) {
-        pickupCard.classList.remove('visible'); // Hide the pickup card
-    }
-}
-
-// Function to slide up the delivery card
-function slideUpDeliveryCard() {
-    const deliveryCard = document.getElementById('delivery-card');
-    if (deliveryCard) {
-        deliveryCard.classList.add('visible'); // Show the delivery card
-    }
-}
-
 // Check button event listener for Pickup
 document.getElementById('check-button').addEventListener('click', function () {
     const address = document.getElementById('pickup-address').textContent;
@@ -129,15 +113,30 @@ document.getElementById('check-button').addEventListener('click', function () {
     slidingCard.style.transform = 'translateY(0)'; // Slide up the confirmed card
 
     isPickupChecked = true; // Mark as checked
+    slideUpPickupCard(); // Slide up the pickup card
+    slideUpDeliveryCard(); // Show delivery card after pickup is confirmed
 });
 
 // Click event on the map for setting delivery location
 map.on('click', function (e) {
+    if (!isPickupChecked) {
+        alert('Please confirm the pickup location first.');
+        return; // Prevent setting delivery location if pickup is not confirmed
+    }
+
     const lat = e.latlng.lat;
     const lon = e.latlng.lng;
-    moveMarker(lat, lon); // Move the marker and update the pickup card
-    updateDeliveryCard(lat, lon); // Call this to update and slide up the delivery card
+    moveMarker(lat, lon); // Move the marker to the selected location
+    updateDeliveryCard(lat, lon); // Update and slide up the delivery card
 });
+
+// Function to slide up the delivery card
+function slideUpDeliveryCard() {
+    const deliveryCard = document.getElementById('delivery-card');
+    if (deliveryCard) {
+        deliveryCard.classList.add('visible'); // Show the delivery card
+    }
+}
 
 // Function to update the delivery card with address and coordinates
 function updateDeliveryCard(lat, lon) {
