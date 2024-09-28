@@ -82,14 +82,15 @@ button#search-button:hover {
 .sliding-card {
     display: none; /* Hidden by default */
     position: absolute; /* Positioned relative to the nearest positioned ancestor */
-    top: 0; /* Start at the top */
+    top: 60px; /* Start below the search container */
     left: 50%;
     transform: translateX(-50%);
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px;
+    width: 80%; /* Match the width of the search container */
+    max-width: 500px; /* Set a maximum width */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 3; /* Above the map and pickup card */
     transition: all 0.5s ease; /* Smooth transition */
