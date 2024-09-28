@@ -139,3 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// Add a click event listener to the check button
+document.getElementById('check-button').addEventListener('click', function() {
+    alert('Pickup location confirmed.');
+});
+
