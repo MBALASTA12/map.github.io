@@ -124,6 +124,24 @@ button#search-button {
     #check-button:hover {
         background-color: #218838; /* Darker green on hover */
     }
+/* Check button styling */
+#check-delivery-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 101;
+}
+
+    #check-button:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
 
 /* Sliding card styling */
 .sliding-card {
