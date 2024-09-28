@@ -100,15 +100,6 @@ function slideUpPickupCard() {
 
 // Ensure the DOM is fully loaded before attaching event listeners
 document.addEventListener('DOMContentLoaded', function () {
-    // Check for check-button existence
-    const checkButton = document.getElementById('check-button');
-    if (!checkButton) {
-        console.error('Check button not found');
-    } else {
-        checkButton.addEventListener('click', function () {
-            console.log('Pickup check button clicked');
-        });
-    }
 
     // Check for check-delivery-button existence
     const checkDeliveryButton = document.getElementById('check-delivery-button');
@@ -177,30 +168,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Check button event listener
-    document.getElementById('check-button').addEventListener('click', function () {
-        const address = document.getElementById('pickup-address').textContent;
-        const coordinates = document.getElementById('pickup-coordinates').textContent;
+// Check button event listener for Pickup
+document.getElementById('check-button').addEventListener('click', function () {
+    const address = document.getElementById('pickup-address').textContent;
+    const coordinates = document.getElementById('pickup-coordinates').textContent;
 
-        if (address.includes('Not set') || coordinates.includes('Not set')) {
-            alert('Please set a location first.');
-            return;
-        }
+    if (address.includes('Not set') || coordinates.includes('Not set')) {
+        alert('Please set a location first.');
+        return;
+    }
 
-        document.getElementById('confirmed-address').textContent = `Address: ${address}`;
-        document.getElementById('confirmed-coordinates').textContent = `Coordinates: ${coordinates}`;
+    // Show confirmed address and coordinates in the sliding card
+    document.getElementById('confirmed-address').textContent = `Address: ${address}`;
+    document.getElementById('confirmed-coordinates').textContent = `Coordinates: ${coordinates}`;
 
-        const slidingCard = document.getElementById('sliding-card');
-        slidingCard.style.display = 'block'; // Show the sliding card
-        slidingCard.style.top = '60px'; // Position it below the search container
+    const slidingCard = document.getElementById('sliding-card');
+    slidingCard.style.display = 'block'; // Show the sliding card
+    slidingCard.style.top = '60px'; // Position it below the search container
 
-        const card = document.getElementById('pickup-card');
-        card.classList.remove('visible'); // Hide the pickup card
-    });
+    const card = document.getElementById('pickup-card');
+    card.classList.remove('visible'); // Hide the pickup card
 
-    // Close button functionality
-    document.getElementById('close-button').addEventListener('click', function () {
-        document.getElementById('sliding-card').style.display = 'none'; // Hide the sliding card
-    });
+    // Ensure the delivery button and delivery card are now visible
+    const deliveryCard = document.getElementById('delivery-card');
+    const deliveryButton = document.getElementById('check-delivery-button');
+
+    if (deliveryCard) {
+        deliveryCard.style.display = 'block'; // Show the delivery card
+    }
+
+    if (deliveryButton) {
+        deliveryButton.style.display = 'inline-block'; // Make sure the delivery button is visible
+    }
+});
 
 
