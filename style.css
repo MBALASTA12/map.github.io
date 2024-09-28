@@ -136,14 +136,16 @@ button#search-button {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: top 0.5s ease; /* Smooth transition */
     padding: 15px;
-    width: 90%; /* Set a width for the card */
+    width: calc(100% - 30px); /* Adjust width to match the search tab (subtracting padding) */
+    max-width: 600px; /* Set a maximum width if desired */
     z-index: 1000; /* Ensure it appears above other elements */
 }
 
 /* Sliding card visible state */
 .sliding-card.visible {
-    top: 60px; /* Position it below the search container */
+    top: calc(60px + 15px); /* Position it below the search container, accounting for padding */
 }
+
 
 
 /* Close button styling */
