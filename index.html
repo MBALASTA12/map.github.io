@@ -46,12 +46,14 @@
         </button>
     </div>
 
-    <!-- Delivery Location Section -->
-    <div class="delivery-section">
-        <input type="text" id="delivery-input" placeholder="Enter delivery location" />
-        <button id="delivery-button">Set Delivery Location</button>
-        <div id="delivery-address"></div>
-        <div id="delivery-coordinates"></div>
+    <!-- Sliding Card for Confirmed Delivery Details -->
+    <div id="sliding-card" class="sliding-card">
+        <button class="close-button" id="close-button">&times;</button> <!-- Close button -->
+        <div class="card-content">
+            <h3>Confirmed Delivery Location</h3>
+            <p id="confirmed-address">Address: Not set</p>
+            <p id="confirmed-coordinates">Coordinates: Not set</p>
+        </div>
     </div>
 
 
