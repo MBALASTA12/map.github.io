@@ -107,7 +107,7 @@ function updateDeliveryCard(lat, lon) {
             const address = data.display_name || 'Unknown address';
             document.getElementById('delivery-address').textContent = `Address: ${address}`;
             document.getElementById('delivery-coordinates').textContent = `Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
-            slideUpPickupCard(); // Slide up the card
+            slideUpDeliveryCard(); // Slide up the delivery card
         })
         .catch(err => {
             console.error('Fetch error:', err);
@@ -115,49 +115,49 @@ function updateDeliveryCard(lat, lon) {
 }
 
 // Function to slide up the delivery card
-function slideUpPickupCard() {
+function slideUpDeliveryCard() {
     const card = document.getElementById('delivery-card');
     card.classList.add('visible'); // Add visible class to show the card
 }
 
-    // Search button event listener
-    document.getElementById('search-button').addEventListener('click', async function () {
-        const query = input.value;
-        if (query.length > 2) {
-            const suggestions = await fetchSuggestions(query);
-            if (suggestions.length > 0) {
-                const bestResult = suggestions[0];
-                moveMarker(bestResult.lat, bestResult.lon);
-            } else {
-                alert('No suggestions found.');
-            }
+// Search button event listener
+document.getElementById('search-button').addEventListener('click', async function () {
+    const query = input.value;
+    if (query.length > 2) {
+        const suggestions = await fetchSuggestions(query);
+        if (suggestions.length > 0) {
+            const bestResult = suggestions[0];
+            moveMarker(bestResult.lat, bestResult.lon);
         } else {
-            alert('Please enter at least 3 characters to search.');
+            alert('No suggestions found.');
         }
-    });
+    } else {
+        alert('Please enter at least 3 characters to search.');
+    }
+});
 
-    // Click event on the map
-    map.on('click', function (e) {
-        const lat = e.latlng.lat;
-        const lon = e.latlng.lng;
-        moveMarker(lat, lon); // Move the marker and update the card
-    });
+// Click event on the map
+map.on('click', function (e) {
+    const lat = e.latlng.lat;
+    const lon = e.latlng.lng;
+    moveMarker(lat, lon); // Move the marker and update the card
+});
 
-    // Locate button event listener
-    document.getElementById('locate-button').addEventListener('click', function () {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                moveMarker(lat, lon); // Move the marker to the user's location
-            }, error => {
-                console.error('Geolocation error:', error);
-                alert('Unable to retrieve your location. Please enable GPS or location services.');
-            });
-        } else {
-            alert('Geolocation is not supported by this browser.');
-        }
-    });
+// Locate button event listener
+document.getElementById('locate-button').addEventListener('click', function () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            moveMarker(lat, lon); // Move the marker to the user's location
+        }, error => {
+            console.error('Geolocation error:', error);
+            alert('Unable to retrieve your location. Please enable GPS or location services.');
+        });
+    } else {
+        alert('Geolocation is not supported by this browser.');
+    }
+});
 
 // Ensure the DOM is fully loaded before attaching event listeners
 document.addEventListener('DOMContentLoaded', function () {
@@ -210,6 +210,4 @@ document.getElementById('check-button').addEventListener('click', function () {
 
     const card = document.getElementById('pickup-card');
     card.classList.remove('visible'); // Hide the pickup card
-
-   
-
+});
