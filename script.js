@@ -100,40 +100,41 @@ function slideUpPickupCard() {
 
 // Ensure the DOM is fully loaded before attaching event listeners
 document.addEventListener('DOMContentLoaded', function () {
-    // Attach the event listener after the DOM has been fully loaded
+    // Check for check-button existence
     const checkButton = document.getElementById('check-button');
-
-    if (checkButton) {
+    if (!checkButton) {
+        console.error('Check button not found');
+    } else {
         checkButton.addEventListener('click', function () {
-            // Your logic for the button click goes here
             console.log('Pickup check button clicked');
+        });
+    }
+
+    // Check for check-delivery-button existence
+    const checkDeliveryButton = document.getElementById('check-delivery-button');
+    if (!checkDeliveryButton) {
+        console.error('Check delivery button not found');
+    } else {
+        checkDeliveryButton.addEventListener('click', function () {
+            const deliveryAddress = document.getElementById('delivery-address').textContent;
+            const deliveryCoordinates = document.getElementById('delivery-coordinates').textContent;
+            const pickupAddress = document.getElementById('pickup-address').textContent;
+            const pickupCoordinates = document.getElementById('pickup-coordinates').textContent;
+
+            if (pickupAddress.includes('Not set') || pickupCoordinates.includes('Not set')) {
+                alert('Please set a pickup location first.');
+                return;
+            }
+
+            if (deliveryAddress.includes('Not set') || deliveryCoordinates.includes('Not set')) {
+                alert('Please set a delivery location first.');
+                return;
+            }
+
+            const detailsUrl = `details.html?pickupAddress=${encodeURIComponent(pickupAddress)}&pickupCoordinates=${encodeURIComponent(pickupCoordinates)}&deliveryAddress=${encodeURIComponent(deliveryAddress)}&deliveryCoordinates=${encodeURIComponent(deliveryCoordinates)}`;
             
-            // Event listener for the delivery check button
-document.getElementById('check-delivery-button').addEventListener('click', function () {
-    const deliveryAddress = document.getElementById('delivery-address').textContent;
-    const deliveryCoordinates = document.getElementById('delivery-coordinates').textContent;
-    const pickupAddress = document.getElementById('pickup-address').textContent;
-    const pickupCoordinates = document.getElementById('pickup-coordinates').textContent;
-
-    // Check if locations are set
-    if (pickupAddress.includes('Not set') || pickupCoordinates.includes('Not set')) {
-        alert('Please set a pickup location first.');
-        return;
-    }
-
-    if (deliveryAddress.includes('Not set') || deliveryCoordinates.includes('Not set')) {
-        alert('Please set a delivery location first.');
-        return;
-    }
-
-    // Redirect to details.html with parameters
-    const detailsUrl = `details.html?pickupAddress=${encodeURIComponent(pickupAddress)}&pickupCoordinates=${encodeURIComponent(pickupCoordinates)}&deliveryAddress=${encodeURIComponent(deliveryAddress)}&deliveryCoordinates=${encodeURIComponent(deliveryCoordinates)}`;
-    
-    window.location.href = detailsUrl; // Navigate to details.html
-});
-
-} else {
-        console.error('Check button not found in the DOM');
+            window.location.href = detailsUrl; // Navigate to details.html
+        });
     }
 });
 
