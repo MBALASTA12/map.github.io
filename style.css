@@ -78,6 +78,23 @@ button#search-button:hover {
     background: #f0f0f0; /* Highlight on hover */
 }
 
+/* Sliding card styles */
+.sliding-card {
+    display: none; /* Hidden by default */
+    position: absolute; /* Positioned relative to the nearest positioned ancestor */
+    top: 0; /* Start at the top */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 3; /* Above the map and pickup card */
+    transition: all 0.5s ease; /* Smooth transition */
+}
+
 /* Pickup card styling */
 .pickup-card {
     position: absolute;
