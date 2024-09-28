@@ -157,3 +157,9 @@ document.getElementById('check-button').addEventListener('click', function () {
     slidingCard.style.display = 'block'; // Show the sliding card
     slidingCard.style.top = '60px'; // Position it below the search container
 });
+
+// Close button functionality
+document.getElementById('close-button').addEventListener('click', function () {
+    document.getElementById('sliding-card').style.display = 'none'; // Hide the sliding card
+});
+
