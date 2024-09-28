@@ -103,6 +103,14 @@ function slideUpPickupCard() {
     const pickupCard = document.getElementById('pickup-card');
     if (pickupCard) {
         pickupCard.classList.add('visible'); // Show the pickup card
+
+        // Wait for the pickup card to slide up before sliding the delivery card
+        setTimeout(() => {
+            pickupCard.classList.remove('visible'); // Hide the pickup card
+
+            // Now slide up the delivery card
+            slideUpDeliveryCard();
+        }, 3000); // Adjust the timeout duration as needed
     } else {
         console.error('Pickup card element not found');
     }
@@ -117,13 +125,12 @@ function updateDeliveryCard(lat, lon) {
             const address = data.display_name || 'Unknown address';
             document.getElementById('delivery-address').textContent = `Address: ${address}`;
             document.getElementById('delivery-coordinates').textContent = `Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
-            slideUpDeliveryCard(); // Slide up the delivery card
+            // Delay the delivery card slide-up until the pickup card is hidden
         })
         .catch(err => {
             console.error('Fetch error:', err);
         });
 }
-
 // Function to slide up the delivery card
 function slideUpDeliveryCard() {
     const deliveryCard = document.getElementById('delivery-card');
