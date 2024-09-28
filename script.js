@@ -159,5 +159,5 @@ document.getElementById('check-button').addEventListener('click', function () {
 });
 
 document.getElementById('close-button').addEventListener('click', function () {
-    document.getElementById('sliding-card').style.display = 'none'; // Hides the sliding card
+    document.getElementById('pickup-sliding-card').style.display = 'none'; // Hides the sliding card
 });
