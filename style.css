@@ -24,7 +24,7 @@ body {
     transform: translateX(-50%);
     z-index: 2; /* Ensure the search bar is above the map */
     display: flex;
-    align-items: center;
+    align-items: left;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -129,7 +129,7 @@ button#search-button:hover {
 /* User location pin styling */
 .locate-button {
     position: absolute;
-    top: 10px; /* Align with search bar */
+    top: 15px; /* Align with search bar */
     right: 20px;
     background: white;
     border: 1px solid #ccc;
