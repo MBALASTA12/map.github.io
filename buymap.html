@@ -11,8 +11,9 @@
 <body>
     <!-- Search Tab -->
     <div id="search-container">
-        <input type="text" id="location-search" placeholder="Search for a location..." />
+        <input type="text" id="location-search" placeholder="Search for a location..." onkeyup="getSuggestions()" />
         <button onclick="searchLocation()">Search</button>
+        <div id="suggestions"></div> <!-- Dropdown for suggestions -->
     </div>
 
     <!-- Container for the map -->
