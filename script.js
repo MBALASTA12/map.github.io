@@ -1,135 +1,79 @@
 // Initialize the map
 const map = L.map('map', {
-    zoomControl: false // Disable the default zoom controls
-}).setView([6.12108, 125.15882], 13); // Set initial coordinates and zoom level
+    zoomControl: false
+}).setView([6.12108, 125.15882], 13);
 
-// Add tile layer to the map (OpenStreetMap)
+// Add tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+    maxZoom: 19
 }).addTo(map);
 
-// Function to fetch location suggestions from OpenStreetMap
-async function fetchSuggestions(query) {
-    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`);
-    const data = await response.json();
-    return data.map(item => ({
-        label: item.display_name,
-        lat: item.lat,
-        lon: item.lon
-    }));
-}
+// Initialize marker array
+let markers = [];
 
-// Initialize Awesomplete for search input
-const input = document.getElementById('search-input');
-const awesomplete = new Awesomplete(input, {
-    autoFirst: true,
-});
-
-// Handle input event for autocomplete suggestions
-input.addEventListener('input', async function () {
-    const query = this.value;
-    if (query.length > 2) {
-        const suggestions = await fetchSuggestions(query);
-        awesomplete.list = suggestions.map(s => s.label);
-    } else {
-        awesomplete.list = [];
-    }
-});
-
-// Handle the selection of an autocomplete suggestion
-awesomplete.input.addEventListener("awesomplete-selectcomplete", function (event) {
-    const selected = event.text.value;
-
-    // Fetch the first result for the selected address
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(selected)}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.length > 0) {
-                const bestResult = data[0];
-                moveMarker(bestResult.lat, bestResult.lon);
-                input.value = ''; // Clear the input
-            } else {
-                alert('Location not found. Please try another search.');
-            }
-        })
-        .catch(err => {
-            console.error('Fetch error:', err);
-            alert('Error occurred while searching. Please try again later.');
-        });
-});
-
-// Initialize a marker array
-const markers = [];
-
-// Function to move the marker to a new location
-function moveMarker(lat, lon) {
-    // Check if the coordinates are valid
-    if (!lat || !lon) {
-        console.error('Invalid coordinates');
-        return;
-    }
-
-    // Remove existing markers
+// Function to move marker and update card
+function moveMarker(lat, lon, isPickup = true) {
+    // Clear previous markers
     markers.forEach(marker => map.removeLayer(marker));
-    markers = []; // Clear the markers array
+    markers = [];
 
-    // Add a new marker at the new location
+    // Add new marker
     const marker = L.marker([lat, lon]).addTo(map);
     markers.push(marker);
+    map.setView([lat, lon], 15); // Adjust the zoom as necessary
 
-    // Center the map on the new marker
-    map.setView([lat, lon], 15); // Adjust zoom level as needed
-
-    // Update the pickup card with address and coordinates
-    updatePickupCard(lat, lon);
+    if (isPickup) {
+        // Update Pickup card details and slide it up
+        updatePickupCard(lat, lon);
+    } else {
+        // Update Delivery card details and slide it up
+        updateDeliveryCard(lat, lon);
+    }
 }
 
-
-// Function to update the pickup card with address and coordinates
+// Pickup card update function
 function updatePickupCard(lat, lon) {
-    // Fetch address details using reverse geocoding
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
         .then(response => response.json())
         .then(data => {
             const address = data.display_name || 'Unknown address';
-            document.getElementById('pickup-address').textContent = `Address: ${address}`;
+            document.getElementById('pickup-address').textContent = `Pickup Address: ${address}`;
             document.getElementById('pickup-coordinates').textContent = `Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
-            slideUpPickupCard(); // Slide up the card
+            slideUpPickupCard(); // Slide up the pickup card
         })
-        .catch(err => {
-            console.error('Fetch error:', err);
-        });
+        .catch(err => console.error('Error fetching reverse geocode:', err));
 }
 
-// Check button event listener for Pickup
-document.getElementById('check-button').addEventListener('click', function () {
-    const address = document.getElementById('pickup-address').textContent;
-    const coordinates = document.getElementById('pickup-coordinates').textContent;
+// Slide up the Pickup card
+function slideUpPickupCard() {
+    const pickupCard = document.getElementById('pickup-card');
+    if (pickupCard) {
+        pickupCard.classList.add('visible');
+    }
+}
 
-    if (address.includes('Not set') || coordinates.includes('Not set')) {
-        alert('Please set a location first.');
+// Transfer Pickup card details to Sliding card and hide Pickup card
+document.getElementById('check-button').addEventListener('click', function () {
+    const pickupAddress = document.getElementById('pickup-address').textContent;
+    const pickupCoordinates = document.getElementById('pickup-coordinates').textContent;
+
+    if (!pickupAddress || pickupAddress.includes('Not set')) {
+        alert('Please select a pickup location first.');
         return;
     }
 
-    // Show confirmed address and coordinates in the sliding card
-    document.getElementById('confirmed-address').textContent = `Address: ${address}`;
-    document.getElementById('confirmed-coordinates').textContent = `Coordinates: ${coordinates}`;
+    // Transfer details to the sliding card
+    document.getElementById('confirmed-address').textContent = pickupAddress;
+    document.getElementById('confirmed-coordinates').textContent = pickupCoordinates;
 
-    const slidingCard = document.getElementById('sliding-card');
-    slidingCard.style.transform = 'translateY(0)'; // Slide up the confirmed card
+    // Hide Pickup card and show Delivery card
+    document.getElementById('pickup-card').style.transform = 'translateY(100%)'; // Hide
+    slideUpDeliveryCard(); // Show delivery card
 
     isPickupChecked = true; // Mark as checked
-    slideUpPickupCard(); // Slide up the pickup card
-    slideUpDeliveryCard(); // Show delivery card after pickup is confirmed
 });
 
-    const lat = e.latlng.lat;
-    const lon = e.latlng.lng;
-    moveMarker(lat, lon); // Move the marker to the selected location
-    updateDeliveryCard(lat, lon); // Update and slide up the delivery card
-});
-
-// Function to slide up the delivery card
+// Slide up the Delivery card
 function slideUpDeliveryCard() {
     const deliveryCard = document.getElementById('delivery-card');
     if (deliveryCard) {
@@ -137,71 +81,50 @@ function slideUpDeliveryCard() {
     }
 }
 
-// Function to update the delivery card with address and coordinates
+// Delivery card update function
 function updateDeliveryCard(lat, lon) {
-    // Fetch address details using reverse geocoding
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
         .then(response => response.json())
         .then(data => {
             const address = data.display_name || 'Unknown address';
             document.getElementById('delivery-address').textContent = `Delivery Address: ${address}`;
-            document.getElementById('delivery-coordinates').textContent = `Delivery Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+            document.getElementById('delivery-coordinates').textContent = `Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
             slideUpDeliveryCard(); // Slide up the delivery card
         })
-        .catch(err => {
-            console.error('Fetch error:', err);
-        });
+        .catch(err => console.error('Error fetching reverse geocode:', err));
 }
 
-// Click event listener for the delivery "Check" button
+// Confirm Delivery request and navigate to details.html
 document.getElementById('check-delivery-button').addEventListener('click', function () {
     const deliveryAddress = document.getElementById('delivery-address').textContent;
     const deliveryCoordinates = document.getElementById('delivery-coordinates').textContent;
 
-    if (deliveryAddress.includes('Not set') || deliveryCoordinates.includes('Not set')) {
-        alert('Please set a delivery location first.');
+    if (!deliveryAddress || deliveryAddress.includes('Not set')) {
+        alert('Please select a delivery location first.');
         return;
     }
 
-    // Navigate to details.html with query parameters
-    const slidingCardDetails = document.getElementById('sliding-card');
-    const confirmedPickupAddress = slidingCardDetails.querySelector('#confirmed-address').textContent;
-    const confirmedPickupCoordinates = slidingCardDetails.querySelector('#confirmed-coordinates').textContent;
+    // Get pickup details from the sliding card
+    const pickupAddress = document.getElementById('confirmed-address').textContent;
+    const pickupCoordinates = document.getElementById('confirmed-coordinates').textContent;
 
-    const detailsUrl = `details.html?pickupAddress=${encodeURIComponent(confirmedPickupAddress)}&pickupCoordinates=${encodeURIComponent(confirmedPickupCoordinates)}&deliveryAddress=${encodeURIComponent(deliveryAddress)}&deliveryCoordinates=${encodeURIComponent(deliveryCoordinates)}`;
+    // Construct the details.html URL with parameters
+    const detailsUrl = `details.html?pickupAddress=${encodeURIComponent(pickupAddress)}&pickupCoordinates=${encodeURIComponent(pickupCoordinates)}&deliveryAddress=${encodeURIComponent(deliveryAddress)}&deliveryCoordinates=${encodeURIComponent(deliveryCoordinates)}`;
     
-    window.location.href = detailsUrl; // Navigate to details.html
+    // Navigate to the details page
+    window.location.href = detailsUrl;
 });
 
-// Search button event listener
-document.getElementById('search-button').addEventListener('click', async function () {
-    const query = input.value;
-    if (query.length > 2) {
-        const suggestions = await fetchSuggestions(query);
-        if (suggestions.length > 0) {
-            const bestResult = suggestions[0];
-            moveMarker(bestResult.lat, bestResult.lon);
-        } else {
-            alert('No suggestions found.');
-        }
+// Event listener for map click to set Pickup or Delivery location
+map.on('click', function (e) {
+    const lat = e.latlng.lat;
+    const lon = e.latlng.lng;
+
+    if (!isPickupChecked) {
+        // First, set the pickup location
+        moveMarker(lat, lon, true); // isPickup = true
     } else {
-        alert('Please enter at least 3 characters to search.');
+        // After pickup is confirmed, set the delivery location
+        moveMarker(lat, lon, false); // isPickup = false
     }
 });
-
-// Locate button event listener
-document.getElementById('locate-button').addEventListener('click', function () {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            moveMarker(lat, lon); // Move the marker to the user's location
-        }, error => {
-            console.error('Geolocation error:', error);
-            alert('Unable to retrieve your location. Please enable GPS or location services.');
-        });
-    } else {
-        alert('Geolocation is not supported by this browser.');
-    }
-});
-
