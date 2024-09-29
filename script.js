@@ -23,7 +23,7 @@
         // Function to slide up the pickup card
         function slideUpPickupCard() {
             const pickupCard = document.getElementById('pickup-card');
-            pickupCard.classList.add('visible'); // Slide up the card
+            pickupCard.classList.add('visible'); // Slide up and show the card
         }
 
         // Handle map click event to get location and show pickup card
