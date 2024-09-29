@@ -12,30 +12,39 @@ body, html {
     width: 100vw;  /* Full viewport width */
 }
 
-/* Redesign zoom buttons to be round and reposition them */
-.leaflet-control-zoom {
+/* Style for the search bar container */
+#search-container {
     position: absolute;
-    left: 10px; /* Position to the left side */
-    top: 50%;   /* Vertically center */
-    transform: translateY(-50%); /* Adjust for centering */
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Ensure it is above the map */
+    display: flex;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.leaflet-control-zoom-in, 
-.leaflet-control-zoom-out {
-    background-color: #0088cc; /* Telegram blue color */
-    border-radius: 50%; /* Make the buttons round */
-    border: none; /* Remove the default border */
-    width: 40px; /* Set the button width */
-    height: 40px; /* Set the button height */
-    line-height: 40px; /* Vertically center text inside the button */
-    color: white; /* Button text color */
-    font-size: 20px; /* Font size for zoom in/out text */
-    text-align: center; /* Center the text */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+/* Style for the search input */
+#location-search {
+    width: 250px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
 }
 
-.leaflet-control-zoom-in:hover, 
-.leaflet-control-zoom-out:hover {
-    background-color: #005f99; /* Darker shade on hover */
+/* Style for the search button */
+#search-container button {
+    padding: 8px 12px;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#search-container button:hover {
+    background-color: #0077aa;
 }
