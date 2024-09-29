@@ -12,6 +12,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let isPickupChecked = false;
 let markers = []; // Marker array to keep track of markers on the map
 
+// Hide pickup card initially
+const pickupCard = document.getElementById('pickup-card');
+pickupCard.classList.remove('visible'); // Ensure pickup card is hidden initially
+
 // Function to fetch location suggestions from OpenStreetMap
 async function fetchSuggestions(query) {
     const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`);
@@ -84,8 +88,6 @@ function moveMarker(lat, lon) {
 
     if (!isPickupChecked) {
         updatePickupCard(lat, lon); // Update the pickup card if pickup is not yet confirmed
-    } else {
-        updateDeliveryCard(lat, lon); // If pickup is confirmed, update the delivery card
     }
 }
 
@@ -97,17 +99,19 @@ function updatePickupCard(lat, lon) {
             const address = data.display_name || 'Unknown address';
             document.getElementById('pickup-address').textContent = `Address: ${address}`;
             document.getElementById('pickup-coordinates').textContent = `Coordinates: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
-            slideUpPickupCard(); // Slide up the card with pickup info
+
+            // Slide up the pickup card now that the marker is placed
+            slideUpPickupCard();
         })
         .catch(err => {
             console.error('Fetch error:', err);
         });
 }
 
-// Function to slide up the pickup card
+// Function to slide up the pickup card (only after the marker is placed)
 function slideUpPickupCard() {
     const pickupCard = document.getElementById('pickup-card');
-    pickupCard.classList.add('visible');
+    pickupCard.classList.add('visible'); // Show the pickup card when a marker is set
 }
 
 // Handle "Check" button for pickup confirmation
@@ -128,8 +132,15 @@ document.getElementById('check-button').addEventListener('click', function () {
     slidingCard.style.transform = 'translateY(0)'; // Slide up the confirmed card
 
     isPickupChecked = true; // Mark pickup as confirmed
-    slideUpDeliveryCard(); // Show delivery card
+    hidePickupCard(); // Hide the pickup card after confirmation
+    slideUpDeliveryCard(); // Show the delivery card
 });
+
+// Function to hide the pickup card after confirmation
+function hidePickupCard() {
+    const pickupCard = document.getElementById('pickup-card');
+    pickupCard.classList.remove('visible'); // Hide the pickup card after it's confirmed
+}
 
 // Function to slide up the delivery card
 function slideUpDeliveryCard() {
