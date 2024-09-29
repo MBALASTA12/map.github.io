@@ -15,7 +15,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Function to update the marker position
     function updateMarker() {
-        centerMarker.setLatLng(map.getCenter()); // Set the marker to the center of the map
+        // Only update if the marker isn't already at the center
+        let currentCenter = centerMarker.getLatLng();
+        let newCenter = map.getCenter();
+
+        // Check if the center has changed
+        if (!currentCenter.equals(newCenter)) {
+            centerMarker.setLatLng(newCenter); // Update the marker to the center of the map
+        }
     }
 
     // Add move event listener to the map
