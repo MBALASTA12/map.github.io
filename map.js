@@ -148,3 +148,17 @@ function trackLocation() {
         alert("Unable to access your location");
     });
 }
+
+function checkDetails() {
+    // Get the address details from the sliding card
+    const address = document.getElementById('address-details').innerText;
+
+    // Store the address in localStorage to pass it to index.html
+    localStorage.setItem('deliveryAddress', address);
+
+    // Optionally close the sliding card after clicking "Check"
+    closeCard();
+
+    // Redirect to index.html or the target page (adjust the path if needed)
+    window.location.href = 'index.html';
+}
