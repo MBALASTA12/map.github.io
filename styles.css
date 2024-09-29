@@ -66,4 +66,9 @@ footer {
         width: 100%;
         margin-top: 20px;
     }
+
+    /* Hide the Leaflet zoom control buttons for mobile view */
+    .leaflet-control-zoom {
+        display: none; /* Hide zoom controls */
+    }
 }
