@@ -10,12 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Create a marker for the center
-    var centerMarker = L.marker(map.getCenter(), { draggable: false }).addTo(map);
-
-    // Update the marker position on map movement
+    // Update the map view on movement (no marker)
     map.on('move', function() {
-        let newCenter = map.getCenter();
-        centerMarker.setLatLng(newCenter); // Update the marker to the center of the map
+        // No marker to update; this can be used for other functionalities if needed
     });
 });
