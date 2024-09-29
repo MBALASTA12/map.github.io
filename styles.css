@@ -6,8 +6,8 @@ body {
     font-family: Arial, sans-serif;
     color: white;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-start; /* Align items to the start (top) */
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Space between top and bottom cards */
     height: 100vh; /* Full viewport height */
     text-align: center;
 }
@@ -22,12 +22,16 @@ body {
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
     padding: 20px; /* Inner padding for content */
-    margin: 20px 0; /* Space above and below the card */
+    margin: 20px; /* Space around cards */
     width: 100%; /* Full width of container */
-    position: absolute; /* Position at the top */
-    top: 20px; /* Distance from the top */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Offset to center */
+}
+
+.top-card {
+    margin-top: 20px; /* Margin at the top */
+}
+
+.bottom-card {
+    margin-bottom: 20px; /* Margin at the bottom */
 }
 
 .inner-card {
