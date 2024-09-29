@@ -76,3 +76,14 @@ body {
     margin-top: 10px; /* Space above the comment box */
     font-size: 16px; /* Font size for better readability */
 }
+.buy-link {
+    color: #0088cc; /* Link color matching the theme */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make link bold */
+    flex-grow: 1; /* Allow the link to take up available space */
+}
+
+.buy-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
