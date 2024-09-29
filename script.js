@@ -114,13 +114,6 @@ document.getElementById('check-button').addEventListener('click', function () {
     slideUpDeliveryCard(); // Show delivery card after pickup is confirmed
 });
 
-// Click event on the map for setting delivery location
-map.on('click', function (e) {
-    if (!isPickupChecked) {
-        alert('Please confirm the pickup location first.');
-        return; // Prevent setting delivery location if pickup is not confirmed
-    }
-
     const lat = e.latlng.lat;
     const lon = e.latlng.lng;
     moveMarker(lat, lon); // Move the marker to the selected location
