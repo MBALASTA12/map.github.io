@@ -92,9 +92,6 @@ function updatePickupCard(lat, lon) {
         });
 }
 
-let isPickupChecked = false; // Track if the pickup card is checked
-let isDeliveryChecked = false; // Track if the delivery card is checked
-
 // Check button event listener for Pickup
 document.getElementById('check-button').addEventListener('click', function () {
     const address = document.getElementById('pickup-address').textContent;
