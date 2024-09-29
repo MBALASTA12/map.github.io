@@ -90,3 +90,25 @@ body, html {
 #gps-button:hover {
     background-color: #005f99;
 }
+
+.sliding-card {
+    position: fixed;
+    bottom: -300px; /* Hidden initially */
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    transition: bottom 0.3s ease-in-out;
+    padding: 20px;
+}
+
+#address-details {
+    text-align: center;
+}
+
+button {
+    margin-top: 10px;
+}
+
