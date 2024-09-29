@@ -29,3 +29,31 @@ body {
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Offset to center */
 }
+
+.inner-card {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    background-color: #f0f0f0; /* Inner card background color */
+    border-radius: 8px; /* Rounded corners for inner card */
+    padding: 10px; /* Padding for inner card */
+    margin: 10px 0; /* Space between inner cards */
+    color: #0088cc; /* Inner card text color */
+}
+
+.pin-icon {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 20px; /* Size of the pin icon */
+}
+
+.red-pin {
+    color: red; /* Red color for the first pin icon */
+}
+
+.blue-pin {
+    color: blue; /* Blue color for the second pin icon */
+}
+
+.arrow {
+    margin-left: auto; /* Push the arrow to the right */
+    font-size: 20px; /* Size of the arrow */
+}
