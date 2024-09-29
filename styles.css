@@ -14,6 +14,7 @@ body {
 
 .container {
     width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Prevent overflow */
 }
 
 .card {
@@ -21,9 +22,12 @@ body {
     color: #0088cc; /* Text color */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    padding: 20px; /* Inner padding for content */
-    margin: 20px; /* Space around cards */
-    width: 100%; /* Full width of container */
+    padding: 15px; /* Inner padding for content */
+    margin: 10px; /* Space around cards */
+    width: calc(100% - 20px); /* Full width minus margins for mobile view */
+    max-width: 600px; /* Limit max width for larger screens */
+    margin-left: auto; /* Center card horizontally */
+    margin-right: auto; /* Center card horizontally */
 }
 
 .top-card {
@@ -70,4 +74,5 @@ body {
     border: 1px solid #ccc; /* Border color */
     resize: none; /* Disable resizing */
     margin-top: 10px; /* Space above the comment box */
+    font-size: 16px; /* Font size for better readability */
 }
