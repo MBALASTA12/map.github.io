@@ -73,3 +73,20 @@ body, html {
 #suggestions div:hover {
     background-color: #f0f0f0;
 }
+
+#gps-button {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    z-index: 1000;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#gps-button:hover {
+    background-color: #005f99;
+}
