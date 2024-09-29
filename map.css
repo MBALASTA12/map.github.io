@@ -96,7 +96,7 @@ body, html {
     bottom: -300px; /* Start hidden below the view */
     left: 0;
     right: 0;
-    background-color: #333; /* Dark background for the card */
+    background-color: #005f99; /* Dark background for the card */
     padding: 20px;
     transition: bottom 0.3s ease; /* Smooth transition */
     z-index: 1000; /* Ensure it appears above the map */
@@ -108,5 +108,6 @@ body, html {
 
 #address-details {
     margin-bottom: 10px;
+    color: white; /* Font color for address details */
 }
 
