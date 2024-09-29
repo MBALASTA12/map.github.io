@@ -93,7 +93,7 @@ map.on('click', function(e) {
     // Add a new marker at the clicked location
     marker = L.marker([lat, lon]).addTo(map);
 
-    // Optionally, you can fetch the address of the clicked location using reverse geocoding
+    // Fetch the address of the clicked location using reverse geocoding
     getAddress(lat, lon);
 });
 
@@ -105,12 +105,27 @@ function getAddress(lat, lon) {
         .then(response => response.json())
         .then(data => {
             const address = data.display_name;
-            alert(`You clicked on: ${address}`); // Show the address in an alert (You can display it elsewhere if needed)
+
+            // Show the address in the sliding card
+            document.getElementById('address-details').innerText = address;
+            openCard(); // Open the sliding card
         })
         .catch(err => {
             console.error(err);
             alert("Error fetching address");
         });
+}
+
+// Function to open the sliding card
+function openCard() {
+    const card = document.getElementById('address-card');
+    card.classList.add('open'); // Add the class to slide it up
+}
+
+// Function to close the sliding card
+function closeCard() {
+    const card = document.getElementById('address-card');
+    card.classList.remove('open'); // Remove the class to slide it down
 }
 
 // GPS tracking function
