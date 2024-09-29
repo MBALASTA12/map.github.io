@@ -1,73 +1,11 @@
-/* Reset some default styles */
-body, h1, h2, p {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-}
-
-/* Header styles */
-header {
-    background: #4CAF50;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Main styles */
-main {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-}
-
-/* Content area styles */
-#content {
-    flex: 1;
-    min-width: 300px;
-    margin-right: 20px;
-}
-
-/* Sidebar styles */
-aside {
-    width: 200px;
-    background: #f4f4f4;
-    padding: 10px;
-}
-
 /* Map styles */
 #map {
-    height: 500px; /* Set a height for the map */
+    height: 100vh; /* Full height of the viewport */
     width: 100%; /* Full width */
-    margin-top: 20px; /* Add some space above the map */
 }
 
-/* Footer styles */
-footer {
-    text-align: center;
-    padding: 10px;
-    background: #333;
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Media query for mobile responsiveness */
+/* Hide the Leaflet zoom control buttons for mobile view */
 @media (max-width: 600px) {
-    main {
-        flex-direction: column;
-    }
-
-    aside {
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    /* Hide the Leaflet zoom control buttons for mobile view */
     .leaflet-control-zoom {
         display: none; /* Hide zoom controls */
     }
