@@ -6,8 +6,8 @@ body {
     font-family: Arial, sans-serif;
     color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start; /* Align items to the start (top) */
+    align-items: flex-start; /* Align items to the start (top) */
     height: 100vh; /* Full viewport height */
     text-align: center;
 }
@@ -15,4 +15,15 @@ body {
 .container {
     max-width: 600px; /* Limit the width for larger screens */
     width: 100%; /* Allow full width on mobile */
+    padding: 20px; /* Add padding for better spacing */
+}
+
+.card {
+    background-color: white; /* Card background color */
+    color: #0088cc; /* Text color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    padding: 20px; /* Inner padding for content */
+    margin-top: 20px; /* Space above the card */
+    width: 100%; /* Full width of container */
 }
