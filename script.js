@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Add a marker
+    // Add a marker (optional)
     var marker = L.marker([51.505, -0.09]).addTo(map);
     marker.bindPopup("<b>Hello!</b><br>This is a marker.").openPopup();
 });
