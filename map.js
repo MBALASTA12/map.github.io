@@ -106,8 +106,9 @@ function getAddress(lat, lon) {
         .then(data => {
             const address = data.display_name;
 
-            // Show the address in the sliding card
-            document.getElementById('address-details').innerText = address;
+            // Show the address in the specific <p> element, not the entire #address-details div
+            document.getElementById('address').innerText = address;
+
             openCard(); // Open the sliding card
         })
         .catch(err => {
