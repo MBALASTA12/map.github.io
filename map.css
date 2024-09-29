@@ -106,11 +106,6 @@ body, html {
     bottom: 0; /* Slide up into view */
 }
 
-#address-details {
-    margin-bottom: 10px;
-    color: white; /* Font color for address details */
-}
-
 /* Style the check button */
 #check-button {
     background-color: #28a745;
@@ -123,5 +118,10 @@ body, html {
 }
 
 #check-button:hover {
-    background-color: #218838;
+    background-color: darkgreen;
+}
+
+#address-details {
+    margin-bottom: 10px;
+    color: white; /* Font color for address details */
 }
