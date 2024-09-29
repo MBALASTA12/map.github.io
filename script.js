@@ -63,18 +63,27 @@ const markers = [];
 
 // Function to move the marker to a new location
 function moveMarker(lat, lon) {
+    // Check if the coordinates are valid
+    if (!lat || !lon) {
+        console.error('Invalid coordinates');
+        return;
+    }
+
     // Remove existing markers
     markers.forEach(marker => map.removeLayer(marker));
-    markers.length = 0; // Clear the markers array
+    markers = []; // Clear the markers array
 
-    // Add a new marker
+    // Add a new marker at the new location
     const marker = L.marker([lat, lon]).addTo(map);
     markers.push(marker);
-    map.setView([lat, lon], 13);
+
+    // Center the map on the new marker
+    map.setView([lat, lon], 15); // Adjust zoom level as needed
 
     // Update the pickup card with address and coordinates
     updatePickupCard(lat, lon);
 }
+
 
 // Function to update the pickup card with address and coordinates
 function updatePickupCard(lat, lon) {
