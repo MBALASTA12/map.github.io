@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Welcome to My Web App!");
 
-    // Initialize the map
-    var map = L.map('map').setView([51.505, -0.09], 13); // Set initial view (latitude, longitude, zoom level)
+    // Initialize the map and set the initial view to General Santos City
+    var map = L.map('map').setView([6.1026, 125.1716], 13); // General Santos City coordinates
 
     // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
