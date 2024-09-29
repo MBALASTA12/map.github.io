@@ -12,15 +12,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Create a marker for the center
     var centerMarker = L.marker(map.getCenter(), { draggable: false }).addTo(map);
-    
+
+    // Flag to control pin placement
+    let pinPlaced = false;
+
     // Function to update the marker position
     function updateMarker() {
-        let currentCenter = centerMarker.getLatLng();
-        let newCenter = map.getCenter();
+        if (!pinPlaced) { // Only update if pin has not been placed
+            let currentCenter = centerMarker.getLatLng();
+            let newCenter = map.getCenter();
 
-        // Check if the center has changed
-        if (!currentCenter.equals(newCenter)) {
-            centerMarker.setLatLng(newCenter); // Update the marker to the center of the map
+            // Check if the center has changed
+            if (!currentCenter.equals(newCenter)) {
+                centerMarker.setLatLng(newCenter); // Update the marker to the center of the map
+            }
         }
     }
 
@@ -48,7 +53,26 @@ document.addEventListener("DOMContentLoaded", function() {
         clearTimeout(moveEndTimeout); // Clear any existing timeout
         moveEndTimeout = setTimeout(() => {
             const latlng = map.getCenter();
-            getAddress(latlng); // Get address after user stops moving
+            if (!pinPlaced) {
+                getAddress(latlng); // Get address after user stops moving
+            }
         }, 1000); // 1-second delay to prevent multiple calls
     });
+
+    // Add a click event listener to place the pin
+    map.on('click', function(e) {
+        pinPlaced = true; // Set the flag to true when pin is placed
+        centerMarker.setLatLng(e.latlng); // Move marker to the clicked location
+        getAddress(e.latlng); // Fetch address for the clicked location
+    });
+
+    // Optional: Add a reset feature to allow repositioning the pin
+    // Uncomment the following lines if you want to allow repositioning
+    /*
+    map.on('dblclick', function() {
+        pinPlaced = false; // Allow the marker to move again
+        centerMarker.setLatLng(map.getCenter()); // Reset the marker position
+        getAddress(map.getCenter()); // Fetch address for the new center
+    });
+    */
 });
