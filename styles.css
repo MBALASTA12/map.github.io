@@ -38,6 +38,13 @@ aside {
     padding: 10px;
 }
 
+/* Map styles */
+#map {
+    height: 500px; /* Set a height for the map */
+    width: 100%; /* Full width */
+    margin-top: 20px; /* Add some space above the map */
+}
+
 /* Footer styles */
 footer {
     text-align: center;
