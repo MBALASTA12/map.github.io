@@ -33,18 +33,15 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => console.error("Error fetching address:", error));
     }
 
-    // Variable to track if we are already fetching the address
-    let fetchingAddress = false;
+    // Variable to control fetching
+    let moveEndTimeout;
 
     // Add end event listener to the map to fetch the address
     map.on('moveend', () => {
-        if (!fetchingAddress) { // Check if we are not already fetching the address
-            fetchingAddress = true; // Set the flag to true
+        clearTimeout(moveEndTimeout); // Clear any existing timeout
+        moveEndTimeout = setTimeout(() => {
             const latlng = map.getCenter();
             getAddress(latlng); // Get address after user stops moving
-            setTimeout(() => {
-                fetchingAddress = false; // Reset the flag after a delay
-            }, 1000); // Delay to prevent multiple calls in quick succession
-        }
+        }, 1000); // 1-second delay to prevent multiple calls
     });
 });
