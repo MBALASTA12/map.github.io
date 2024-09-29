@@ -13,27 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Create a marker for the center
     var centerMarker = L.marker(map.getCenter(), { draggable: false }).addTo(map);
 
-    // Function to get the address using reverse geocoding
-    function getAddress(latlng) {
-        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latlng.lat}&lon=${latlng.lng}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.display_name) {
-                    // Show address in popup at the clicked location
-                    L.popup()
-                        .setLatLng(latlng)
-                        .setContent(data.display_name)
-                        .openOn(map);
-                }
-            })
-            .catch(error => console.error("Error fetching address:", error));
-    }
-
-    // Add a click event listener to show address details
-    map.on('click', function(e) {
-        getAddress(e.latlng); // Fetch and display the address for the clicked location
-    });
-
     // Update the marker position on map movement
     map.on('move', function() {
         let newCenter = map.getCenter();
