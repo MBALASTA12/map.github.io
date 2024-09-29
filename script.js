@@ -181,6 +181,12 @@ document.getElementById('check-delivery-button').addEventListener('click', funct
     window.location.href = detailsUrl; // Navigate to the details page
 });
 
+// Add a click event listener to the map to handle taps
+map.on('click', function (e) {
+    const { lat, lng } = e.latlng;
+    moveMarker(lat, lng); // Move the marker to the clicked location
+});
+
 // Locate button event listener to move marker to current location
 document.getElementById('locate-button').addEventListener('click', function () {
     if (navigator.geolocation) {
