@@ -1,4 +1,7 @@
 // map.js
+
+let marker; // Variable to hold the marker
+
 // Initialize the map and set its view to General Santos City
 const map = L.map('map', {
     zoomControl: false
@@ -9,7 +12,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Search location function using Nominatim API
+// Function to search for a location using Nominatim API
 function searchLocation() {
     const location = document.getElementById('location-search').value;
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${location}`;
@@ -75,4 +78,37 @@ function selectSuggestion(location) {
 
     // Move the map to the selected location
     map.setView([location.lat, location.lon], 13);
+}
+
+// Function to add a marker when the user clicks the map
+map.on('click', function(e) {
+    const lat = e.latlng.lat;
+    const lon = e.latlng.lng;
+
+    // Remove existing marker if any
+    if (marker) {
+        map.removeLayer(marker);
+    }
+
+    // Add a new marker at the clicked location
+    marker = L.marker([lat, lon]).addTo(map);
+
+    // Optionally, you can fetch the address of the clicked location using reverse geocoding
+    getAddress(lat, lon);
+});
+
+// Reverse geocoding to get the address of the clicked location
+function getAddress(lat, lon) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const address = data.display_name;
+            alert(`You clicked on: ${address}`); // Show the address in an alert (You can display it elsewhere if needed)
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error fetching address");
+        });
 }
