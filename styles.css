@@ -61,3 +61,13 @@ body {
     margin-left: auto; /* Push the arrow to the right */
     font-size: 20px; /* Size of the arrow */
 }
+
+.comment-box {
+    width: 100%; /* Full width of the card */
+    height: 100px; /* Height of the comment box */
+    padding: 10px; /* Inner padding */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Border color */
+    resize: none; /* Disable resizing */
+    margin-top: 10px; /* Space above the comment box */
+}
