@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Add a marker (optional)
-    var marker = L.marker([51.505, -0.09]).addTo(map);
-    marker.bindPopup("<b>Hello!</b><br>This is a marker.").openPopup();
+    // Function to add a marker at the clicked location
+    function addMarker(e) {
+        var marker = L.marker(e.latlng).addTo(map); // Create a marker at the clicked location
+        marker.bindPopup("<b>Marker!</b><br>Coordinates: " + e.latlng.toString()).openPopup(); // Optional: Bind a popup with coordinates
+    }
+
+    // Add click event listener to the map
+    map.on('click', addMarker);
 });
