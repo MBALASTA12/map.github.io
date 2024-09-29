@@ -1,12 +1,18 @@
-/* Map styles */
-#map {
-    height: 100vh; /* Full height of the viewport */
-    width: 100%; /* Full width */
+/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0088cc; /* Telegram blue color */
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
 }
 
-/* Hide the Leaflet zoom control buttons for mobile view */
-@media (max-width: 600px) {
-    .leaflet-control-zoom {
-        display: none; /* Hide zoom controls */
-    }
+.container {
+    max-width: 600px; /* Limit the width for larger screens */
+    width: 100%; /* Allow full width on mobile */
 }
