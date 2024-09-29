@@ -3,64 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delivery Map</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
+    <title>My Web App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- App container -->
-    <div id="app-container">
-        <!-- Search container -->
-        <div class="search-container">
-            <input id="search-input" type="text" placeholder="Search location" />
-            <button id="search-button">Search</button>
-        </div>
-
-        <!-- Sliding Card for Confirmed Pickup Details -->
-        <div id="sliding-card" class="sliding-card">
-            <button class="close-button" id="close-button">&times;</button> <!-- Close button -->
-            <div class="card-content">
-                <h3>Confirmed Pickup Location</h3>
-                <p id="confirmed-address">Address: Not set</p>
-                <p id="confirmed-coordinates">Coordinates: Not set</p>
-            </div>
-        </div>
-
-        <!-- Map container -->
-        <div id="map" style="height: 600px;"></div> <!-- Set a height for the map -->
-
-        <!-- Pickup Location Card -->
-        <div id="pickup-card" class="card visible"> <!-- Added 'visible' class here -->
-            <div class="card-content">
-                <h3>Pickup Location</h3>
-                <p id="pickup-address">Address: Not set</p>
-                <p id="pickup-coordinates">Coordinates: Not set</p>
-                <!-- Check Button -->
-                <button id="check-button">✔️</button> <!-- Fixed the button tag -->
-            </div>
-        </div>
-
-        <!-- Delivery Location Card -->
-        <div id="delivery-card" class="card"> <!-- Delivery card is hidden initially -->
-            <div class="card-content">
-                <h3>Delivery Location</h3>
-                <p id="delivery-address">Address: Not set</p>
-                <p id="delivery-coordinates">Coordinates: Not set</p>
-                <!-- Check Button -->
-                <button id="check-delivery-button">✔️</button>
-            </div>
-        </div>
-
-        <!-- User Location Pin -->
-        <button id="locate-button" class="locate-button">
-            📍 <!-- You can use an icon or an image -->
-        </button>
-    </div>
-
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
-    <script src="script.js"></script> <!-- Link to the JS file -->
+    <header>
+        <h1>Welcome to My Web App</h1>
+    </header>
+    <main>
+        <section id="content">
+            <h2>Content Area</h2>
+            <p>This is where your main content will go.</p>
+        </section>
+        <aside>
+            <h2>Sidebar</h2>
+            <p>This is a sidebar for additional information.</p>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Web App</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
