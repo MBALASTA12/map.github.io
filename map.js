@@ -112,3 +112,24 @@ function getAddress(lat, lon) {
             alert("Error fetching address");
         });
 }
+
+// GPS tracking function
+function trackLocation() {
+    map.locate({ setView: true, maxZoom: 16 });
+
+    map.on('locationfound', function(e) {
+        const userLat = e.latlng.lat;
+        const userLon = e.latlng.lng;
+
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = L.marker([userLat, userLon]).addTo(map)
+            .bindPopup("You are here").openPopup();
+    });
+
+    map.on('locationerror', function() {
+        alert("Unable to access your location");
+    });
+}
