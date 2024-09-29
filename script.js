@@ -13,66 +13,30 @@ document.addEventListener("DOMContentLoaded", function() {
     // Create a marker for the center
     var centerMarker = L.marker(map.getCenter(), { draggable: false }).addTo(map);
 
-    // Flag to control pin placement
-    let pinPlaced = false;
-
-    // Function to update the marker position
-    function updateMarker() {
-        if (!pinPlaced) { // Only update if pin has not been placed
-            let currentCenter = centerMarker.getLatLng();
-            let newCenter = map.getCenter();
-
-            // Check if the center has changed
-            if (!currentCenter.equals(newCenter)) {
-                centerMarker.setLatLng(newCenter); // Update the marker to the center of the map
-            }
-        }
-    }
-
-    // Add move event listener to the map for desktop and mobile
-    map.on('move', updateMarker);
-    map.on('touchmove', updateMarker); // For mobile touch events
-
     // Function to get the address using reverse geocoding
     function getAddress(latlng) {
         fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latlng.lat}&lon=${latlng.lng}`)
             .then(response => response.json())
             .then(data => {
                 if (data && data.display_name) {
-                    centerMarker.bindPopup(data.display_name).openPopup(); // Show address in popup
+                    // Show address in popup at the clicked location
+                    L.popup()
+                        .setLatLng(latlng)
+                        .setContent(data.display_name)
+                        .openOn(map);
                 }
             })
             .catch(error => console.error("Error fetching address:", error));
     }
 
-    // Variable to control fetching
-    let moveEndTimeout;
-
-    // Add end event listener to the map to fetch the address
-    map.on('moveend', () => {
-        clearTimeout(moveEndTimeout); // Clear any existing timeout
-        moveEndTimeout = setTimeout(() => {
-            const latlng = map.getCenter();
-            if (!pinPlaced) {
-                getAddress(latlng); // Get address after user stops moving
-            }
-        }, 1000); // 1-second delay to prevent multiple calls
-    });
-
-    // Add a click event listener to place the pin
+    // Add a click event listener to show address details
     map.on('click', function(e) {
-        pinPlaced = true; // Set the flag to true when pin is placed
-        centerMarker.setLatLng(e.latlng); // Move marker to the clicked location
-        getAddress(e.latlng); // Fetch address for the clicked location
+        getAddress(e.latlng); // Fetch and display the address for the clicked location
     });
 
-    // Optional: Add a reset feature to allow repositioning the pin
-    // Uncomment the following lines if you want to allow repositioning
-    /*
-    map.on('dblclick', function() {
-        pinPlaced = false; // Allow the marker to move again
-        centerMarker.setLatLng(map.getCenter()); // Reset the marker position
-        getAddress(map.getCenter()); // Fetch address for the new center
+    // Update the marker position on map movement
+    map.on('move', function() {
+        let newCenter = map.getCenter();
+        centerMarker.setLatLng(newCenter); // Update the marker to the center of the map
     });
-    */
 });
