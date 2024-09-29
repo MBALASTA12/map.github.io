@@ -111,3 +111,17 @@ body, html {
     color: white; /* Font color for address details */
 }
 
+/* Style the check button */
+#check-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+}
+
+#check-button:hover {
+    background-color: #218838;
+}
