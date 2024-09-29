@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Function to update the marker position
     function updateMarker() {
-        // Only update if the marker isn't already at the center
         let currentCenter = centerMarker.getLatLng();
         let newCenter = map.getCenter();
 
@@ -25,8 +24,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Add move event listener to the map
+    // Add move event listener to the map for desktop and mobile
     map.on('move', updateMarker);
+    map.on('touchmove', updateMarker); // For mobile touch events
 
     // Function to get the address using reverse geocoding
     function getAddress(latlng) {
