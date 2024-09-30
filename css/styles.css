@@ -68,7 +68,7 @@ body {
 
 .comment-box {
     width: 100%; /* Full width of the card */
-    height: 100px; /* Height of the comment box */
+    height: 30px; /* Height of the comment box */
     padding: 10px; /* Inner padding */
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Border color */
