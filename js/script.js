@@ -1,19 +1,21 @@
-// script.js
-document.addEventListener("DOMContentLoaded", function() {
-    console.log("Welcome to My Web App!");
-});
+// Function to load both buy and delivery addresses from localStorage
+function loadAddresses() {
+    // Get the stored buy address and delivery address from localStorage
+    const buyAddress = localStorage.getItem('buyAddress');
+    const deliveryAddress = localStorage.getItem('deliveryAddress');
 
-    // Function to load the delivery address from localStorage
-    function loadAddress() {
-        // Get the stored address from localStorage
-        const address = localStorage.getItem('deliveryAddress');
-        
-        // If an address is found, replace the "Where to Buy" text
-        if (address) {
-            const deliveryLink = document.querySelector('.buy-link');
-            deliveryLink.textContent = `Delivery Address: ${address}`;
-        }
+    // Replace the "Where to Buy" text if a buy address is found
+    if (buyAddress) {
+        const buyLink = document.getElementById('buyLink');
+        buyLink.textContent = `Buy Address: ${buyAddress}`;
     }
 
-    // Call the function to load the address when the page loads
-    window.onload = loadAddress;
+    // Replace the "Where to Deliver" text if a delivery address is found
+    if (deliveryAddress) {
+        const deliverLink = document.getElementById('deliverLink');
+        deliverLink.textContent = `Deliver Address: ${deliveryAddress}`;
+    }
+}
+
+// Call the function to load the addresses when the page loads
+window.onload = loadAddresses;
