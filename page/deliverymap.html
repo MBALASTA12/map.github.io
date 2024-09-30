@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where to Buy - Map</title>
+    <link rel="stylesheet" href="../css/map.css"> <!-- Link to map styling -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script> <!-- Leaflet library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Search Tab -->
+    <div id="search-container">
+        <input type="text" id="location-search" placeholder="Search for a location..." onkeyup="getSuggestions()" />
+        <button onclick="searchLocation()">Search</button>
+        <div id="suggestions"></div> <!-- Dropdown for suggestions -->
+    </div>
 
+    <!-- GPS Tracker Button -->
+    <button id="gps-button" onclick="trackLocation()">📍</button>
+
+    <!-- Container for the map -->
+    <div id="map"></div>
+
+    <!-- Sliding Card for Address Details -->
+    <div id="address-card" class="sliding-card">
+        <div id="address-details">
+            <h3>Address Details</h3>
+            <p id="address"></p>
+            <button id="check-button" onclick="checkDetails()">✔️</button>
+        </div>
+    </div>
+    
+    <script src="../js/deliverymap.js"></script> <!-- Link to map functionality -->
+</body>
+</html>
