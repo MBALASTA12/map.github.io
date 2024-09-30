@@ -155,7 +155,7 @@ function checkDetails() {
     const address = document.getElementById('address-details').innerText;
 
     // Store the address in localStorage to pass it to index.html
-    localStorage.setItem('deliveryAddress', address);
+    localStorage.setItem('buyAddress', address);
 
     // Optionally close the sliding card after clicking "Check"
     closeCard();
