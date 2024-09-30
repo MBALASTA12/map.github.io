@@ -161,5 +161,5 @@ function checkDetails() {
     closeCard();
 
     // Redirect to index.html or the target page (adjust the path if needed)
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 }
