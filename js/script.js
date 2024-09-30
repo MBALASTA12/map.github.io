@@ -7,13 +7,13 @@ function loadAddresses() {
     // Replace the "Where to Buy" text if a buy address is found
     if (buyAddress) {
         const buyLink = document.getElementById('buyLink');
-        buyLink.textContent = `Buy Address: ${buyAddress}`;
+        buyLink.textContent = `${buyAddress}`;
     }
 
     // Replace the "Where to Deliver" text if a delivery address is found
     if (deliveryAddress) {
         const deliverLink = document.getElementById('deliveryLink');
-        deliverLink.textContent = `Deliver Address: ${deliveryAddress}`;
+        deliverLink.textContent = `${deliveryAddress}`;
     }
 }
 
