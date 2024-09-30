@@ -87,3 +87,13 @@ body {
     text-decoration: underline; /* Underline on hover */
 }
 
+.deliver-link {
+    color: #0088cc; /* Link color matching the theme */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make link bold */
+    flex-grow: 1; /* Allow the link to take up available space */
+}
+
+.deliver-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
