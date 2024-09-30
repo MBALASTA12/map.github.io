@@ -12,7 +12,7 @@ function loadAddresses() {
 
     // Replace the "Where to Deliver" text if a delivery address is found
     if (deliveryAddress) {
-        const deliverLink = document.getElementById('deliverLink');
+        const deliverLink = document.getElementById('deliveryLink');
         deliverLink.textContent = `Deliver Address: ${deliveryAddress}`;
     }
 }
