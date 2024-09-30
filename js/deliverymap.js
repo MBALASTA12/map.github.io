@@ -166,7 +166,7 @@ function checkDetails() {
     }
 
     // Get the address details from the sliding card
-    const address = document.getElementById('address').innerText;
+    const address = document.getElementById('address-details').innerText;
 
     // Store the address in localStorage to pass it to index.html
     localStorage.setItem('deliveryAddress', address);
