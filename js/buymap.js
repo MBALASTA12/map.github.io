@@ -151,6 +151,17 @@ function trackLocation() {
 }
 
 function checkDetails() {
+    // Only store the last clicked coordinates if they exist
+    if (lastClickedCoordinates) {
+        const coordinatesJson = JSON.stringify(lastClickedCoordinates);
+
+        // Save coordinates in localStorage
+        localStorage.setItem('buyCoordinates', coordinatesJson);
+    } else {
+        alert("No location selected. Please click on the map first.");
+        return; // Exit the function if no coordinates are available
+    }
+
     // Get the address details from the sliding card
     const address = document.getElementById('address-details').innerText;
 
@@ -163,3 +174,4 @@ function checkDetails() {
     // Redirect to index.html or the target page (adjust the path if needed)
     window.location.href = '../index.html';
 }
+
