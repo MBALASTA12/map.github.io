@@ -1,6 +1,5 @@
-// map.js
-
 let marker; // Variable to hold the marker
+let lastClickedCoordinates = null; // Variable to store the last clicked coordinates
 
 // Initialize the map and set its view to General Santos City
 const map = L.map('map', {
@@ -93,6 +92,9 @@ map.on('click', function(e) {
     // Add a new marker at the clicked location
     marker = L.marker([lat, lon]).addTo(map);
 
+    // Update lastClickedCoordinates with the new coordinates
+    lastClickedCoordinates = { lat: lat, lon: lon };
+
     // Fetch the address of the clicked location using reverse geocoding
     getAddress(lat, lon);
 });
@@ -150,6 +152,7 @@ function trackLocation() {
     });
 }
 
+// Function to check details and save coordinates
 function checkDetails() {
     // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
@@ -174,4 +177,3 @@ function checkDetails() {
     // Redirect to index.html or the target page (adjust the path if needed)
     window.location.href = '../index.html';
 }
-
