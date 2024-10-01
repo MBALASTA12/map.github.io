@@ -177,23 +177,3 @@ function checkDetails() {
     // Redirect to index.html or the target page (adjust the path if needed)
     window.location.href = '../index.html';
 }
-
-// Create a marker for the driver's location
-var driverMarker = L.marker([6.1164, 125.1716]).addTo(map); // Initial position
-
-// Function to fetch driver location from the server
-function fetchDriverLocation() {
-    fetch('http://localhost:3000/driver-location')
-        .then(response => response.json())
-        .then(data => {
-            // Update marker position with the driver's location
-            driverMarker.setLatLng([data.lat, data.lon]);
-            map.setView([data.lat, data.lon], 13); // Center the map on the driver's location
-        })
-        .catch(error => {
-            console.error("Error fetching driver location: ", error);
-        });
-}
-
-// Poll for driver location every 5 seconds
-setInterval(fetchDriverLocation, 5000);
