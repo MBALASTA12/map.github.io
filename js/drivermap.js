@@ -23,6 +23,15 @@ function updateDriverLocation() {
 
             // Center the map on the driver's location
             map.setView([lat, lon], 13);
+
+            // Send updated location to server
+            fetch('http://localhost:3000/update-location', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ lat: lat, lon: lon })
+            });
         }, function(error) {
             console.error("Error getting location: ", error);
         }, {
