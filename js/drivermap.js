@@ -45,10 +45,14 @@ function updateDriverLocation() {
 
 // Function to update the direction based on device orientation
 function updateDirection(event) {
-    var alpha = event.alpha; // Compass direction (in degrees)
+    if (event.alpha !== null) {
+        var alpha = event.alpha; // Compass direction (in degrees)
 
-    // Set the rotation of the driver marker's icon
-    driverMarker.getElement().style.transform = 'rotate(' + alpha + 'deg)';
+        // Set the rotation of the driver marker's icon
+        // Invert the rotation if necessary
+        driverMarker.getElement().style.transform = 'rotate(' + (360 - alpha) + 'deg)';
+        driverMarker.getElement().style.transformOrigin = 'center center'; // Set the origin to the center
+    }
 }
 
 // Event listener for device orientation
