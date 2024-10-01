@@ -63,3 +63,25 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
 // Call this function when the page loads to compute the cost
 computeAndDisplayCost();
+
+
+document.getElementById('check-button').addEventListener('click', function() {
+    // Get the values from the DOM elements
+    const buyLocation = document.getElementById('buyLink').textContent;
+    const deliverLocation = document.getElementById('deliveryLink').textContent;
+    const totalDistance = document.getElementById('total-distance').textContent;
+    const totalCost = document.getElementById('total-cost').textContent;
+
+    // Create a JSON object with the captured data
+    const deliveryDetails = {
+        buyLocation: buyLocation,
+        deliverLocation: deliverLocation,
+        totalDistance: totalDistance,
+        totalCost: totalCost
+    };
+
+    // Convert the JSON object to a string
+    const jsonString = JSON.stringify(deliveryDetails);
+
+    // Here you can send the JSON data to your server or bot
+    console.log("Delivery details saved:", jsonString);
