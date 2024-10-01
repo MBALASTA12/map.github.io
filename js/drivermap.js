@@ -8,16 +8,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Create a custom arrow icon for the driver's location
-var driverIcon = L.icon({
-    iconUrl: 'icon/arrow-icon.svg', // Path to your arrow icon
-    iconSize: [30, 30], // Size of the icon
-    iconAnchor: [15, 15], // Point of the icon which will correspond to marker's location
-    popupAnchor: [0, -15] // Point from which the popup should open relative to the iconAnchor
-});
-
-// Create a marker for the driver's location with the custom icon
-var driverMarker = L.marker([6.1164, 125.1716], { icon: driverIcon }).addTo(map); // Initial position
+// Create a marker for the driver's location
+var driverMarker = L.marker([6.1164, 125.1716]).addTo(map); // Initial position
 
 // Function to update the driver's location
 function updateDriverLocation() {
@@ -42,21 +34,6 @@ function updateDriverLocation() {
         alert("Geolocation is not supported by this browser.");
     }
 }
-
-// Function to update the direction based on device orientation
-function updateDirection(event) {
-    if (event.alpha !== null) {
-        var alpha = event.alpha; // Compass direction (in degrees)
-
-        // Set the rotation of the driver marker's icon
-        // Invert the rotation if necessary
-        driverMarker.getElement().style.transform = 'rotate(' + (360 - alpha) + 'deg)';
-        driverMarker.getElement().style.transformOrigin = 'center center'; // Set the origin to the center
-    }
-}
-
-// Event listener for device orientation
-window.addEventListener('deviceorientation', updateDirection);
 
 // Call the function to start updating the driver's location
 updateDriverLocation();
