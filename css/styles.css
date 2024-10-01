@@ -97,3 +97,16 @@ body {
 .delivery-link:hover {
     text-decoration: underline; /* Underline on hover */
 }
+
+#payment-card {
+    display: none;
+    position: relative;
+}
+
+#check-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
