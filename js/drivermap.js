@@ -49,15 +49,26 @@ function updateDriverLocation() {
 // Function to retrieve delivery details from localStorage (from script.js)
 function getDeliveryDetails() {
     const deliveryDetails = localStorage.getItem('deliveryDetails');
+
     if (deliveryDetails) {
         console.log("Delivery details found:", deliveryDetails);
-        return JSON.parse(deliveryDetails);
+        const parsedDetails = JSON.parse(deliveryDetails);
+        console.log("Parsed Delivery Details:", parsedDetails);
+        return parsedDetails;
     } else {
-        console.error("No delivery details found.");
+        console.error("No delivery details found in localStorage.");
+        alert("No delivery details found!");
         return null;
     }
 }
 
+// Example usage of retrieved details:
+const details = getDeliveryDetails();
+if (details) {
+    // Update the UI or map with the details
+    document.getElementById('buyLocationDisplay').textContent = details.buyLocation;
+    document.getElementById('totalCostDisplay').textContent = details.totalCost;
+}
 // Function to display the buy location on the map
 function showBuyLocation(buyLocation) {
     // Assuming the buyLocation has latitude and longitude
