@@ -49,11 +49,9 @@ function computeAndDisplayCost() {
     }
 }
 
-// Function to save delivery details to localStorage
-function saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalCost) {
+// Function to save total cost and total distance to localStorage
+function saveDeliveryDetails(totalDistance, totalCost) {
     const deliveryDetails = {
-        buyLocation: buyLocation,
-        deliverLocation: deliverLocation,
         totalDistance: totalDistance,
         totalCost: totalCost
     };
