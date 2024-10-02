@@ -70,7 +70,7 @@ computeAndDisplayCost();
 
 // Function to save delivery details to localStorage
 function saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalCost, buyCoordinates, deliveryCoordinates) {
-    const deliveryDetails = {
+    const saveDeliveryDetails = {
         buyLocation: buyLocation,
         deliverLocation: deliverLocation,
         totalDistance: totalDistance,
@@ -79,8 +79,8 @@ function saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalC
         deliveryCoordinates: deliveryCoordinates // Add delivery coordinates
     };
 
-    localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
-    console.log("Delivery details saved:", deliveryDetails);
+    localStorage.setItem('saveDeliveryDetails', JSON.stringify(saveDeliveryDetails));
+    console.log("Delivery details saved:", saveDeliveryDetails);
 }
 
 // Event listener for the check button
