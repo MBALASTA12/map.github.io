@@ -22,6 +22,9 @@ function computeAndDisplayCost() {
     const buyCoordinates = JSON.parse(localStorage.getItem('buyCoordinates'));
     const deliveryCoordinates = JSON.parse(localStorage.getItem('deliveryCoordinates'));
 
+    const buyAddress = localStorage.getItem('buyAddress'); // Fetch buy address from localStorage
+    const deliveryAddress = localStorage.getItem('deliveryAddress'); // Fetch delivery address from localStorage
+
     if (buyCoordinates && deliveryCoordinates) {
         const distance = calculateDistance(
             buyCoordinates.lat,
