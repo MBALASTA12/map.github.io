@@ -77,7 +77,7 @@ function getsaveDeliveryDetails() {
 }
 
 // Example call to the function
-const deliveryInfo = getSaveDeliveryDetails();
+const deliveryInfo = getDeliveryDetails();
 if (deliveryInfo) {
     console.log("Delivery Info:", deliveryInfo);
 }
