@@ -156,24 +156,24 @@ function trackLocation() {
 function confirmedDetails() {
     // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
-        const coordinatesJson = JSON.stringify(lastClickedCoordinates);
+        // Get the address details from the sliding card
+        const address = document.getElementById('address').innerText;
 
-        // Save coordinates in localStorage
-        localStorage.setItem('buyCoordinates', coordinatesJson);
+        // Create an object to store both address and coordinates
+        const details = {
+            address: address,
+            coordinates: lastClickedCoordinates
+        };
+
+        // Save the details in localStorage as a JSON string
+        localStorage.setItem('buyDetails', JSON.stringify(details));
+
+        // Optionally close the sliding card after clicking "Check"
+        closeCard();
+
+        // Redirect to index.html or the target page (adjust the path if needed)
+        window.location.href = '../index.html';
     } else {
         alert("No location selected. Please click on the map first.");
-        return; // Exit the function if no coordinates are available
     }
-
-    // Get the address details from the sliding card
-    const address = document.getElementById('address-details').innerText;
-
-    // Store the address in localStorage to pass it to index.html
-    localStorage.setItem('buyAddress', address);
-
-    // Optionally close the sliding card after clicking "Check"
-    closeCard();
-
-    // Redirect to index.html or the target page (adjust the path if needed)
-    window.location.href = '../index.html';
 }
