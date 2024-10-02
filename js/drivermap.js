@@ -50,6 +50,7 @@ function updateDriverLocation() {
 function getDeliveryDetails() {
     const deliveryDetails = localStorage.getItem('deliveryDetails');
     if (deliveryDetails) {
+        console.log("Delivery details found:", deliveryDetails);
         return JSON.parse(deliveryDetails);
     } else {
         console.error("No delivery details found.");
