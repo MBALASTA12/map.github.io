@@ -25,7 +25,7 @@ function updateDriverLocation() {
             map.setView([lat, lon], 13);
 
             // Get the saved delivery details from script.js
-            const deliveryDetails = getDeliveryDetails();
+            const deliveryDetails = getsaveDeliveryDetails();
 
             if (deliveryDetails) {
                 // Show the buyLocation on the map
