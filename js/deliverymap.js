@@ -156,37 +156,24 @@ function trackLocation() {
 function confirmedDetails() {
     // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
-        const coordinatesJson = JSON.stringify(lastClickedCoordinates);
+        // Get the address details from the sliding card
+        const address = document.getElementById('address').innerText;
 
-        // Save coordinates in localStorage
-        localStorage.setItem('deliveryCoordinates', coordinatesJson);
+        // Create an object to store both address and coordinates
+        const details = {
+            address: address,
+            coordinates: lastClickedCoordinates
+        };
+
+        // Save the details in localStorage as a JSON string
+        localStorage.setItem('deliveryDetails', JSON.stringify(details));
+
+        // Optionally close the sliding card after clicking "Check"
+        closeCard();
+
+        // Redirect to index.html or the target page (adjust the path if needed)
+        window.location.href = '../index.html';
     } else {
         alert("No location selected. Please click on the map first.");
-        return; // Exit the function if no coordinates are available
     }
-
-    // Get the address details from the sliding card
-    const address = document.getElementById('address').innerText; // Get address from <p> element
-
-    // Store the address in localStorage to pass it to index.html
-    localStorage.setItem('deliveryAddress', address);
-
-    // Call the function to store detailed delivery information
-    storeDeliveryDetails(address, lastClickedCoordinates);
-
-    // Optionally close the sliding card after clicking "Check"
-    closeCard();
-
-    // Redirect to index.html or the target page (adjust the path if needed)
-    window.location.href = '../index.html';
-}
-
-// Function to store delivery details
-function storeDeliveryDetails(address, coordinates) {
-    const deliveryDetails = {
-        address: address, // Use the address passed from checkDetails
-        coordinates: coordinates, // Use the coordinates passed from checkDetails
-        // Add any other relevant details if needed
-    };
-    localStorage.setItem('deliveryMapDetails', JSON.stringify(deliveryDetails));
 }
