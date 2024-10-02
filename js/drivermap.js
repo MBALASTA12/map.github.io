@@ -28,8 +28,8 @@ function updateDriverLocation() {
             const saveDeliveryDetails = getsaveDeliveryDetails();
 
             if (saveDeliveryDetails) {
-                // Show the buyLocation on the map
-                showBuyLocation(saveDeliveryDetails.buyLocation);
+                // Show the buyLocation on the map using buyCoordinates
+                showBuyLocation(saveDeliveryDetails.buyCoordinates);
                 
                 // Show the total cost (total amount) in the UI
                 displayTotalCost(saveDeliveryDetails.totalCost);
@@ -61,6 +61,7 @@ function getsaveDeliveryDetails() {
         const buyCoordinates = saveDeliveryDetails.buyCoordinates;
         const deliveryCoordinates = saveDeliveryDetails.deliveryCoordinates;
 
+        // You can return these details if needed
         return {
             buyLocation,
             deliverLocation,
@@ -75,26 +76,15 @@ function getsaveDeliveryDetails() {
     }
 }
 
-// Example call to the function
-const deliveryInfo = getsaveDeliveryDetails();
-if (deliveryInfo) {
-    console.log("Delivery Info:", deliveryInfo);
-}
-
-// Function to display the buy location on the map
-function showBuyLocation(buyLocation) {
-    // Get the coordinates for the buy location (using a placeholder for now)
-    getCoordinatesFromAddress(buyLocation).then(buyCoordinates => {
-        if (buyCoordinates) {
-            // Add a marker for the buy location on the map
-            var buyMarker = L.marker([buyCoordinates.lat, buyCoordinates.lon]).addTo(map);
-            
-            // Bind a popup to the marker showing the text "Buy Location"
-            buyMarker.bindPopup("Buy Location: " + buyLocation + "<br><small>Buy</small>").openPopup();
-        } else {
-            console.error("Failed to get coordinates for buy location.");
-        }
-    });
+// Function to display the buy location on the map using buyCoordinates
+function showBuyLocation(buyCoordinates) {
+    if (buyCoordinates) {
+        // Add a marker for the buy location on the map
+        var buyMarker = L.marker([buyCoordinates.lat, buyCoordinates.lon]).addTo(map);
+        
+        // Add a popup with the label "Buy"
+        buyMarker.bindPopup("<b>Buy</b>").openPopup();
+    }
 }
 
 // Function to display the total cost in the UI
@@ -120,4 +110,10 @@ async function getCoordinatesFromAddress(address) {
         console.error("Geocoding failed for address:", address);
         return null; // Handle the error appropriately
     }
+}
+
+// Example call to the function
+const deliveryInfo = getsaveDeliveryDetails();
+if (deliveryInfo) {
+    console.log("Delivery Info:", deliveryInfo);
 }
