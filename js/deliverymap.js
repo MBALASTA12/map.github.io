@@ -166,14 +166,27 @@ function checkDetails() {
     }
 
     // Get the address details from the sliding card
-    const address = document.getElementById('address-details').innerText;
+    const address = document.getElementById('address').innerText; // Get address from <p> element
 
     // Store the address in localStorage to pass it to index.html
     localStorage.setItem('deliveryAddress', address);
+
+    // Call the function to store detailed delivery information
+    storeDeliveryDetails(address, lastClickedCoordinates);
 
     // Optionally close the sliding card after clicking "Check"
     closeCard();
 
     // Redirect to index.html or the target page (adjust the path if needed)
     window.location.href = '../index.html';
+}
+
+// Function to store delivery details
+function storeDeliveryDetails(address, coordinates) {
+    const deliveryDetails = {
+        address: address, // Use the address passed from checkDetails
+        coordinates: coordinates, // Use the coordinates passed from checkDetails
+        // Add any other relevant details if needed
+    };
+    localStorage.setItem('deliveryMapDetails', JSON.stringify(deliveryDetails));
 }
