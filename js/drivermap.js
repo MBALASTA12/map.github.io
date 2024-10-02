@@ -48,18 +48,18 @@ function updateDriverLocation() {
 
 // Function to retrieve delivery details from localStorage
 function getsaveDeliveryDetails() {
-    const saveDeliveryDetails = JSON.parse(localStorage.getItem('saveDeliveryDetails'));
+    const saveDeliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails')); // Correct key name
 
     if (saveDeliveryDetails) {
         console.log("Retrieved delivery details:", saveDeliveryDetails);
 
         // Use the details as needed
-        const buyLocation = saveDeliveryDetails.buyLocation;
-        const deliverLocation = saveDeliveryDetails.deliverLocation;
-        const totalDistance = saveDeliveryDetails.totalDistance;
-        const totalCost = saveDeliveryDetails.totalCost;
-        const buyCoordinates = saveDeliveryDetails.buyCoordinates;
-        const deliveryCoordinates = saveDeliveryDetails.deliveryCoordinates;
+        const buyLocation = saveDeliveryDetails.buy.address; // Adjusted based on the save structure
+        const deliverLocation = saveDeliveryDetails.delivery.address; // Adjusted based on the save structure
+        const totalDistance = saveDeliveryDetails.distance; // Adjusted based on the save structure
+        const totalCost = saveDeliveryDetails.cost; // Adjusted based on the save structure
+        const buyCoordinates = saveDeliveryDetails.buy.coordinates; // Adjusted based on the save structure
+        const deliveryCoordinates = saveDeliveryDetails.delivery.coordinates; // Adjusted based on the save structure
 
         // You can return these details if needed
         return {
@@ -79,7 +79,7 @@ function getsaveDeliveryDetails() {
 // Function to display the buy location on the map using buyCoordinates
 function showBuyLocation(buyCoordinates) {
     if (buyCoordinates) {
-        // Add a marker for the buy location on the map
+        // Assuming `map` is already initialized
         var buyMarker = L.marker([buyCoordinates.lat, buyCoordinates.lon]).addTo(map);
         
         // Add a popup with the label "Buy"
@@ -92,6 +92,18 @@ function displayTotalCost(totalCost) {
     const totalCostElement = document.getElementById('total-cost-display');
     totalCostElement.textContent = `Total Cost: ${totalCost} PHP`;
 }
+
+// Event listener for the Check button
+document.getElementById('checkBuyLocationButton').addEventListener('click', function() {
+    const deliveryInfo = getsaveDeliveryDetails();
+    if (deliveryInfo) {
+        // Display the buy location on the map
+        showBuyLocation(deliveryInfo.buyCoordinates);
+        
+        // Display the total cost in the UI
+        displayTotalCost(deliveryInfo.totalCost);
+    }
+});
 
 // Call the function to start updating the driver's location
 updateDriverLocation();
