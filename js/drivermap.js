@@ -64,7 +64,7 @@ function getDeliveryDetails() {
 const details = getDeliveryDetails();
 if (details) {
     // Update the UI with the details
-    document.getElementById('totalCostDisplay').textContent = details.totalCost;
+    document.getElementById('deliveryDetails').textContent = details.deliveryDetails;
 }
 
 // Function to display the buy location on the map
