@@ -153,7 +153,7 @@ function trackLocation() {
 }
 
 // Function to check details and save coordinates
-function checkDetails() {
+function confirmedDetails() {
     // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
         const coordinatesJson = JSON.stringify(lastClickedCoordinates);
