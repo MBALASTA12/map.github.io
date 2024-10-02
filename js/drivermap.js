@@ -90,10 +90,17 @@ function displayTotalCost(totalCost) {
 updateDriverLocation();
 
 // Dummy function to get coordinates from an address (replace with an actual geocoding service)
-function getCoordinatesFromAddress(address) {
-    // Example coordinates (replace with actual geocoding logic)
-    return {
-        lat: 14.5995, // Example latitude
-        lon: 120.9842 // Example longitude
-    };
+async function getCoordinatesFromAddress(address) {
+    const response = await fetch(`https://api.example.com/geocode?address=${encodeURIComponent(address)}`);
+    const data = await response.json();
+    
+    if (data && data.results && data.results.length > 0) {
+        return {
+            lat: data.results[0].geometry.location.lat,
+            lon: data.results[0].geometry.location.lng
+        };
+    } else {
+        console.error("Geocoding failed for address:", address);
+        return null; // Handle the error appropriately
+    }
 }
