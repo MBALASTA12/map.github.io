@@ -24,14 +24,16 @@ function updateDriverLocation() {
             // Center the map on the driver's location
             map.setView([lat, lon], 13);
 
-            // Send updated location to server
-            fetch('http://localhost:3000/update-location', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ lat: lat, lon: lon })
-            });
+            // Get the saved delivery details from script.js
+            const deliveryDetails = getDeliveryDetails();
+
+            if (deliveryDetails) {
+                // Show the buyLocation on the map
+                showBuyLocation(deliveryDetails.buyLocation);
+                
+                // Show the total cost (total amount) in the UI
+                displayTotalCost(deliveryDetails.totalCost);
+            }
         }, function(error) {
             console.error("Error getting location: ", error);
         }, {
@@ -44,5 +46,45 @@ function updateDriverLocation() {
     }
 }
 
+// Function to retrieve delivery details from localStorage (from script.js)
+function getDeliveryDetails() {
+    const deliveryDetails = localStorage.getItem('deliveryDetails');
+    if (deliveryDetails) {
+        return JSON.parse(deliveryDetails);
+    } else {
+        console.error("No delivery details found.");
+        return null;
+    }
+}
+
+// Function to display the buy location on the map
+function showBuyLocation(buyLocation) {
+    // Assuming the buyLocation has latitude and longitude
+    const buyCoordinates = getCoordinatesFromAddress(buyLocation);
+
+    if (buyCoordinates) {
+        // Add a marker for the buy location on the map
+        var buyMarker = L.marker([buyCoordinates.lat, buyCoordinates.lon]).addTo(map);
+        buyMarker.bindPopup("Buy Location: " + buyLocation).openPopup();
+    }
+}
+
+// Function to display the total cost in the UI
+function displayTotalCost(totalCost) {
+    // Assuming you have an element in the driver.html to show total cost
+    const totalCostElement = document.getElementById('total-cost-display');
+    totalCostElement.textContent = `Total Cost: ${totalCost} PHP`;
+}
+
 // Call the function to start updating the driver's location
 updateDriverLocation();
+
+// Dummy function to get coordinates from an address (you may need to implement this)
+function getCoordinatesFromAddress(address) {
+    // This is a placeholder function. Implement your own logic to get coordinates from an address.
+    // You can use a geocoding service like OpenStreetMap, Google Maps API, etc.
+    return {
+        lat: 14.5995, // Example latitude
+        lon: 120.9842 // Example longitude
+    };
+}
