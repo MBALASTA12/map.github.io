@@ -5,12 +5,12 @@ function loadAddresses() {
 
     if (buyAddress) {
         const buyLink = document.getElementById('buyLink');
-        buyLink.textContent = buyAddress; // No need for `${}` here
+        buyLink.textContent = buyAddress;
     }
 
     if (deliveryAddress) {
         const deliverLink = document.getElementById('deliveryLink');
-        deliverLink.textContent = deliveryAddress; // No need for `${}` here
+        deliverLink.textContent = deliveryAddress;
     }
 }
 
@@ -43,21 +43,10 @@ function computeAndDisplayCost() {
         document.getElementById('payment-card').style.display = 'block';
 
         // Save delivery details in localStorage
-        saveDeliveryDetails(buyAddress, deliveryAddress, distance, cost);
+        saveDeliveryDetails(buyAddress, deliveryAddress, distance, cost, buyCoordinates, deliveryCoordinates);
     } else {
         alert("Coordinates not found. Please save both buy and delivery coordinates.");
     }
-}
-
-// Function to save total cost and total distance to localStorage
-function saveDeliveryDetails(totalDistance, totalCost) {
-    const deliveryDetails = {
-        totalDistance: totalDistance,
-        totalCost: totalCost
-    };
-
-    localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
-    console.log("Delivery details saved:", deliveryDetails);
 }
 
 // Function to calculate the distance using the Haversine formula
@@ -79,23 +68,34 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 // Call this function when the page loads to compute the cost
 computeAndDisplayCost();
 
-// Event listener for the check button
-document.getElementById('check-button').addEventListener('click', function() {
-    const buyLocation = document.getElementById('buyLink').textContent;
-    const deliverLocation = document.getElementById('deliveryLink').textContent;
-    const totalDistance = document.getElementById('total-distance').textContent;
-    const totalCost = document.getElementById('total-cost').textContent;
-
-    // Create a JSON object with the captured data
+// Function to save delivery details to localStorage
+function saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalCost, buyCoordinates, deliveryCoordinates) {
     const deliveryDetails = {
         buyLocation: buyLocation,
         deliverLocation: deliverLocation,
         totalDistance: totalDistance,
-        totalCost: totalCost
+        totalCost: totalCost,
+        buyCoordinates: buyCoordinates, // Add buy coordinates
+        deliveryCoordinates: deliveryCoordinates // Add delivery coordinates
     };
 
-    // Save delivery details in localStorage
     localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
     console.log("Delivery details saved:", deliveryDetails);
-    alert("Delivery details saved!"); // Alert for confirmation
+}
+
+// Event listener for the check button
+document.getElementById('check-button').addEventListener('click', function() {
+    const buyLocation = document.getElementById('buyLink').textContent;
+    const deliverLocation = document.getElementById('deliveryLink').textContent;
+    
+    // Retrieve total distance and cost values as numbers
+    const totalDistance = parseFloat(document.getElementById('total-distance').textContent) || 0;
+    const totalCost = parseFloat(document.getElementById('total-cost').textContent) || 0;
+
+    // Retrieve coordinates from localStorage
+    const buyCoordinates = JSON.parse(localStorage.getItem('buyCoordinates'));
+    const deliveryCoordinates = JSON.parse(localStorage.getItem('deliveryCoordinates'));
+
+    // Save delivery details
+    saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalCost, buyCoordinates, deliveryCoordinates);
 });
