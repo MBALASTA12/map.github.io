@@ -64,7 +64,6 @@ function getDeliveryDetails() {
 const details = getDeliveryDetails();
 if (details) {
     // Update the UI with the details
-    document.getElementById('buyLocationDisplay').textContent = details.buyLocation;
     document.getElementById('totalCostDisplay').textContent = details.totalCost;
 }
 
