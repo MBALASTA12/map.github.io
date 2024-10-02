@@ -1,16 +1,13 @@
 // Function to load both buy and delivery addresses from localStorage
 function loadAddresses() {
-    // Get the stored buy address and delivery address from localStorage
     const buyAddress = localStorage.getItem('buyAddress');
     const deliveryAddress = localStorage.getItem('deliveryAddress');
 
-    // Replace the "Where to Buy" text if a buy address is found
     if (buyAddress) {
         const buyLink = document.getElementById('buyLink');
         buyLink.textContent = `${buyAddress}`;
     }
 
-    // Replace the "Where to Deliver" text if a delivery address is found
     if (deliveryAddress) {
         const deliverLink = document.getElementById('deliveryLink');
         deliverLink.textContent = `${deliveryAddress}`;
@@ -40,9 +37,25 @@ function computeAndDisplayCost() {
         document.getElementById('total-distance').innerText = distance.toFixed(2);
         document.getElementById('total-cost').innerText = cost.toFixed(2);
         document.getElementById('payment-card').style.display = 'block'; // Show the payment card
+
+        // Save delivery details in localStorage
+        saveDeliveryDetails(buyAddress, deliveryAddress, distance, cost);
     } else {
         alert("Coordinates not found. Please save both buy and delivery coordinates.");
     }
+}
+
+// Function to save delivery details to localStorage
+function saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalCost) {
+    const deliveryDetails = {
+        buyLocation: buyLocation,
+        deliverLocation: deliverLocation,
+        totalDistance: totalDistance,
+        totalCost: totalCost
+    };
+
+    localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
+    console.log("Delivery details saved:", deliveryDetails);
 }
 
 // Function to calculate the distance using the Haversine formula
@@ -64,9 +77,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 // Call this function when the page loads to compute the cost
 computeAndDisplayCost();
 
-
 document.getElementById('check-button').addEventListener('click', function() {
-    // Get the values from the DOM elements
     const buyLocation = document.getElementById('buyLink').textContent;
     const deliverLocation = document.getElementById('deliveryLink').textContent;
     const totalDistance = document.getElementById('total-distance').textContent;
@@ -82,8 +93,6 @@ document.getElementById('check-button').addEventListener('click', function() {
 
     // Convert the JSON object to a string and save it in localStorage
     localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
-
-    // Here you can send the JSON data to your server or bot if needed
     console.log("Delivery details saved:", deliveryDetails);
     alert("Delivery details saved!");  // Alert for confirmation
 });
