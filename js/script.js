@@ -5,12 +5,12 @@ function loadAddresses() {
 
     if (buyAddress) {
         const buyLink = document.getElementById('buyLink');
-        buyLink.textContent = `${buyAddress}`;
+        buyLink.textContent = buyAddress; // No need for `${}` here
     }
 
     if (deliveryAddress) {
         const deliverLink = document.getElementById('deliveryLink');
-        deliverLink.textContent = `${deliveryAddress}`;
+        deliverLink.textContent = deliveryAddress; // No need for `${}` here
     }
 }
 
@@ -22,8 +22,8 @@ function computeAndDisplayCost() {
     const buyCoordinates = JSON.parse(localStorage.getItem('buyCoordinates'));
     const deliveryCoordinates = JSON.parse(localStorage.getItem('deliveryCoordinates'));
 
-    const buyAddress = localStorage.getItem('buyAddress'); // Fetch buy address from localStorage
-    const deliveryAddress = localStorage.getItem('deliveryAddress'); // Fetch delivery address from localStorage
+    const buyAddress = localStorage.getItem('buyAddress');
+    const deliveryAddress = localStorage.getItem('deliveryAddress');
 
     if (buyCoordinates && deliveryCoordinates) {
         const distance = calculateDistance(
@@ -33,13 +33,14 @@ function computeAndDisplayCost() {
             deliveryCoordinates.lon
         );
 
-        // Convert distance to PHP
-        const cost = (distance / 31) * 1;
+        // Cost calculation; adjust the conversion rates as necessary
+        const costPerMeter = 1 / 31; // 1 PHP for every 31 meters
+        const cost = (distance * costPerMeter).toFixed(2);
 
-        // Display the results
-        document.getElementById('total-distance').innerText = distance.toFixed(2);
-        document.getElementById('total-cost').innerText = cost.toFixed(2);
-        document.getElementById('payment-card').style.display = 'block'; // Show the payment card
+        // Display results
+        document.getElementById('total-distance').innerText = (distance / 1000).toFixed(2) + " km"; // Display in km
+        document.getElementById('total-cost').innerText = cost + " PHP";
+        document.getElementById('payment-card').style.display = 'block';
 
         // Save delivery details in localStorage
         saveDeliveryDetails(buyAddress, deliveryAddress, distance, cost);
@@ -80,6 +81,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 // Call this function when the page loads to compute the cost
 computeAndDisplayCost();
 
+// Event listener for the check button
 document.getElementById('check-button').addEventListener('click', function() {
     const buyLocation = document.getElementById('buyLink').textContent;
     const deliverLocation = document.getElementById('deliveryLink').textContent;
@@ -94,8 +96,8 @@ document.getElementById('check-button').addEventListener('click', function() {
         totalCost: totalCost
     };
 
-    // Convert the JSON object to a string and save it in localStorage
+    // Save delivery details in localStorage
     localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
     console.log("Delivery details saved:", deliveryDetails);
-    alert("Delivery details saved!");  // Alert for confirmation
+    alert("Delivery details saved!"); // Alert for confirmation
 });
