@@ -46,25 +46,40 @@ function updateDriverLocation() {
     }
 }
 
-// Function to retrieve delivery details from localStorage (from script.js)
-function getDeliveryDetails() {
-    const deliveryDetails = localStorage.getItem('deliveryDetails');
+// Function to retrieve delivery details from localStorage
+function getsaveDeliveryDetails() {
+    const saveDeliveryDetails = JSON.parse(localStorage.getItem('saveDeliveryDetails'));
 
-    if (deliveryDetails) {
-        console.log("Delivery details found:", deliveryDetails);
-        return JSON.parse(deliveryDetails);
+    if (saveDeliveryDetails) {
+        console.log("Retrieved delivery details:", deliveryDetails);
+
+        // Use the details as needed
+        const buyLocation = saveDeliveryDetails.buyLocation;
+        const deliverLocation = saveDeliveryDetails.deliverLocation;
+        const totalDistance = saveDeliveryDetails.totalDistance;
+        const totalCost = saveDeliveryDetails.totalCost;
+        const buyCoordinates = saveDeliveryDetails.buyCoordinates;
+        const deliveryCoordinates = saveDeliveryDetails.deliveryCoordinates;
+
+        // You can return these details if needed
+        return {
+            buyLocation,
+            deliverLocation,
+            totalDistance,
+            totalCost,
+            buyCoordinates,
+            deliveryCoordinates
+        };
     } else {
-        console.error("No delivery details found in localStorage.");
-        alert("No delivery details found!");
+        console.log("No delivery details found in localStorage.");
         return null;
     }
 }
 
-// Example usage of retrieved details
-const details = getDeliveryDetails();
-if (details) {
-    // Update the UI with the details
-    document.getElementById('deliveryDetails').textContent = details.deliveryDetails;
+// Example call to the function
+const deliveryInfo = getSaveDeliveryDetails();
+if (deliveryInfo) {
+    console.log("Delivery Info:", deliveryInfo);
 }
 
 // Function to display the buy location on the map
