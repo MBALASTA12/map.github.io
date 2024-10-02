@@ -27,12 +27,12 @@ function updateDriverLocation() {
             // Get the saved delivery details from script.js
             const saveDeliveryDetails = getsaveDeliveryDetails();
 
-            if (deliveryDetails) {
+            if (saveDeliveryDetails) {
                 // Show the buyLocation on the map
-                showBuyLocation(deliveryDetails.buyLocation);
+                showBuyLocation(saveDeliveryDetails.buyLocation);
                 
                 // Show the total cost (total amount) in the UI
-                displayTotalCost(deliveryDetails.totalCost);
+                displayTotalCost(saveDeliveryDetails.totalCost);
             }
         }, function(error) {
             console.error("Error getting location: ", error);
@@ -51,7 +51,7 @@ function getsaveDeliveryDetails() {
     const saveDeliveryDetails = JSON.parse(localStorage.getItem('saveDeliveryDetails'));
 
     if (saveDeliveryDetails) {
-        console.log("Retrieved delivery details:", deliveryDetails);
+        console.log("Retrieved delivery details:", saveDeliveryDetails);
 
         // Use the details as needed
         const buyLocation = saveDeliveryDetails.buyLocation;
