@@ -80,9 +80,9 @@ document.getElementById('check-button').addEventListener('click', function() {
         totalCost: totalCost
     };
 
-    // Convert the JSON object to a string
-    const jsonString = JSON.stringify(deliveryDetails);
+    // Convert the JSON object to a string and save it in localStorage
+    localStorage.setItem('deliveryDetails', JSON.stringify(deliveryDetails));
 
-    // Here you can send the JSON data to your server or bot
-    console.log("Delivery details saved:", jsonString);
+    // Here you can send the JSON data to your server or bot if needed
+    console.log("Delivery details saved:", deliveryDetails);
 });
