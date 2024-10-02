@@ -52,9 +52,7 @@ function getDeliveryDetails() {
 
     if (deliveryDetails) {
         console.log("Delivery details found:", deliveryDetails);
-        const parsedDetails = JSON.parse(deliveryDetails);
-        console.log("Parsed Delivery Details:", parsedDetails);
-        return parsedDetails;
+        return JSON.parse(deliveryDetails);
     } else {
         console.error("No delivery details found in localStorage.");
         alert("No delivery details found!");
@@ -62,17 +60,17 @@ function getDeliveryDetails() {
     }
 }
 
-// Example usage of retrieved details:
+// Example usage of retrieved details
 const details = getDeliveryDetails();
 if (details) {
-    // Update the UI or map with the details
+    // Update the UI with the details
     document.getElementById('buyLocationDisplay').textContent = details.buyLocation;
     document.getElementById('totalCostDisplay').textContent = details.totalCost;
 }
 
 // Function to display the buy location on the map
 function showBuyLocation(buyLocation) {
-    // Assuming the buyLocation has latitude and longitude
+    // Get the coordinates for the buy location (using a placeholder for now)
     const buyCoordinates = getCoordinatesFromAddress(buyLocation);
 
     if (buyCoordinates) {
@@ -84,7 +82,6 @@ function showBuyLocation(buyLocation) {
 
 // Function to display the total cost in the UI
 function displayTotalCost(totalCost) {
-    // Assuming you have an element in the driver.html to show total cost
     const totalCostElement = document.getElementById('total-cost-display');
     totalCostElement.textContent = `Total Cost: ${totalCost} PHP`;
 }
@@ -92,10 +89,9 @@ function displayTotalCost(totalCost) {
 // Call the function to start updating the driver's location
 updateDriverLocation();
 
-// Dummy function to get coordinates from an address (you may need to implement this)
+// Dummy function to get coordinates from an address (replace with an actual geocoding service)
 function getCoordinatesFromAddress(address) {
-    // This is a placeholder function. Implement your own logic to get coordinates from an address.
-    // You can use a geocoding service like OpenStreetMap, Google Maps API, etc.
+    // Example coordinates (replace with actual geocoding logic)
     return {
         lat: 14.5995, // Example latitude
         lon: 120.9842 // Example longitude
