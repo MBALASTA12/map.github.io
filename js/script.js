@@ -85,4 +85,5 @@ document.getElementById('check-button').addEventListener('click', function() {
 
     // Here you can send the JSON data to your server or bot if needed
     console.log("Delivery details saved:", deliveryDetails);
+    alert("Delivery details saved!");  // Alert for confirmation
 });
