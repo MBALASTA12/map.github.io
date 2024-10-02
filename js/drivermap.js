@@ -24,7 +24,7 @@ function updateDriverLocation() {
             // Center the map on the driver's location
             map.setView([lat, lon], 13);
 
-            // Get the saved delivery details from script.js
+            // Get the saved delivery details from localStorage
             const saveDeliveryDetails = getsaveDeliveryDetails();
 
             if (saveDeliveryDetails) {
@@ -61,7 +61,6 @@ function getsaveDeliveryDetails() {
         const buyCoordinates = saveDeliveryDetails.buyCoordinates;
         const deliveryCoordinates = saveDeliveryDetails.deliveryCoordinates;
 
-        // You can return these details if needed
         return {
             buyLocation,
             deliverLocation,
@@ -85,13 +84,17 @@ if (deliveryInfo) {
 // Function to display the buy location on the map
 function showBuyLocation(buyLocation) {
     // Get the coordinates for the buy location (using a placeholder for now)
-    const buyCoordinates = getCoordinatesFromAddress(buyLocation);
-
-    if (buyCoordinates) {
-        // Add a marker for the buy location on the map
-        var buyMarker = L.marker([buyCoordinates.lat, buyCoordinates.lon]).addTo(map);
-        buyMarker.bindPopup("Buy Location: " + buyLocation).openPopup();
-    }
+    getCoordinatesFromAddress(buyLocation).then(buyCoordinates => {
+        if (buyCoordinates) {
+            // Add a marker for the buy location on the map
+            var buyMarker = L.marker([buyCoordinates.lat, buyCoordinates.lon]).addTo(map);
+            
+            // Bind a popup to the marker showing the text "Buy Location"
+            buyMarker.bindPopup("Buy Location: " + buyLocation + "<br><small>Buy</small>").openPopup();
+        } else {
+            console.error("Failed to get coordinates for buy location.");
+        }
+    });
 }
 
 // Function to display the total cost in the UI
