@@ -69,6 +69,7 @@ if (details) {
     document.getElementById('buyLocationDisplay').textContent = details.buyLocation;
     document.getElementById('totalCostDisplay').textContent = details.totalCost;
 }
+
 // Function to display the buy location on the map
 function showBuyLocation(buyLocation) {
     // Assuming the buyLocation has latitude and longitude
