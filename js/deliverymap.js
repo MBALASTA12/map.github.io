@@ -153,26 +153,33 @@ function trackLocation() {
 }
 
 // Function to check details and save coordinates
-function confirmedDetails() {
+function confirmedDeliveryDetails() {
     // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
         // Get the address details from the sliding card
-        const address = document.getElementById('address').innerText;
+        const address = document.getElementById('deliveryAddress').innerText;
 
-        // Create an object to store both address and coordinates
-        const details = {
+        // Encode address and coordinates as URL parameters
+        const params = new URLSearchParams({
             address: address,
-            coordinates: lastClickedCoordinates
+            lat: lastClickedCoordinates.lat,
+            lng: lastClickedCoordinates.lng
+        });
+
+        // Create a JSON object for coordinates
+        const deliveryCoordinates = {
+            latitude: lastClickedCoordinates.lat,
+            longitude: lastClickedCoordinates.lng
         };
 
-        // Save the details in localStorage as a JSON string
-        localStorage.setItem('deliveryDetails', JSON.stringify(details));
+        // Save the coordinates to a JSON string (in localStorage or another method)
+        localStorage.setItem('deliveryCoordinates', JSON.stringify(deliveryCoordinates));
 
         // Optionally close the sliding card after clicking "Check"
         closeCard();
 
-        // Redirect to index.html or the target page (adjust the path if needed)
-        window.location.href = '../index.html';
+        // Redirect to index.html or another page with the encoded parameters
+        window.location.href = `../index.html?${params.toString()}`;
     } else {
         alert("No location selected. Please click on the map first.");
     }
