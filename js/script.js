@@ -1,18 +1,35 @@
-// Function to load both buy and delivery addresses from localStorage
-function loadAddresses() {
-    const buyAddress = localStorage.getItem('buyAddress');
-    const deliveryAddress = localStorage.getItem('deliveryAddress');
+  // Function to parse URL parameters, display the address, and save coordinates as JSON
+  function displayBuyDetailsFromURL() {
+      const params = new URLSearchParams(window.location.search);
 
-    if (buyAddress) {
-        const buyLink = document.getElementById('buyLink');
-        buyLink.textContent = buyAddress;
-    }
+      // Check if the required parameters are present
+      if (params.has('address') && params.has('lat') && params.has('lng')) {
+          const address = params.get('address');
+          const lat = params.get('lat');
+          const lng = params.get('lng');
 
-    if (deliveryAddress) {
-        const deliverLink = document.getElementById('deliveryLink');
-        deliverLink.textContent = deliveryAddress;
-    }
-}
+          // Display only the address in the "Where to Buy" section
+          document.getElementById('buyDetails').innerText = `Address: ${address}`;
+
+          // Create a JSON object to store the coordinates
+          const coordinates = {
+              latitude: lat,
+              longitude: lng
+          };
+
+          // Save the coordinates as a JSON string in localStorage
+          localStorage.setItem('coordinates', JSON.stringify(coordinates));
+
+          // You can also log the coordinates object if needed
+          console.log('Coordinates saved:', coordinates);
+      } else {
+          // If no details are found, display a default message
+          document.getElementById('buyDetails').innerText = "No location selected yet.";
+      }
+  }
+
+  // Call the function when the page loads
+  window.onload = displayBuyDetailsFromURL;
 
 // Call the function to load the addresses when the page loads
 window.onload = loadAddresses;
@@ -68,20 +85,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 // Call this function when the page loads to compute the cost
 computeAndDisplayCost();
 
-// Function to save delivery details to localStorage
-function saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalCost, buyCoordinates, deliveryCoordinates) {
-    const saveDeliveryDetails = {
-        buyLocation: buyLocation,
-        deliverLocation: deliverLocation,
-        totalDistance: totalDistance,
-        totalCost: totalCost,
-        buyCoordinates: buyCoordinates, // Add buy coordinates
-        deliveryCoordinates: deliveryCoordinates // Add delivery coordinates
-    };
-
-    localStorage.setItem('saveDeliveryDetails', JSON.stringify(saveDeliveryDetails));
-    console.log("Delivery details saved:", saveDeliveryDetails);
-}
 
 // Event listener for the check button
 document.getElementById('check-button').addEventListener('click', function() {
