@@ -152,28 +152,27 @@ function trackLocation() {
     });
 }
 
-// Function to check details and save coordinates
+// Function to check details and send coordinates to index.html via URL
 function confirmedDetails() {
     // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
         // Get the address details from the sliding card
         const address = document.getElementById('address').innerText;
 
-        // Create an object to store both address and coordinates
-        const details = {
+        // Encode address and coordinates as URL parameters
+        const params = new URLSearchParams({
             address: address,
-            coordinates: lastClickedCoordinates
-        };
-
-        // Save the details in localStorage as a JSON string
-        localStorage.setItem('buyDetails', JSON.stringify(details));
+            lat: lastClickedCoordinates.lat,
+            lng: lastClickedCoordinates.lng
+        });
 
         // Optionally close the sliding card after clicking "Check"
         closeCard();
 
-        // Redirect to index.html or the target page (adjust the path if needed)
-        window.location.href = '../index.html';
+        // Redirect to index.html with the encoded parameters
+        window.location.href = `../index.html?${params.toString()}`;
     } else {
         alert("No location selected. Please click on the map first.");
     }
 }
+
