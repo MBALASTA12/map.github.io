@@ -21,14 +21,6 @@
 
   // Call the function when the page loads
   window.onload = updateBuyLinkFromURL;
-</script>
-
-<!-- HTML for "Where to Buy" section -->
-<div class="inner-card">
-    <span class="pin-icon red-pin">📍</span>
-    <a href="page/buymap.html" class="buy-link" id="buyLink">Where to buy</a>
-    <span class="arrow"> > </span>
-</div>
 
 // Function to compute and display the distance and cost
 function computeAndDisplayCost() {
