@@ -1,26 +1,36 @@
-  // Function to update the "Where to Buy" link with the address from the URL
-  function updateBuyLinkFromURL() {
+  // Function to update the links with address from the URL
+  function updateLinksFromURL() {
       const params = new URLSearchParams(window.location.search);
 
-      // Check if the address is in the URL
-      if (params.has('address')) {
-          const address = params.get('address');
-          
-          // Update the "Where to Buy" link with the address
+      // Update "Where to Buy" link
+      if (params.has('address') && window.location.href.includes('buymap')) {
+          const buyAddress = params.get('address');
           const buyLink = document.getElementById('buyLink');
-          buyLink.innerText = address;  // Set the link text to the address
+          buyLink.innerText = buyAddress;  // Set the link text to the address
 
-          // Optionally retrieve the coordinates saved in localStorage
-          const coordinates = JSON.parse(localStorage.getItem('buyCoordinates'));
-          if (coordinates) {
-              console.log('Coordinates from JSON:', coordinates);
-              // You can do additional actions with the coordinates here if needed
+          // Retrieve the coordinates saved for buying
+          const buyCoordinates = JSON.parse(localStorage.getItem('buyCoordinates'));
+          if (buyCoordinates) {
+              console.log('Buy Coordinates from JSON:', buyCoordinates);
+          }
+      }
+
+      // Update "Delivery" link (if exists)
+      if (params.has('address') && window.location.href.includes('deliverymap')) {
+          const deliveryAddress = params.get('address');
+          const deliveryLink = document.getElementById('deliveryLink');
+          deliveryLink.innerText = deliveryAddress;  // Set the link text to the address
+
+          // Retrieve the coordinates saved for delivery
+          const deliveryCoordinates = JSON.parse(localStorage.getItem('deliveryCoordinates'));
+          if (deliveryCoordinates) {
+              console.log('Delivery Coordinates from JSON:', deliveryCoordinates);
           }
       }
   }
 
   // Call the function when the page loads
-  window.onload = updateBuyLinkFromURL;
+  window.onload = updateLinksFromURL;
 
 // Function to compute and display the distance and cost
 function computeAndDisplayCost() {
