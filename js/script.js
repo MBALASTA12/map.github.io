@@ -62,21 +62,3 @@ function computeAndDisplayCost(buyCoordinates, deliveryCoordinates) {
 
   // Call the function when the page loads
   window.onload = updateLinksFromURL;
-
-
-// Event listener for the check button
-document.getElementById('check-button').addEventListener('click', function() {
-    const buyLocation = document.getElementById('buyLink').textContent;
-    const deliverLocation = document.getElementById('deliveryLink').textContent;
-    
-    // Retrieve total distance and cost values as numbers
-    const totalDistance = parseFloat(document.getElementById('total-distance').textContent) || 0;
-    const totalCost = parseFloat(document.getElementById('total-cost').textContent) || 0;
-
-    // Retrieve coordinates from localStorage
-    const buyCoordinates = JSON.parse(localStorage.getItem('buyCoordinates'));
-    const deliveryCoordinates = JSON.parse(localStorage.getItem('deliveryCoordinates'));
-
-    // Save delivery details
-    saveDeliveryDetails(buyLocation, deliverLocation, totalDistance, totalCost, buyCoordinates, deliveryCoordinates);
-});
