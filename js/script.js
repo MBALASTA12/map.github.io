@@ -1,6 +1,7 @@
   // Function to update the links with address from the URL
   function updateLinksFromURL() {
       const params = new URLSearchParams(window.location.search);
+      let buyCoordinates, deliveryCoordinates;
 
       // Update "Where to Buy" link
       if (params.has('address') && window.location.href.includes('buymap')) {
@@ -27,6 +28,10 @@
               console.log('Delivery Coordinates from JSON:', deliveryCoordinates);
           }
       }
+        // Call computeAndDisplayCost if both coordinates are available
+    if (buyCoordinates && deliveryCoordinates) {
+        computeAndDisplayCost(buyCoordinates, deliveryCoordinates);
+    }
   }
 
 // Function to compute the distance using the Haversine formula
