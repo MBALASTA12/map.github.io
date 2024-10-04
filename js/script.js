@@ -1,38 +1,34 @@
-  // Function to parse URL parameters, display the address, and save coordinates as JSON
-  function displayBuyDetailsFromURL() {
+  // Function to update the "Where to Buy" link with the address from the URL
+  function updateBuyLinkFromURL() {
       const params = new URLSearchParams(window.location.search);
 
-      // Check if the required parameters are present
-      if (params.has('address') && params.has('lat') && params.has('lng')) {
+      // Check if the address is in the URL
+      if (params.has('address')) {
           const address = params.get('address');
-          const lat = params.get('lat');
-          const lng = params.get('lng');
+          
+          // Update the "Where to Buy" link with the address
+          const buyLink = document.getElementById('buyLink');
+          buyLink.innerText = address;  // Set the link text to the address
 
-          // Display only the address in the "Where to Buy" section
-          document.getElementById('buyDetails').innerText = `Address: ${address}`;
-
-          // Create a JSON object to store the coordinates
-          const coordinates = {
-              latitude: lat,
-              longitude: lng
-          };
-
-          // Save the coordinates as a JSON string in localStorage
-          localStorage.setItem('coordinates', JSON.stringify(coordinates));
-
-          // You can also log the coordinates object if needed
-          console.log('Coordinates saved:', coordinates);
-      } else {
-          // If no details are found, display a default message
-          document.getElementById('buyDetails').innerText = "No location selected yet.";
+          // Optionally retrieve the coordinates saved in localStorage
+          const coordinates = JSON.parse(localStorage.getItem('buyCoordinates'));
+          if (coordinates) {
+              console.log('Coordinates from JSON:', coordinates);
+              // You can do additional actions with the coordinates here if needed
+          }
       }
   }
 
   // Call the function when the page loads
-  window.onload = displayBuyDetailsFromURL;
+  window.onload = updateBuyLinkFromURL;
+</script>
 
-// Call the function to load the addresses when the page loads
-window.onload = loadAddresses;
+<!-- HTML for "Where to Buy" section -->
+<div class="inner-card">
+    <span class="pin-icon red-pin">📍</span>
+    <a href="page/buymap.html" class="buy-link" id="buyLink">Where to buy</a>
+    <span class="arrow"> > </span>
+</div>
 
 // Function to compute and display the distance and cost
 function computeAndDisplayCost() {
