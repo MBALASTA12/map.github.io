@@ -166,6 +166,15 @@ function confirmedDetails() {
             lng: lastClickedCoordinates.lng
         });
 
+        // Create a JSON object for coordinates
+        const coordinates = {
+            latitude: lastClickedCoordinates.lat,
+            longitude: lastClickedCoordinates.lng
+        };
+
+        // Save the coordinates to a JSON string (in localStorage or another method)
+        localStorage.setItem('buyCoordinates', JSON.stringify(coordinates));
+
         // Optionally close the sliding card after clicking "Check"
         closeCard();
 
@@ -175,4 +184,3 @@ function confirmedDetails() {
         alert("No location selected. Please click on the map first.");
     }
 }
-
