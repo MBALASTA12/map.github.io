@@ -153,7 +153,7 @@ function trackLocation() {
 }
 
 // Function to check details and send coordinates to index.html via URL
-function confirmedDetails() {
+function confirmedBuyDetails() {
     // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
         // Get the address details from the sliding card
