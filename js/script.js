@@ -70,6 +70,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     return R * c; // Distance in meters
 }
 
+// Confirm details function
 function confirmDetails() {
     const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
     const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
@@ -96,7 +97,7 @@ function confirmDetails() {
     } else {
         alert("Please ensure all address details are filled out before confirming.");
     }
-});
+}
 
 // Function to show the waiting popup
 function showWaitingPopup() {
@@ -107,3 +108,6 @@ function showWaitingPopup() {
 function closeWaitingPopup() {
     document.getElementById('waiting-popup').style.display = 'none';
 }
+
+// Event listener for the confirmed button
+document.getElementById('confirmed-button').addEventListener('click', confirmDetails);
