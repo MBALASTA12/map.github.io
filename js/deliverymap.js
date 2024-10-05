@@ -37,7 +37,6 @@ function searchLocation() {
 function getSuggestions() {
     const input = document.getElementById('location-search').value;
 
-    // Only fetch suggestions if input length is > 2
     if (input.length > 2) {
         const url = `https://nominatim.openstreetmap.org/search?format=json&q=${input}&limit=5`;
 
@@ -154,31 +153,24 @@ function trackLocation() {
 
 // Function to check details and save coordinates
 function confirmedDeliveryDetails() {
-    // Only store the last clicked coordinates if they exist
     if (lastClickedCoordinates) {
-        // Get the address details from the sliding card
-        const address = document.getElementById('deliveryAddress').innerText;
+        const address = document.getElementById('address').innerText;
 
-        // Encode address and coordinates as URL parameters
         const params = new URLSearchParams({
             address: address,
             lat: lastClickedCoordinates.lat,
             lng: lastClickedCoordinates.lng
         });
 
-        // Create a JSON object for coordinates
         const deliveryCoordinates = {
             latitude: lastClickedCoordinates.lat,
             longitude: lastClickedCoordinates.lng
         };
 
-        // Save the coordinates to a JSON string (in localStorage or another method)
         localStorage.setItem('deliveryCoordinates', JSON.stringify(deliveryCoordinates));
 
-        // Optionally close the sliding card after clicking "Check"
         closeCard();
 
-        // Redirect to index.html or another page with the encoded parameters
         window.location.href = `../index.html?${params.toString()}`;
     } else {
         alert("No location selected. Please click on the map first.");
