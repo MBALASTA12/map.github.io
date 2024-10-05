@@ -126,5 +126,5 @@ function confirmedBuyDetails() {
 
     localStorage.setItem('buyCoordinates', JSON.stringify(lastClickedCoordinates));
     closeCard(); // Optionally close card
-    window.location.href = `../index.html?${params.toString()}`;
+    window.location.href = "index.html?address=" + encodeURIComponent(buyAddress) + "&deliveryAddress=" + encodeURIComponent(deliveryAddress);
 }
