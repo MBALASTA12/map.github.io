@@ -91,9 +91,19 @@ function confirmDetails() {
         // Store the details in localStorage
         localStorage.setItem('confirmationDetails', JSON.stringify(confirmationDetails));
 
-        // Redirect to drivermap.js (you may need to change this based on your routing setup)
-        window.location.href = "page/drivermap.html"; // Make sure this path is correct
+        // Show the waiting popup
+        showWaitingPopup();
     } else {
-        alert("Please ensure both buy and delivery details are selected.");
+        alert("Please ensure all address details are filled out before confirming.");
     }
+});
+
+// Function to show the waiting popup
+function showWaitingPopup() {
+    document.getElementById('waiting-popup').style.display = 'block';
+}
+
+// Function to close the waiting popup
+function closeWaitingPopup() {
+    document.getElementById('waiting-popup').style.display = 'none';
 }
