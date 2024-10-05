@@ -135,5 +135,5 @@ function confirmedBuyDetails() {
     closeCard();
 
     // Redirect to the next page (assuming you're navigating to the delivery selection)
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
 }
