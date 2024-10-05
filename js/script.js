@@ -1,14 +1,18 @@
-function displayAddresses() {
-    const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
-    const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
+        // Retrieve and display buy address
+        const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
+        const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
 
-    if (buyDetails && deliveryDetails) {
-        // Display the addresses
-        document.getElementById('whereToBuy').innerText = buyDetails.address;
-        document.getElementById('whereToDeliver').innerText = deliveryDetails.address;
-    } else {
-        alert("Location details are missing.");
-    }
+        if (buyDetails) {
+            document.getElementById('buy-address').innerText = buyDetails.address;
+        } else {
+            document.getElementById('buy-address').innerText = "No buy address selected.";
+        }
+
+        if (deliveryDetails) {
+            document.getElementById('delivery-address').innerText = deliveryDetails.address;
+        } else {
+            document.getElementById('delivery-address').innerText = "No delivery address selected.";
+        }
 }
 
 function computeDistanceAndCost() {
