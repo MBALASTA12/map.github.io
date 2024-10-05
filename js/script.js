@@ -69,3 +69,31 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
     return R * c; // Distance in meters
 }
+
+function confirmDetails() {
+    const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
+    const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
+
+    if (buyDetails && deliveryDetails) {
+        const totalDistance = document.getElementById('totalDistance').innerText;
+        const totalCost = document.getElementById('paymentCost').innerText;
+
+        // Create an object to hold all the details
+        const confirmationDetails = {
+            buyAddress: buyDetails.address,
+            buyCoordinates: buyDetails.coordinates,
+            deliveryAddress: deliveryDetails.address,
+            deliveryCoordinates: deliveryDetails.coordinates,
+            totalDistance: totalDistance,
+            totalCost: totalCost
+        };
+
+        // Store the details in localStorage
+        localStorage.setItem('confirmationDetails', JSON.stringify(confirmationDetails));
+
+        // Redirect to drivermap.js (you may need to change this based on your routing setup)
+        window.location.href = "page/drivermap.html"; // Make sure this path is correct
+    } else {
+        alert("Please ensure both buy and delivery details are selected.");
+    }
+}
