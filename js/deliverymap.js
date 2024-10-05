@@ -171,7 +171,7 @@ function confirmedDeliveryDetails() {
 
         closeCard();
 
-        window.location.href = `../index.html?${params.toString()}`;
+        window.location.href = "index.html?address=" + encodeURIComponent(buyAddress) + "&deliveryAddress=" + encodeURIComponent(deliveryAddress);
     } else {
         alert("No location selected. Please click on the map first.");
     }
