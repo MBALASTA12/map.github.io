@@ -9,13 +9,13 @@
 </head>
 <body>
     <div id="map"></div>
-    <div id="popup" class="popup">
+        <div id="popup" style="display: none;">
         <div class="popup-content">
-            <span class="close-popup">✖ Close</span>
-            <h3>Order Details</h3>
+            <span class="close-popup" style="cursor: pointer;">&times;</span>
             <div id="order-details"></div>
         </div>
     </div>
+    
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="js/drivermap.js"></script>
 </body>
