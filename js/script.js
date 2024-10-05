@@ -16,9 +16,9 @@ function updateLinksFromURL() {
         }
     }
 
-    // Update "Delivery" link (if exists)
-    if (params.has('address') && window.location.href.includes('deliverymap')) {
-        const deliveryAddress = params.get('address');
+    // Update "Where to Deliver" link
+    if (params.has('deliveryAddress') && window.location.href.includes('deliverymap')) {
+        const deliveryAddress = params.get('deliveryAddress');
         const deliveryLink = document.getElementById('deliveryLink');
         deliveryLink.innerText = deliveryAddress;  // Set the link text to the address
 
