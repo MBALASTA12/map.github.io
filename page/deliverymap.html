@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Where to Deliver - Map</title>
-    <link rel="stylesheet" href="../css/map.css"> <!-- Link to map styling -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script> <!-- Leaflet library -->
+    <link rel="stylesheet" href="../css/map.css">
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
 </head>
 <body>
@@ -13,7 +13,7 @@
     <div id="search-container">
         <input type="text" id="location-search" placeholder="Search for a location..." onkeyup="getSuggestions()" />
         <button onclick="searchLocation()">Search</button>
-        <div id="suggestions"></div> <!-- Dropdown for suggestions -->
+        <div id="suggestions"></div>
     </div>
 
     <!-- GPS Tracker Button -->
@@ -26,10 +26,10 @@
     <div id="address-card" class="sliding-card">
         <div id="address-details">
             <p id="address"></p>
-            <button id="check-button" onclick="confirmedDeliveryDetails(); storeDeliveryDetails()">✔️</button>
+            <button id="check-button" onclick="confirmedDeliveryDetails()">✔️</button>
         </div>
     </div>
     
-    <script src="../js/deliverymap.js"></script> <!-- Link to map functionality -->
+    <script src="../js/deliverymap.js"></script>
 </body>
 </html>
