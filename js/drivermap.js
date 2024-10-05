@@ -75,6 +75,14 @@ function displayLocation(buyCoordinates) {
     marker = L.marker([buyCoordinates.lat, buyCoordinates.lng]).addTo(map);
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Call the function to receive order details when the page loads
+    receiveOrderDetails();
+
+    // Add event listener to close the popup
+    document.querySelector('.close-popup').addEventListener('click', closePopup);
+});
+
 // Function to display the total cost in the UI
 function displayTotalCost(totalCost) {
     const costElement = document.createElement('div');
@@ -106,6 +114,16 @@ function displayOrderDetails(orderDetails) {
         <p><strong>Total Distance:</strong> ${orderDetails.totalDistance} meters</p>
         <p><strong>Total Cost:</strong> ₱${orderDetails.totalCost}</p>
     `;
+}
+// Function to receive order details from localStorage
+function receiveOrderDetails() {
+    const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+    if (orderDetails) {
+        displayTotalCost(orderDetails.totalCost);
+        displayOrderDetails(orderDetails);
+    } else {
+        alert("No order details found.");
+    }
 }
 
 // Call the function to receive order details when the page loads
