@@ -73,6 +73,9 @@ function displayLocation(buyCoordinates) {
 
     // Add a marker for the buy location
     marker = L.marker([buyCoordinates.lat, buyCoordinates.lng]).addTo(map);
+
+    // Attach a popup with the total cost to the marker
+    marker.bindPopup(`<b>Total Cost:</b> ₱${totalCost}`).openPopup();
 }
 
 // Function to display the total cost in the UI
