@@ -136,5 +136,5 @@ function confirmedBuyDetails() {
     closeCard(); 
     
     // Navigate to index.html with the address as a parameter
-    window.location.href = "index.html?address=" + encodeURIComponent(address);
+    window.location.href = "index.html";;
 }
