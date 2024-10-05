@@ -9,3 +9,27 @@ html, body {
     height: 100vh; /* Fullscreen map */
     width: 100vw; /* Fullscreen width */
 }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            z-index: 999;
+        }
+        .popup-content {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        .close-popup {
+            cursor: pointer;
+            color: red;
+        }
