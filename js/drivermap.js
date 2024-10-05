@@ -115,16 +115,6 @@ function displayOrderDetails(orderDetails) {
         <p><strong>Total Cost:</strong> ₱${orderDetails.totalCost}</p>
     `;
 }
-// Function to receive order details from localStorage
-function receiveOrderDetails() {
-    const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
-    if (orderDetails) {
-        displayTotalCost(orderDetails.totalCost);
-        displayOrderDetails(orderDetails);
-    } else {
-        alert("No order details found.");
-    }
-}
 
 // Call the function to receive order details when the page loads
 window.onload = receiveOrderDetails;
