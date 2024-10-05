@@ -1,186 +1,130 @@
-let marker; // Variable to hold the marker
-let lastClickedCoordinates = null; // Variable to store the last clicked coordinates
+let marker; // Marker for the map
+let lastClickedCoordinates = null; // Store last clicked coordinates
 
 // Initialize the map and set its view to General Santos City
-const map = L.map('map', {
-    zoomControl: false
-}).setView([6.1164, 125.1716], 13);
+const map = L.map('map', { zoomControl: false }).setView([6.1164, 125.1716], 13);
 
-// Load and display the OpenStreetMap tiles
+// Load OpenStreetMap tiles
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Function to search for a location using Nominatim API
+// Search for location using Nominatim API
 function searchLocation() {
-    const location = document.getElementById('location-search').value;
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${location}`;
+    const location = document.getElementById('location-search').value.trim();
+    if (!location) return alert("Please enter a location to search");
 
-    fetch(url)
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${location}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
-                const lat = data[0].lat;
-                const lon = data[0].lon;
+                const { lat, lon } = data[0];
                 map.setView([lat, lon], 13);
             } else {
                 alert("Location not found");
             }
         })
-        .catch(err => {
-            console.error(err);
-            alert("Error searching for location");
-        });
+        .catch(() => alert("Error searching for location"));
 }
 
-// Function to get location suggestions using Nominatim API
+// Get suggestions for location input
 function getSuggestions() {
-    const input = document.getElementById('location-search').value;
+    const input = document.getElementById('location-search').value.trim();
 
-    // Only fetch suggestions if input length is > 2
     if (input.length > 2) {
-        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${input}&limit=5`;
-
-        fetch(url)
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${input}&limit=5`)
             .then(response => response.json())
             .then(data => {
                 const suggestionsBox = document.getElementById('suggestions');
                 suggestionsBox.innerHTML = ''; // Clear previous suggestions
-                suggestionsBox.style.display = 'block'; // Show suggestions box
 
                 if (data.length > 0) {
                     data.forEach(location => {
                         const suggestionItem = document.createElement('div');
+                        suggestionItem.className = 'suggestion-item'; // Add custom styling class
                         suggestionItem.innerText = location.display_name;
                         suggestionItem.onclick = () => selectSuggestion(location);
                         suggestionsBox.appendChild(suggestionItem);
                     });
+                    suggestionsBox.style.display = 'block'; // Show suggestions
                 } else {
                     suggestionsBox.innerHTML = '<div>No results found</div>';
                 }
             })
-            .catch(err => {
-                console.error(err);
-            });
+            .catch(() => console.error("Error fetching suggestions"));
     } else {
-        document.getElementById('suggestions').style.display = 'none'; // Hide suggestions if input is too short
+        document.getElementById('suggestions').style.display = 'none'; // Hide suggestions
     }
 }
 
-// Function to handle suggestion selection
+// Select a location from suggestions
 function selectSuggestion(location) {
-    const suggestionsBox = document.getElementById('suggestions');
-    suggestionsBox.style.display = 'none'; // Hide the suggestions box
-
-    // Set the selected location in the input field
     document.getElementById('location-search').value = location.display_name;
-
-    // Move the map to the selected location
+    document.getElementById('suggestions').style.display = 'none'; // Hide suggestions
     map.setView([location.lat, location.lon], 13);
 }
 
-// Function to add a marker when the user clicks the map
-map.on('click', function(e) {
-    const lat = e.latlng.lat;
-    const lon = e.latlng.lng;
+// Add a marker on map click
+map.on('click', e => {
+    const { lat, lng } = e.latlng;
 
-    // Remove existing marker if any
-    if (marker) {
-        map.removeLayer(marker);
-    }
+    // Remove existing marker
+    if (marker) map.removeLayer(marker);
 
-    // Add a new marker at the clicked location
-    marker = L.marker([lat, lon]).addTo(map);
+    // Add new marker
+    marker = L.marker([lat, lng]).addTo(map);
+    lastClickedCoordinates = { lat, lon: lng };
 
-    // Update lastClickedCoordinates with the new coordinates
-    lastClickedCoordinates = { lat: lat, lon: lon };
-
-    // Fetch the address of the clicked location using reverse geocoding
-    getAddress(lat, lon);
+    getAddress(lat, lng); // Fetch address with reverse geocoding
 });
 
-// Reverse geocoding to get the address of the clicked location
+// Get address from coordinates
 function getAddress(lat, lon) {
-    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
-
-    fetch(url)
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
         .then(response => response.json())
         .then(data => {
             const address = data.display_name;
-
-            // Show the address in the specific <p> element, not the entire #address-details div
-            document.getElementById('address').innerText = address;
-
-            openCard(); // Open the sliding card
+            document.getElementById('address').innerText = address; // Update address
+            openCard(); // Slide up the card
         })
-        .catch(err => {
-            console.error(err);
-            alert("Error fetching address");
-        });
+        .catch(() => alert("Error fetching address"));
 }
 
-// Function to open the sliding card
+// Open sliding card
 function openCard() {
-    const card = document.getElementById('address-card');
-    card.classList.add('open'); // Add the class to slide it up
+    document.getElementById('address-card').classList.add('open');
 }
 
-// Function to close the sliding card
+// Close sliding card
 function closeCard() {
-    const card = document.getElementById('address-card');
-    card.classList.remove('open'); // Remove the class to slide it down
+    document.getElementById('address-card').classList.remove('open');
 }
 
-// GPS tracking function
+// Track user location
 function trackLocation() {
     map.locate({ setView: true, maxZoom: 16 });
 
-    map.on('locationfound', function(e) {
-        const userLat = e.latlng.lat;
-        const userLon = e.latlng.lng;
-
-        if (marker) {
-            map.removeLayer(marker);
-        }
-
-        marker = L.marker([userLat, userLon]).addTo(map)
-            .bindPopup("You are here").openPopup();
+    map.on('locationfound', e => {
+        const { lat, lng } = e.latlng;
+        if (marker) map.removeLayer(marker);
+        marker = L.marker([lat, lng]).addTo(map).bindPopup("You are here").openPopup();
     });
 
-    map.on('locationerror', function() {
-        alert("Unable to access your location");
-    });
+    map.on('locationerror', () => alert("Unable to access your location"));
 }
 
-// Function to check details and send coordinates to index.html via URL
+// Confirm details and redirect to index.html
 function confirmedBuyDetails() {
-    // Only store the last clicked coordinates if they exist
-    if (lastClickedCoordinates) {
-        // Get the address details from the sliding card
-        const address = document.getElementById('address').innerText;
+    if (!lastClickedCoordinates) return alert("No location selected. Please click on the map first.");
 
-        // Encode address and coordinates as URL parameters
-        const params = new URLSearchParams({
-            address: address,
-            lat: lastClickedCoordinates.lat,
-            lng: lastClickedCoordinates.lng
-        });
+    const address = document.getElementById('address').innerText;
+    const params = new URLSearchParams({
+        address,
+        lat: lastClickedCoordinates.lat,
+        lng: lastClickedCoordinates.lon
+    });
 
-        // Create a JSON object for coordinates
-        const coordinates = {
-            latitude: lastClickedCoordinates.lat,
-            longitude: lastClickedCoordinates.lng
-        };
-
-        // Save the coordinates to a JSON string (in localStorage or another method)
-        localStorage.setItem('buyCoordinates', JSON.stringify(coordinates));
-
-        // Optionally close the sliding card after clicking "Check"
-        closeCard();
-
-        // Redirect to index.html with the encoded parameters
-        window.location.href = `../index.html?${params.toString()}`;
-    } else {
-        alert("No location selected. Please click on the map first.");
-    }
+    localStorage.setItem('buyCoordinates', JSON.stringify(lastClickedCoordinates));
+    closeCard(); // Optionally close card
+    window.location.href = `../index.html?${params.toString()}`;
 }
