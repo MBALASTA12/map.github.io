@@ -3,21 +3,21 @@ function displayAddresses() {
     const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
     const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
 
-    // Check if buy details exist
+    // Display buy address
     if (buyDetails) {
         document.getElementById('buy-address').innerText = buyDetails.address;
     } else {
         document.getElementById('buy-address').innerText = "No buy address selected.";
     }
 
-    // Check if delivery details exist
+    // Display delivery address
     if (deliveryDetails) {
         document.getElementById('delivery-address').innerText = deliveryDetails.address;
     } else {
         document.getElementById('delivery-address').innerText = "No delivery address selected.";
     }
 
-    // Call to compute the distance and cost after displaying addresses
+    // Call the function to compute distance and cost
     computeDistanceAndCost();
 }
 
@@ -39,15 +39,21 @@ function computeDistanceAndCost() {
         // Convert distance to cost (31 meters = 1 PHP)
         const cost = (distance / 31).toFixed(2);
 
-        // Display the cost on the payment card
+        // Display the cost and distance on the payment card
         document.getElementById('paymentCost').innerText = `₱${cost}`;
-        document.getElementById('totalDistance').innerText = `${distance.toFixed(2)} meters`;
+        document.getElementById('totalDistance').innerText = `${distance.toFixed(2)} meters`; // Display distance
+
+        // Show payment card
+        document.getElementById('payment-card').style.display = 'block'; // Show payment card
     } else {
         alert("Location details are missing.");
     }
 }
 
-// Haversine formula to calculate distance
+// Call the function to display addresses
+displayAddresses();
+
+// Haversine formula to calculate distance between two coordinates
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371000; // Earth's radius in meters
     const φ1 = lat1 * Math.PI / 180; // Convert degrees to radians
@@ -61,8 +67,5 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    return R * c; // Return distance in meters
+    return R * c; // Distance in meters
 }
-
-// Call the function to display addresses
-displayAddresses();
