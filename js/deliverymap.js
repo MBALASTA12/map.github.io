@@ -153,26 +153,25 @@ function trackLocation() {
 
 // Function to check details and save coordinates
 function confirmedDeliveryDetails() {
-    if (lastClickedCoordinates) {
-        const address = document.getElementById('address').innerText;
+    if (!lastClickedCoordinates) return alert("No location selected. Please click on the map first.");
 
-        const params = new URLSearchParams({
-            address: address,
+    const address = document.getElementById('address').innerText;
+
+    // Save the delivery address and coordinates in JSON format
+    const deliveryData = {
+        address: address,
+        coordinates: {
             lat: lastClickedCoordinates.lat,
-            lng: lastClickedCoordinates.lng
-        });
+            lng: lastClickedCoordinates.lon
+        }
+    };
 
-        const deliveryCoordinates = {
-            latitude: lastClickedCoordinates.lat,
-            longitude: lastClickedCoordinates.lng
-        };
+    // Save to localStorage
+    localStorage.setItem('deliveryDetails', JSON.stringify(deliveryData));
 
-        localStorage.setItem('deliveryCoordinates', JSON.stringify(deliveryCoordinates));
+    // Optionally close the card if needed
+    closeCard();
 
-        closeCard();
-
-        window.location.href = "index.html?address=" + encodeURIComponent(buyAddress) + "&deliveryAddress=" + encodeURIComponent(deliveryAddress);
-    } else {
-        alert("No location selected. Please click on the map first.");
-    }
+    // Redirect to the summary page
+    window.location.href = "summary.html";
 }
