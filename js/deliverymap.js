@@ -173,5 +173,5 @@ function confirmedDeliveryDetails() {
     closeCard();
 
     // Redirect to the summary page
-    window.location.href = "summary.html";
+    window.location.href = "index.html";
 }
