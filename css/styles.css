@@ -99,7 +99,7 @@ body {
 }
 
 #payment-card {
-    display: none;
+    display: block;
     position: relative;
 }
 
