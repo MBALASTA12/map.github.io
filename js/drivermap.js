@@ -47,11 +47,12 @@ function updateDriverLocation() {
 }
 
 
-// Function to receive order details from script.js
+// Function to receive order details from localStorage and display them
 function receiveOrderDetails() {
     const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
     if (orderDetails) {
-        displayLocation(orderDetails.buyCoordinates);
+        // Pass both buyCoordinates and totalCost to displayLocation
+        displayLocation(orderDetails.buyCoordinates, orderDetails.totalCost);
         displayTotalCost(orderDetails.totalCost);
         displayOrderDetails(orderDetails);
     } else {
