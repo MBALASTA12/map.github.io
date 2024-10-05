@@ -75,14 +75,6 @@ function displayLocation(buyCoordinates) {
     marker = L.marker([buyCoordinates.lat, buyCoordinates.lng]).addTo(map);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Call the function to receive order details when the page loads
-    receiveOrderDetails();
-
-    // Add event listener to close the popup
-    document.querySelector('.close-popup').addEventListener('click', closePopup);
-});
-
 // Function to display the total cost in the UI
 function displayTotalCost(totalCost) {
     const costElement = document.createElement('div');
