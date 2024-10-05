@@ -89,8 +89,8 @@ function confirmDetails() {
             totalCost: totalCost
         };
 
-        // Store the details in localStorage
-        localStorage.setItem('confirmationDetails', JSON.stringify(confirmationDetails));
+        // Store the details in localStorage for drivermap.js
+        localStorage.setItem('orderDetails', JSON.stringify(confirmationDetails));
 
         // Show the waiting popup
         showWaitingPopup();
