@@ -1,20 +1,23 @@
-        // Retrieve and display buy address
-        const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
-        const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
+// Function to retrieve and display addresses
+function displayAddresses() {
+    const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
+    const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
 
-        if (buyDetails) {
-            document.getElementById('buy-address').innerText = buyDetails.address;
-        } else {
-            document.getElementById('buy-address').innerText = "No buy address selected.";
-        }
+    if (buyDetails) {
+        document.getElementById('buy-address').innerText = buyDetails.address;
+    } else {
+        document.getElementById('buy-address').innerText = "No buy address selected.";
+    }
 
-        if (deliveryDetails) {
-            document.getElementById('delivery-address').innerText = deliveryDetails.address;
-        } else {
-            document.getElementById('delivery-address').innerText = "No delivery address selected.";
-        }
+    if (deliveryDetails) {
+        document.getElementById('delivery-address').innerText = deliveryDetails.address;
+    } else {
+        document.getElementById('delivery-address').innerText = "No delivery address selected.";
+    }
 }
 
+// Call the function to display addresses
+displayAddresses();
 function computeDistanceAndCost() {
     const buyDetails = JSON.parse(localStorage.getItem('buyDetails'));
     const deliveryDetails = JSON.parse(localStorage.getItem('deliveryDetails'));
