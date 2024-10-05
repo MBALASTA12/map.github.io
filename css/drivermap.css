@@ -33,3 +33,11 @@ html, body {
     cursor: pointer;
     color: red;
 }
+
+.custom-popup-marker {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+}
