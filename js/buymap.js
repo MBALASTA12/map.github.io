@@ -118,23 +118,22 @@ function confirmedBuyDetails() {
     if (!lastClickedCoordinates) return alert("No location selected. Please click on the map first.");
 
     const address = document.getElementById('address').innerText;
-    const params = new URLSearchParams({
-        address,
-        lat: lastClickedCoordinates.lat,
-        lng: lastClickedCoordinates.lon
-    });
 
-    // Save the address and coordinates in JSON format
-    const buyCoordinates = {
+    // Save the buy address and coordinates in JSON format
+    const buyData = {
         address: address,
-        coordinates: lastClickedCoordinates
+        coordinates: {
+            lat: lastClickedCoordinates.lat,
+            lng: lastClickedCoordinates.lon
+        }
     };
 
-    localStorage.setItem('buyCoordinates', JSON.stringify(buyCoordinates));
-    
-    // Optionally close card
-    closeCard(); 
-    
-    // Navigate to index.html with the address as a parameter
-    window.location.href = "index.html";;
+    // Save to localStorage
+    localStorage.setItem('buyDetails', JSON.stringify(buyData));
+
+    // Optionally close the card if needed
+    closeCard();
+
+    // Redirect to the next page (assuming you're navigating to the delivery selection)
+    window.location.href = "index.html";
 }
