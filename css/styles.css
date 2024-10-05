@@ -98,7 +98,7 @@ body {
     text-decoration: underline; /* Underline on hover */
 }
 
-#payment-card {
+#paymentCost {
     display: none;
     position: relative;
 }
