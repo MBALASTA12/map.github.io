@@ -60,8 +60,8 @@ function receiveOrderDetails() {
     }
 }
 
-// Function to display the location on the map using buyCoordinates
-function displayLocation(buyCoordinates) {
+// Function to display the location on the map using buyCoordinates and show the total cost
+function displayLocation(buyCoordinates, totalCost) {
     // If the map is not already initialized, set it up
     if (!map) {
         map = L.map('map').setView([buyCoordinates.lat, buyCoordinates.lng], 15);
@@ -73,7 +73,7 @@ function displayLocation(buyCoordinates) {
     }
 
     // Add a marker for the buy location
-    marker = L.marker([buyCoordinates.lat, buyCoordinates.lng]).addTo(map);
+    const marker = L.marker([buyCoordinates.lat, buyCoordinates.lng]).addTo(map);
 
     // Attach a popup with the total cost to the marker
     marker.bindPopup(`<b>Total Cost:</b> ₱${totalCost}`).openPopup();
