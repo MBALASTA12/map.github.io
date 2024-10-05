@@ -41,6 +41,7 @@ function computeDistanceAndCost() {
 
         // Display the cost on the payment card
         document.getElementById('paymentCost').innerText = `₱${cost}`;
+        document.getElementById('totalDistance').innerText = `${distance.toFixed(2)} meters`;
     } else {
         alert("Location details are missing.");
     }
