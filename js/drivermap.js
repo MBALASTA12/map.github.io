@@ -61,13 +61,15 @@ function receiveOrderDetails() {
 
 // Function to display the location on the map using buyCoordinates
 function displayLocation(buyCoordinates) {
-    // Initialize the map
-    map = L.map('map').setView([buyCoordinates.lat, buyCoordinates.lng], 15);
+    // If the map is not already initialized, set it up
+    if (!map) {
+        map = L.map('map').setView([buyCoordinates.lat, buyCoordinates.lng], 15);
 
-    // Load OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-    }).addTo(map);
+        // Load OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+    }
 
     // Add a marker for the buy location
     marker = L.marker([buyCoordinates.lat, buyCoordinates.lng]).addTo(map);
