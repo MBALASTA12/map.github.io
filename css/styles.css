@@ -110,3 +110,14 @@ body {
     transform: translateY(-50%);
 }
 
+#waiting-popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000; /* Ensure it appears on top */
+}
