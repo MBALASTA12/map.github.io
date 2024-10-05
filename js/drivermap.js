@@ -72,21 +72,13 @@ function displayLocation(buyCoordinates, totalCost) {
         }).addTo(map);
     }
 
-    // Create a custom icon to make the marker look like a popup
-    const customIcon = L.divIcon({
-        className: 'custom-popup-marker', // Custom class for styling
-        html: `${totalCost}`, // Content to display in the popup
-        iconSize: [120, 40], // Adjust size of the "marker" to fit content
-    });
-
     // Add the custom marker at the location without the usual marker look
     const marker = L.marker([buyCoordinates.lat, buyCoordinates.lng], {
-        icon: customIcon, // Use the custom icon
         interactive: false // Make it non-clickable
     }).addTo(map);
 
     // Optionally, you can bind a popup without the close button, though the custom marker already shows the totalCost
-    marker.bindPopup(`<b>Total Cost: ₱${totalCost}</b>`, {
+    marker.bindPopup(`${totalCost}`, {
         closeButton: false, // Remove the close button from the popup
         autoClose: false, // Keep the popup open
         closeOnClick: false // Do not close when clicking elsewhere
