@@ -117,14 +117,19 @@ function trackLocation() {
 function confirmedBuyDetails() {
     if (!lastClickedCoordinates) return alert("No location selected. Please click on the map first.");
 
+    // Get the address text from the element
     const address = document.getElementById('address').innerText;
-    const params = new URLSearchParams({
-        address,
+
+    // Store the coordinates in JSON format
+    const coordinates = {
         lat: lastClickedCoordinates.lat,
         lng: lastClickedCoordinates.lon
-    });
+    };
+    localStorage.setItem('buyCoordinates', JSON.stringify(coordinates));
 
-    localStorage.setItem('buyCoordinates', JSON.stringify(lastClickedCoordinates));
-    closeCard(); // Optionally close card
-    window.location.href = "index.html?address=" + encodeURIComponent(buyAddress) + "&deliveryAddress=" + encodeURIComponent(deliveryAddress);
+    // Optionally close the card if needed
+    closeCard();
+
+    // Redirect to index.html with address and coordinates
+    window.location.href = "index.html?address=" + encodeURIComponent(address) + "&lat=" + coordinates.lat + "&lng=" + coordinates.lng;
 }
