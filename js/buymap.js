@@ -117,19 +117,24 @@ function trackLocation() {
 function confirmedBuyDetails() {
     if (!lastClickedCoordinates) return alert("No location selected. Please click on the map first.");
 
-    // Get the address text from the element
     const address = document.getElementById('address').innerText;
-
-    // Store the coordinates in JSON format
-    const coordinates = {
+    const params = new URLSearchParams({
+        address,
         lat: lastClickedCoordinates.lat,
         lng: lastClickedCoordinates.lon
+    });
+
+    // Save the address and coordinates in JSON format
+    const buyCoordinates = {
+        address: address,
+        coordinates: lastClickedCoordinates
     };
-    localStorage.setItem('buyCoordinates', JSON.stringify(coordinates));
 
-    // Optionally close the card if needed
-    closeCard();
-
-    // Redirect to index.html with address and coordinates
-    window.location.href = "index.html?address=" + encodeURIComponent(address) + "&lat=" + coordinates.lat + "&lng=" + coordinates.lng;
+    localStorage.setItem('buyCoordinates', JSON.stringify(buyCoordinates));
+    
+    // Optionally close card
+    closeCard(); 
+    
+    // Navigate to index.html with the address as a parameter
+    window.location.href = "index.html?address=" + encodeURIComponent(address);
 }
