@@ -89,11 +89,25 @@ function confirmDetails() {
             totalCost: totalCost
         };
 
-        // Store the details in localStorage for drivermap.js
-        localStorage.setItem('orderDetails', JSON.stringify(confirmationDetails));
+        // Send order details to the server
+        fetch('/sendOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(confirmationDetails),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Order received successfully') {
+                console.log('Order sent successfully');
+                showWaitingPopup(); // Show the waiting popup after confirmation
+            }
+        })
+        .catch(error => {
+            console.error('Error sending order:', error);
+        });
 
-        // Show the waiting popup
-        showWaitingPopup();
     } else {
         alert("Please ensure all address details are filled out before confirming.");
     }
