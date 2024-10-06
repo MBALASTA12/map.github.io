@@ -11,7 +11,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Create a marker for the driver's location
 var driverMarker = L.marker([6.1164, 125.1716]).addTo(map); // Initial position
 
-// Function to update the driver's location
+// Function to update the driver's location in real-time
 function updateDriverLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(function(position) {
@@ -23,17 +23,6 @@ function updateDriverLocation() {
 
             // Center the map on the driver's location
             map.setView([lat, lon], 13);
-
-            // Get the saved delivery details from localStorage
-            const saveDeliveryDetails = getsaveDeliveryDetails();
-
-            if (saveDeliveryDetails) {
-                // Show the buyLocation on the map using buyCoordinates
-                showBuyLocation(saveDeliveryDetails.buyCoordinates);
-                
-                // Show the total cost (total amount) in the UI
-                displayTotalCost(saveDeliveryDetails.totalCost);
-            }
         }, function(error) {
             console.error("Error getting location: ", error);
         }, {
@@ -43,20 +32,6 @@ function updateDriverLocation() {
         });
     } else {
         alert("Geolocation is not supported by this browser.");
-    }
-}
-
-
-// Function to receive order details from localStorage and display them
-function receiveOrderDetails() {
-    const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
-    if (orderDetails) {
-        // Pass both buyCoordinates and totalCost to displayLocation
-        displayLocation(orderDetails.buyCoordinates, orderDetails.totalCost);
-        displayTotalCost(orderDetails.totalCost);
-        displayOrderDetails(orderDetails);
-    } else {
-        alert("No order details found.");
     }
 }
 
@@ -72,7 +47,7 @@ function displayLocation(buyCoordinates, totalCost) {
         }).addTo(map);
     }
 
-    // Add the custom marker at the location without the usual marker look
+    // Add the custom marker at the location
     const marker = L.marker([buyCoordinates.lat, buyCoordinates.lng], {
         interactive: false // Make it non-clickable
     }).addTo(map);
@@ -118,5 +93,17 @@ function displayOrderDetails(orderDetails) {
     `;
 }
 
+// Socket.IO: Listening for new orders in real-time
+const socket = io();
+
+// Listen for new orders and update the map
+socket.on('newOrder', (orderDetails) => {
+    displayLocation(orderDetails.buyCoordinates, orderDetails.totalCost);
+    displayTotalCost(orderDetails.totalCost);
+    displayOrderDetails(orderDetails);
+});
+
+// Initialize the map when the page loads
+window.onload = initializeMap;
 // Call the function to receive order details when the page loads
 window.onload = receiveOrderDetails;
