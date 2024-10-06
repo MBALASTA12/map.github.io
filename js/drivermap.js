@@ -94,7 +94,7 @@ function displayOrderDetails(orderDetails) {
 }
 
 // Socket.IO: Listening for new orders in real-time
-const socket = io();
+const socket = io('http://localhost:3000');
 
 // Listen for new orders and update the map
 socket.on('newOrder', (orderDetails) => {
